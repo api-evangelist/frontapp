@@ -1,0 +1,50 @@
+generated: '2026-07-19'
+method: searched
+source: https://dev.frontapp.com/docs/authentication
+docs: https://dev.frontapp.com/docs/authentication
+summary:
+  types: [http, oauth2]
+  http_schemes: [bearer]
+  oauth2_flows: [authorizationCode, clientCredentials]
+  api_key_in: []
+schemes:
+- name: apiToken
+  type: http
+  scheme: bearer
+  bearerFormat: JWT
+  description: >-
+    API tokens (JWT bearer tokens) are created per company from Settings and
+    passed in the Authorization header as `Authorization: Bearer <token>`.
+    Recommended for single-company integrations and server-to-server access.
+  docs: https://dev.frontapp.com/docs/create-and-revoke-api-tokens
+- name: oauth2
+  type: oauth2
+  description: >-
+    OAuth 2.0 authorization code flow for building apps that access many Front
+    companies. Access tokens expire after 60 minutes; refresh tokens are valid
+    for 6 months (a new refresh token is issued in the final 24 hours before
+    expiry). Scopes are selected at authorization time.
+  flows:
+  - flow: authorizationCode
+    authorizationUrl: https://app.frontapp.com/oauth/authorize
+    tokenUrl: https://app.frontapp.com/oauth/token
+    refreshUrl: https://app.frontapp.com/oauth/token
+    access_token_ttl_seconds: 3600
+    refresh_token_ttl: 6 months
+  docs: https://dev.frontapp.com/docs/oauth
+- name: oauth2-mcp
+  type: oauth2
+  description: >-
+    OAuth 2.1 authorization server backing the Front MCP server; supports
+    authorization_code, refresh_token, and client_credentials grants with PKCE
+    (S256). Advertised via RFC 8414 metadata.
+  flows:
+  - flow: authorizationCode
+    authorizationUrl: https://app.frontapp.com/oauth/authorize
+    tokenUrl: https://app.frontapp.com/oauth/token
+    revocationUrl: https://app.frontapp.com/oauth/revoke
+    pkce: S256
+  - flow: clientCredentials
+    tokenUrl: https://app.frontapp.com/oauth/token
+  scopes: [feature:mcp]
+  source: well-known/frontapp-oauth-authorization-server.json
