@@ -1,7 +1,30 @@
 aid: frontapp
 name: FrontApp
-description: FrontApp is a company surfaced as a portfolio company of battery-ventures and added to the
-  API Evangelist network as a stub for enrichment. This profile is a lead awaiting the enrichment pipeline.
+description: >-
+  Front is a customer service and communication platform that combines the
+  efficiency of a help desk with the familiarity of email, giving teams a shared
+  inbox across email, SMS, chat, and social channels. The Front Core API is a
+  REST API (base https://api2.frontapp.com) exposing 340+ endpoints across
+  conversations, messages, drafts, comments, contacts, accounts, inboxes,
+  channels, tags, teammates, teams, knowledge bases, shifts, analytics, links,
+  message templates, and signatures. It supports API-token and OAuth 2.0
+  authentication with 50+ granular scopes, cursor pagination, per-company rate
+  limiting with standard headers, webhooks and application triggers for events,
+  and an official hosted MCP server for AI agents. Front is a portfolio company
+  of Battery Ventures.
+accessModel:
+  pricing: unknown
+  onboarding: self-serve
+  trial: false
+  try_now: false
+  public: false
+  label: Self-serve signup
+  confidence: medium
+  source:
+  - authentication
+  generated: '2026-07-22'
+  method: derived
+image: https://avatars.githubusercontent.com/frontapp
 url: https://raw.githubusercontent.com/api-evangelist/frontapp/refs/heads/main/apis.yml
 x-type: company
 x-source: vc-portfolio
@@ -11,12 +34,124 @@ x-tier: stub
 x-tier-reason: portfolio-lead
 specificationVersion: '0.20'
 created: '2026-07-17'
-modified: '2026-07-17'
+modified: '2026-07-19'
 tags:
 - Company
-apis: []
+- Communication
+- Customer Service
+- Shared Inbox
+- Email
+- Messaging
+- Collaboration
+- Help Desk
+apis:
+- aid: frontapp:frontapp-core-api
+  name: Front Core API
+  humanURL: https://dev.frontapp.com/reference/introduction
+  baseURL: https://api2.frontapp.com
+  tags:
+  - Conversations
+  - Messages
+  - Contacts
+  - Inboxes
+  - Communication
+  description: >-
+    The Front Core API is a REST API over Front's shared-inbox platform. It
+    exposes conversations, messages, drafts, comments, contacts, accounts,
+    inboxes, channels, tags, teammates, teams, knowledge bases, shifts,
+    analytics, links, message templates, and signatures, with API-token and
+    OAuth 2.0 authentication, cursor pagination, and webhooks for events.
+  properties:
+  - url: https://dev.frontapp.com
+    type: DeveloperPortal
+  - url: https://dev.frontapp.com/docs/welcome
+    type: Documentation
+  - url: https://dev.frontapp.com/reference
+    type: APIReference
+  - url: https://dev.frontapp.com/docs/core-api-getting-started
+    type: GettingStarted
+  - url: https://dev.frontapp.com/docs/authentication
+    type: Authentication
+  - url: https://dev.frontapp.com/docs/webhooks-1
+    type: Webhooks
+common:
+- type: DeveloperPortal
+  url: https://dev.frontapp.com
+- type: Documentation
+  url: https://dev.frontapp.com/docs/welcome
+- type: APIReference
+  url: https://dev.frontapp.com/reference
+- type: GettingStarted
+  url: https://dev.frontapp.com/docs/core-api-getting-started
+- type: HelpCenter
+  url: https://help.front.com
+- type: Support
+  url: https://community.front.com
+- type: Blog
+  url: https://front.com/blog
+- type: GitHubOrganization
+  url: https://github.com/frontapp
+- type: Pricing
+  url: https://front.com/pricing
+- type: Login
+  url: https://app.frontapp.com
+- type: TermsOfService
+  url: https://front.com/legal/terms-of-service
+- type: PrivacyPolicy
+  url: https://front.com/legal/privacy-policy
+- type: Postman
+  url: https://www.postman.com/frontapp
+- type: StatusPage
+  url: https://status.frontapp.com
+- type: LLMsTxt
+  url: llms/frontapp-llms.txt
+- type: WellKnown
+  url: well-known/frontapp-well-known.yml
+- type: SecurityTxt
+  url: well-known/frontapp-security.txt
+- type: MCPServer
+  url: https://mcp.frontapp.com/mcp
+  name: MCP Server
+  description: Front's official hosted MCP server (open beta) exposes conversations, messages, comments, tags, contacts, accounts, and organization tools to MCP clients over Streamable HTTP with OAuth 2.1 + PKCE; agents inherit the authorizing teammate's permissions.
+- type: Authentication
+  url: authentication/frontapp-authentication.yml
+- type: OAuthScopes
+  url: scopes/frontapp-scopes.yml
+- type: Conventions
+  url: conventions/frontapp-conventions.yml
+- type: Lifecycle
+  url: lifecycle/frontapp-lifecycle.yml
+- type: ChangeLog
+  url: changelog/frontapp-changelog.yml
+- type: RateLimits
+  url: rate-limits/frontapp-rate-limits.yml
+- type: Webhooks
+  url: asyncapi/frontapp-webhooks.yml
+- type: Packages
+  url: packages/frontapp-packages.yml
+- type: SDKs
+  url: packages/frontapp-packages.yml
+- type: Components
+  url: components/frontapp-components.yml
+- type: Conformance
+  url: conformance/frontapp-conformance.yml
+- type: DomainSecurity
+  url: security/frontapp-domain-security.yml
+- type: VulnerabilityDisclosure
+  url: security/frontapp-vulnerability-disclosure.yml
+- type: Security
+  url: https://front.com/security
+- type: TrustCenter
+  url: security/frontapp-trust-center.yml
+- type: Compliance
+  url: https://trust.front.com/
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com
 - FN: APIs.json
   email: info@apis.io
+x-enrichment:
+  date: '2026-07-19'
+  status: backfilled
+  pass: local-v1
+  note: backfilled from .gitignore signal + verified work evidence

@@ -1,0 +1,17 @@
+generated: '2026-07-19'
+method: searched
+source: https://dev.frontapp.com/docs + https://status.frontapp.com + https://community.front.com/api-news-updates-40
+versioning:
+  scheme: unversioned-base
+  current: api2
+  base_url: https://api2.frontapp.com
+  note: The Core API base host is api2.frontapp.com; there is no version segment in the path. Changes are communicated through the API news & updates changelog.
+changelog:
+  url: https://community.front.com/api-news-updates-40
+status_page: https://status.frontapp.com
+sla:
+  note: Front documents uptime and incidents via its public status page; contractual SLA terms are covered under enterprise agreements.
+deprecation:
+  policy_url: null
+  note: No standalone RFC 8594 Sunset/Deprecation-header policy page was found; deprecations are announced via the API news changelog.
+deprecated_operations: []

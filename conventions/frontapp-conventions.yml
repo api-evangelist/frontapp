@@ -1,0 +1,41 @@
+generated: '2026-07-19'
+method: searched
+source: https://dev.frontapp.com/docs (base-url, authentication, oauth, rate-limiting, pagination, response-body-structure)
+authentication:
+  styles: [bearer-api-token, oauth2]
+  header: 'Authorization: Bearer <token>'
+  ref: authentication/frontapp-authentication.yml
+base_url:
+  production: https://api2.frontapp.com
+  note: Company-specific variants like https://<company>.api.frontapp.com are also functional.
+pagination:
+  style: cursor
+  response_fields:
+    results: _results
+    pagination: _pagination
+    next: _pagination.next
+  note: List endpoints return a `_pagination.next` URL to follow; responses use a HAL-style `_links`/`_results` envelope.
+response_envelope:
+  hypermedia: true
+  fields: [_links, _results, _pagination, _error]
+  ref: https://dev.frontapp.com/reference/response-body-structure
+resource_aliases:
+  supported: true
+  description: Many resources can be addressed by an alias (e.g. alt:email:contact@example.com) in addition to their Front ID.
+  ref: https://dev.frontapp.com/docs/resource-aliases-1
+idempotency:
+  supported: false
+  note: Front does not document an idempotency-key header for the Core API.
+rate_limiting:
+  scope: per-company
+  ref: rate-limits/frontapp-rate-limits.yml
+error_handling:
+  envelope_field: _error
+  ref: errors/ (not derived — no local OpenAPI captured)
+versioning:
+  scheme: none-in-path
+  note: The Core API base is unversioned (api2.frontapp.com); changes are announced via the API news changelog.
+  ref: changelog/frontapp-changelog.yml
+events:
+  webhooks: true
+  ref: asyncapi/frontapp-webhooks.yml

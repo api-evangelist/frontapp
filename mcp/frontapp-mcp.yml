@@ -1,0 +1,34 @@
+generated: '2026-07-19'
+method: searched
+status: published
+source: https://dev.frontapp.com/docs/mcp-server
+server:
+  name: front
+  official: true
+  beta: true
+  transport: http
+  transport_detail: Streamable HTTP
+  url: https://mcp.frontapp.com/mcp
+authentication:
+  type: oauth
+  detail: OAuth 2.1 + PKCE; requires a confidential client with client credentials. Agents authenticate as a specific Front teammate and inherit exactly that teammate's role/permissions.
+  authorization_server: https://app.frontapp.com/.well-known/oauth-authorization-server
+  scope: feature:mcp
+rate_limits:
+  light_reads: 120/min
+  heavy_reads: 30/min
+  writes: 20/min
+  note: additional hourly caps apply per teammate and per workspace
+tool_categories:
+- name: Conversations
+  capabilities: [search, read, create drafts, update status, assign]
+- name: Messages & Attachments
+  capabilities: [retrieve message content, download files]
+- name: Comments
+  capabilities: [post internal notes with teammate mentions]
+- name: Tags
+  capabilities: [manage conversation tags across the workspace]
+- name: Contacts & Accounts
+  capabilities: [search and retrieve customer and company records]
+- name: Organization
+  capabilities: [list inboxes, channels, teammates, teams, ticket statuses]

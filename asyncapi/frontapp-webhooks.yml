@@ -1,0 +1,29 @@
+generated: '2026-07-19'
+method: searched
+source: https://dev.frontapp.com/docs/webhooks-1
+spec_type: Webhooks
+docs:
+  webhooks: https://dev.frontapp.com/docs/webhooks-1
+  application_webhooks: https://dev.frontapp.com/docs/application-webhooks
+  rule_webhooks: https://dev.frontapp.com/docs/rule-webhooks
+  application_triggers: https://dev.frontapp.com/docs/application-triggers
+  events_reference: https://dev.frontapp.com/reference/list-conversation-events
+delivery:
+  method: POST
+  payload: Event JSON representation in the request body (rule webhooks may send a full event payload or an event preview).
+  excludes: Mass/bulk action events (bulk moves, bulk status updates, message imports) are not delivered.
+webhook_types:
+- name: Application webhooks
+  description: Configured as part of a Front app; not self-served by end users.
+  ref: https://dev.frontapp.com/docs/application-webhooks
+- name: Rule webhooks
+  description: Configured by users through Front rules; no server required to start.
+  ref: https://dev.frontapp.com/docs/rule-webhooks
+- name: Application triggers
+  description: App-defined triggers that invoke external endpoints on Front events.
+  ref: https://dev.frontapp.com/docs/application-triggers
+note: >-
+  Front documents webhooks but does not publish an AsyncAPI document or an
+  enumerated machine-readable event-type list on the public webhook pages; the
+  conversation-events reference is the authoritative event source. Event types
+  are not enumerated here to avoid fabrication.

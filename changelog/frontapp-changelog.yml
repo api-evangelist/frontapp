@@ -1,0 +1,42 @@
+generated: '2026-07-19'
+method: searched
+source: https://community.front.com/api-news-updates-40
+scheme: dated-community-posts
+note: >-
+  Front publishes API news & updates as dated community posts rather than a
+  semantically versioned changelog. Entries below capture the recent window as
+  seen on 2026-07-19; the live board is the source of truth. Relative ages are
+  as displayed by the community platform.
+entries:
+- title: 'Voice call support is now available in the Channel API'
+  relative: most recent
+  type: additions
+  highlight: New endpoints for voice call integrations — call status management, transcripts, recordings, and full call lifecycle.
+- title: 'Announcing the Autopilot Resolve SDK'
+  relative: ~1 month ago
+  type: additions
+  highlight: SDK to control the Autopilot Resolve widget on websites (custom mounting, context passing, identity verification).
+- title: 'Bring Your Own AI Agent to Front — Join the Beta'
+  relative: ~1 month ago
+  type: additions
+  highlight: External AI agents can operate as teammates with assigned conversations and human handoff.
+- title: 'Create task conversations via the Core API'
+  relative: ~1 month ago
+  type: additions
+  highlight: Task conversations supported in Core API with description fields and a type parameter.
+- title: 'The Front MCP Server is here (beta)'
+  relative: ~1 month ago
+  type: additions
+  highlight: Official MCP server so AI tools (e.g. Claude) can interact with Front data and docs.
+- title: 'New Time Off API endpoints'
+  relative: ~2 months ago
+  type: additions
+  highlight: Programmatic management of teammate out-of-office periods.
+- title: 'Build voice channel integrations faster with our new starter template'
+  relative: ~2 months ago
+  type: additions
+  highlight: GitHub TypeScript/Node starter template for voice application channels.
+- title: 'Run plugins in the background'
+  relative: ~3 months ago
+  type: additions
+  highlight: Sidebar plugins support background execution with notification management.

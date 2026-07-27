@@ -1,0 +1,74 @@
+generated: '2026-07-19'
+method: searched
+source: https://dev.frontapp.com/reference (per-endpoint "Required scope") + https://dev.frontapp.com/docs/oauth
+docs: https://dev.frontapp.com/docs/oauth
+schemes:
+- name: oauth2
+  flows:
+  - flow: authorizationCode
+    authorizationUrl: https://app.frontapp.com/oauth/authorize
+    tokenUrl: https://app.frontapp.com/oauth/token
+notes: >-
+  Front uses granular resource:action scopes (read/write/delete). Some resources
+  additionally support a delete scope. `events:*:read` uses a wildcard segment
+  for the event source. `feature:app_trigger` and `feature:mcp` are feature
+  scopes rather than resource scopes. Scopes were harvested from the "Required
+  scope" annotations across the 340+ published API reference endpoints.
+scopes:
+- {scope: accounts:read, description: Read accounts (companies)}
+- {scope: accounts:write, description: Create and update accounts}
+- {scope: accounts:delete, description: Delete accounts}
+- {scope: analytics:read, description: Create and fetch analytics reports and exports}
+- {scope: attachments:read, description: Download message attachments}
+- {scope: channels:read, description: Read channels}
+- {scope: channels:write, description: Create and update channels}
+- {scope: comments:read, description: Read internal comments}
+- {scope: comments:write, description: Create comments and mentions}
+- {scope: contacts:read, description: Read contacts and contact lists}
+- {scope: contacts:write, description: Create, update, and merge contacts}
+- {scope: contacts:delete, description: Delete contacts}
+- {scope: conversations:read, description: List and read conversations and events}
+- {scope: conversations:write, description: Create and update conversations}
+- {scope: conversations:delete, description: Delete conversations}
+- {scope: custom_fields:read, description: Read custom fields}
+- {scope: drafts:read, description: Read message drafts}
+- {scope: drafts:write, description: Create and update drafts}
+- {scope: drafts:delete, description: Delete drafts}
+- {scope: 'events:*:read', description: Read events (wildcard event source)}
+- {scope: inboxes:read, description: Read inboxes}
+- {scope: inboxes:write, description: Create and update inboxes}
+- {scope: knowledge_bases:read, description: Read knowledge bases, articles, and categories}
+- {scope: knowledge_bases:write, description: Create and update knowledge bases, articles, and categories}
+- {scope: knowledge_bases:delete, description: Delete knowledge base content}
+- {scope: links:read, description: Read links and linked conversations}
+- {scope: links:write, description: Create and update links}
+- {scope: message_templates:read, description: Read message templates}
+- {scope: message_templates:write, description: Create and update message templates}
+- {scope: message_templates:delete, description: Delete message templates}
+- {scope: messages:read, description: Read messages}
+- {scope: messages:write, description: Create and update messages}
+- {scope: messages:send, description: Send outbound messages}
+- {scope: rules:read, description: Read rules}
+- {scope: shifts:read, description: Read shifts}
+- {scope: shifts:write, description: Create and update shifts}
+- {scope: signatures:read, description: Read signatures}
+- {scope: signatures:write, description: Create and update signatures}
+- {scope: signatures:delete, description: Delete signatures}
+- {scope: statuses:read, description: Read ticket/conversation statuses}
+- {scope: tags:read, description: Read tags}
+- {scope: tags:write, description: Create and update tags}
+- {scope: tags:delete, description: Delete tags}
+- {scope: teammate_groups:read, description: Read teammate groups}
+- {scope: teammate_groups:write, description: Create and update teammate groups}
+- {scope: teammate_groups:delete, description: Delete teammate groups}
+- {scope: teammates:read, description: Read teammates}
+- {scope: teammates:write, description: Update teammates}
+- {scope: teams:read, description: Read teams}
+- {scope: teams:write, description: Create and update teams}
+- {scope: time_off:read, description: Read time off}
+- {scope: time_off:write, description: Create and update time off}
+- {scope: time_off:delete, description: Delete time off}
+- {scope: views:read, description: Read views}
+- {scope: views:write, description: Create and update views}
+- {scope: feature:app_trigger, description: Feature scope for application triggers}
+- {scope: feature:mcp, description: Feature scope granting access to the Front MCP server}

@@ -1,0 +1,28 @@
+generated: '2026-07-19'
+method: searched
+source: https://dev.frontapp.com/docs/rate-limiting
+docs: https://dev.frontapp.com/docs/rate-limiting
+scope: per-company
+plans:
+- {plan: Starter, limit_count: 50, window: minute}
+- {plan: Professional, limit_count: 100, window: minute}
+- {plan: Enterprise, limit_count: 200, window: minute}
+burst:
+  description: Burst limit equals half the plan rate limit; replenishes over 10 minutes after exhaustion.
+  header: x-ratelimit-burst-remaining
+headers:
+- {name: x-ratelimit-limit, description: Maximum number of requests allowed in the time window}
+- {name: x-ratelimit-remaining, description: Requests remaining in the current window}
+- {name: x-ratelimit-reset, description: UNIX timestamp when remaining requests reset}
+- {name: x-ratelimit-burst-remaining, description: Remaining burst capacity}
+- {name: retry-after, description: Seconds to wait before retrying (on 429)}
+- {name: x-front-tier, description: Which tier limit was exceeded (on 429)}
+on_exceed:
+  status: 429
+  body: JSON error object
+tiered_limits:
+- {tier: 'Tier 1 (analytics)', limit: 1 request/second}
+- {tier: 'Tier 2 (conversations, messages)', limit: 5 requests per resource per second}
+- {tier: message seen tracking, limit: 10 requests per message per hour}
+- {tier: integration calls, limit_count: 120, window: minute}
+- {tier: server-to-app calls, limit_count: 600, window: minute}

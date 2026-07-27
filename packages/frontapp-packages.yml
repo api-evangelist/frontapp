@@ -1,0 +1,28 @@
+generated: '2026-07-19'
+method: searched
+source: npm registry (registry.npmjs.org) + https://github.com/frontapp
+note: >-
+  Front does not publish an official server-side REST client SDK for the Core
+  API; its first-party libraries are client-side plugin/UI SDKs published under
+  the @frontapp npm scope and the frontapp GitHub org. Third-party wrappers
+  (e.g. front-sdk by resin-io) exist but are not first-party and are excluded.
+packages:
+- language: javascript
+  registry: npm
+  name: '@frontapp/plugin-sdk'
+  url: https://www.npmjs.com/package/@frontapp/plugin-sdk
+  install: npm install @frontapp/plugin-sdk
+  repository: https://github.com/frontapp/front-ui-sdk
+  version: 1.10.0
+  official: true
+  kind: plugin-ui-sdk
+- language: javascript
+  registry: npm
+  name: '@frontapp/ui-kit'
+  url: https://www.npmjs.com/package/@frontapp/ui-kit
+  install: npm install @frontapp/ui-kit
+  repository: https://github.com/frontapp/front-ui-kit
+  homepage: http://frontapp.github.io/front-ui-kit
+  version: 0.23.0
+  official: true
+  kind: react-ui-component-library

@@ -1,0 +1,21 @@
+generated: '2026-07-19'
+method: searched
+source: https://dev.frontapp.com/docs + npm (@frontapp scope)
+note: Client-side / embeddable UI components published by Front, distinct from server-side SDKs.
+families:
+- name: Plugin / UI SDK
+  description: JavaScript SDK for building sidebar plugins that run inside the Front app context.
+  loader: '@frontapp/plugin-sdk'
+  repository: https://github.com/frontapp/front-ui-sdk
+  docs: https://dev.frontapp.com/reference/plugin-sdk-introduction
+- name: Front UI Kit
+  description: React component library matching Front's design system for building plugin UIs.
+  loader: '@frontapp/ui-kit'
+  repository: https://github.com/frontapp/front-ui-kit
+  docs: http://frontapp.github.io/front-ui-kit
+- name: Chat Widget SDK
+  description: Embeddable chat widget for websites and mobile (iOS/Android) apps with user identification.
+  docs: https://dev.frontapp.com/docs/chat-sdk-reference
+- name: Autopilot Resolve SDK
+  description: SDK to embed and control the Autopilot Resolve AI widget on websites (custom mounting, context passing, identity verification).
+  docs: https://dev.frontapp.com/docs/autopilot-resolve-sdk-reference
