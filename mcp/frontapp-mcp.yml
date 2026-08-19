@@ -11,7 +11,8 @@ server:
   url: https://mcp.frontapp.com/mcp
 authentication:
   type: oauth
-  detail: OAuth 2.1 + PKCE; requires a confidential client with client credentials. Agents authenticate as a specific Front teammate and inherit exactly that teammate's role/permissions.
+  detail: OAuth 2.1 + PKCE; requires a confidential client with client credentials. Agents authenticate
+    as a specific Front teammate and inherit exactly that teammate's role/permissions.
   authorization_server: https://app.frontapp.com/.well-known/oauth-authorization-server
   scope: feature:mcp
 rate_limits:
@@ -21,14 +22,36 @@ rate_limits:
   note: additional hourly caps apply per teammate and per workspace
 tool_categories:
 - name: Conversations
-  capabilities: [search, read, create drafts, update status, assign]
+  capabilities:
+  - search
+  - read
+  - create drafts
+  - update status
+  - assign
 - name: Messages & Attachments
-  capabilities: [retrieve message content, download files]
+  capabilities:
+  - retrieve message content
+  - download files
 - name: Comments
-  capabilities: [post internal notes with teammate mentions]
+  capabilities:
+  - post internal notes with teammate mentions
 - name: Tags
-  capabilities: [manage conversation tags across the workspace]
+  capabilities:
+  - manage conversation tags across the workspace
 - name: Contacts & Accounts
-  capabilities: [search and retrieve customer and company records]
+  capabilities:
+  - search and retrieve customer and company records
 - name: Organization
-  capabilities: [list inboxes, channels, teammates, teams, ticket statuses]
+  capabilities:
+  - list inboxes
+  - channels
+  - teammates
+  - teams
+  - ticket statuses
+deployment:
+  mode: remote
+  endpoint: https://mcp.frontapp.com/mcp
+  verified: probed
+  probe: gated
+  checked: '2026-08-12'
+  source: catalog MCP census
