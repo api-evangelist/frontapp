@@ -37,6 +37,15 @@ created: '2026-07-17'
 modified: '2026-07-19'
 tags:
 - Company
+- Communications
+- Customer Service
+- Shared Inbox
+- Email
+- Messaging
+- Collaboration
+- Help Desk
+tags_raw:
+- Company
 - Communication
 - Customer Service
 - Shared Inbox
@@ -50,6 +59,12 @@ apis:
   humanURL: https://dev.frontapp.com/reference/introduction
   baseURL: https://api2.frontapp.com
   tags:
+  - Conversations
+  - Message
+  - Contacts
+  - Inboxes
+  - Communications
+  tags_raw:
   - Conversations
   - Messages
   - Contacts
