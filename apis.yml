@@ -12,6 +12,17 @@ description: >-
   limiting with standard headers, webhooks and application triggers for events,
   and an official hosted MCP server for AI agents. Front is a portfolio company
   of Battery Ventures.
+deliveryModel:
+  model: saas
+  open_source: false
+  commercial: true
+  callable_host: false
+  label: Hosted service · you call their endpoint
+  confidence: medium
+  source:
+  - pricing
+  generated: '2026-08-28'
+  method: derived
 accessModel:
   pricing: unknown
   onboarding: self-serve
