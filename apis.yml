@@ -1,17 +1,13 @@
 aid: frontapp
 name: FrontApp
-description: >-
-  Front is a customer service and communication platform that combines the
-  efficiency of a help desk with the familiarity of email, giving teams a shared
-  inbox across email, SMS, chat, and social channels. The Front Core API is a
-  REST API (base https://api2.frontapp.com) exposing 340+ endpoints across
-  conversations, messages, drafts, comments, contacts, accounts, inboxes,
-  channels, tags, teammates, teams, knowledge bases, shifts, analytics, links,
-  message templates, and signatures. It supports API-token and OAuth 2.0
-  authentication with 50+ granular scopes, cursor pagination, per-company rate
-  limiting with standard headers, webhooks and application triggers for events,
-  and an official hosted MCP server for AI agents. Front is a portfolio company
-  of Battery Ventures.
+description: Front is a customer service and communication platform that combines the efficiency of a
+  help desk with the familiarity of email, giving teams a shared inbox across email, SMS, chat, and social
+  channels. The Front Core API is a REST API (base https://api2.frontapp.com) exposing 340+ endpoints
+  across conversations, messages, drafts, comments, contacts, accounts, inboxes, channels, tags, teammates,
+  teams, knowledge bases, shifts, analytics, links, message templates, and signatures. It supports API-token
+  and OAuth 2.0 authentication with 50+ granular scopes, cursor pagination, per-company rate limiting
+  with standard headers, webhooks and application triggers for events, and an official hosted MCP server
+  for AI agents. Front is a portfolio company of Battery Ventures.
 deliveryModel:
   model: saas
   open_source: false
@@ -45,7 +41,7 @@ x-tier: stub
 x-tier-reason: portfolio-lead
 specificationVersion: '0.23'
 created: '2026-07-17'
-modified: '2026-07-19'
+modified: '2026-09-16'
 tags:
 - Company
 - Communications
@@ -81,12 +77,10 @@ apis:
   - Contacts
   - Inboxes
   - Communication
-  description: >-
-    The Front Core API is a REST API over Front's shared-inbox platform. It
-    exposes conversations, messages, drafts, comments, contacts, accounts,
-    inboxes, channels, tags, teammates, teams, knowledge bases, shifts,
-    analytics, links, message templates, and signatures, with API-token and
-    OAuth 2.0 authentication, cursor pagination, and webhooks for events.
+  description: The Front Core API is a REST API over Front's shared-inbox platform. It exposes conversations,
+    messages, drafts, comments, contacts, accounts, inboxes, channels, tags, teammates, teams, knowledge
+    bases, shifts, analytics, links, message templates, and signatures, with API-token and OAuth 2.0 authentication,
+    cursor pagination, and webhooks for events.
   properties:
   - url: https://dev.frontapp.com
     type: DeveloperPortal
@@ -101,6 +95,8 @@ apis:
   - url: https://dev.frontapp.com/docs/webhooks-1
     type: Webhooks
 common:
+- type: Website
+  url: https://frontapp.com
 - type: DeveloperPortal
   url: https://dev.frontapp.com
 - type: Documentation
@@ -138,7 +134,9 @@ common:
 - type: MCPServer
   url: https://mcp.frontapp.com/mcp
   name: MCP Server
-  description: Front's official hosted MCP server (open beta) exposes conversations, messages, comments, tags, contacts, accounts, and organization tools to MCP clients over Streamable HTTP with OAuth 2.1 + PKCE; agents inherit the authorizing teammate's permissions.
+  description: Front's official hosted MCP server (open beta) exposes conversations, messages, comments,
+    tags, contacts, accounts, and organization tools to MCP clients over Streamable HTTP with OAuth 2.1
+    + PKCE; agents inherit the authorizing teammate's permissions.
 - type: Authentication
   url: authentication/frontapp-authentication.yml
 - type: OAuthScopes
