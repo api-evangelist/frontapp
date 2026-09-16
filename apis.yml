@@ -82,11 +82,10 @@ apis:
   - Inboxes
   - Communication
   description: >-
-    The Front Core API is a REST API over Front's shared-inbox platform. It
-    exposes conversations, messages, drafts, comments, contacts, accounts,
-    inboxes, channels, tags, teammates, teams, knowledge bases, shifts,
-    analytics, links, message templates, and signatures, with API-token and
-    OAuth 2.0 authentication, cursor pagination, and webhooks for events.
+    The Front Core API is a REST API over Front's shared-inbox platform. It exposes conversations, messages,
+    drafts, comments, contacts, accounts, inboxes, channels, tags, teammates, teams, knowledge bases,
+    shifts, analytics, links, message templates, and signatures, with API-token and OAuth 2.0 authentication,
+    cursor pagination, and webhooks for events.
   properties:
   - url: https://dev.frontapp.com
     type: DeveloperPortal
@@ -100,6 +99,370 @@ apis:
     type: Authentication
   - url: https://dev.frontapp.com/docs/webhooks-1
     type: Webhooks
+- aid: frontapp:frontapp-accounts-api
+  name: FrontApp Accounts API
+  description: The Accounts API from FrontApp — 3 operation(s) for accounts.
+  humanURL: https://dev.frontapp.com/reference/introduction
+  baseURL: https://api2.frontapp.com
+  tags:
+  - Accounts
+  properties:
+  - type: OpenAPI
+    url: openapi/frontapp-accounts-api-openapi.yml
+- aid: frontapp:frontapp-analytics-api
+  name: FrontApp Analytics API
+  description: The Analytics API from FrontApp — 4 operation(s) for analytics.
+  humanURL: https://dev.frontapp.com/reference/introduction
+  baseURL: https://api2.frontapp.com
+  tags:
+  - Analytics
+  properties:
+  - type: OpenAPI
+    url: openapi/frontapp-analytics-api-openapi.yml
+- aid: frontapp:frontapp-application-message-templates-api
+  name: FrontApp Application Message Templates API
+  description: >-
+    The Application Message Templates API from FrontApp — 2 operation(s) for application message templates.
+  humanURL: https://dev.frontapp.com/reference/introduction
+  baseURL: https://api2.frontapp.com
+  tags:
+  - Application Message Templates
+  properties:
+  - type: OpenAPI
+    url: openapi/frontapp-application-message-templates-api-openapi.yml
+- aid: frontapp:frontapp-applications-api
+  name: FrontApp Applications API
+  description: The Applications API from FrontApp — 1 operation(s) for applications.
+  humanURL: https://dev.frontapp.com/reference/introduction
+  baseURL: https://api2.frontapp.com
+  tags:
+  - Applications
+  properties:
+  - type: OpenAPI
+    url: openapi/frontapp-applications-api-openapi.yml
+- aid: frontapp:frontapp-attachments-api
+  name: FrontApp Attachments API
+  description: The Attachments API from FrontApp — 4 operation(s) for attachments.
+  humanURL: https://dev.frontapp.com/reference/introduction
+  baseURL: https://api2.frontapp.com
+  tags:
+  - Attachments
+  properties:
+  - type: OpenAPI
+    url: openapi/frontapp-attachments-api-openapi.yml
+- aid: frontapp:frontapp-calls-api
+  name: FrontApp Calls API
+  description: The Calls API from FrontApp — 5 operation(s) for calls.
+  humanURL: https://dev.frontapp.com/reference/introduction
+  baseURL: https://api2.frontapp.com
+  tags:
+  - Calls
+  properties:
+  - type: OpenAPI
+    url: openapi/frontapp-calls-api-openapi.yml
+- aid: frontapp:frontapp-channels-api
+  name: FrontApp Channels API
+  description: The Channels API from FrontApp — 6 operation(s) for channels.
+  humanURL: https://dev.frontapp.com/reference/introduction
+  baseURL: https://api2.frontapp.com
+  tags:
+  - Channels
+  properties:
+  - type: OpenAPI
+    url: openapi/frontapp-channels-api-openapi.yml
+- aid: frontapp:frontapp-comments-api
+  name: FrontApp Comments API
+  description: The Comments API from FrontApp — 5 operation(s) for comments.
+  humanURL: https://dev.frontapp.com/reference/introduction
+  baseURL: https://api2.frontapp.com
+  tags:
+  - Comments
+  properties:
+  - type: OpenAPI
+    url: openapi/frontapp-comments-api-openapi.yml
+- aid: frontapp:frontapp-contact-groups-api
+  name: FrontApp Contact Groups API
+  description: The Contact Groups API from FrontApp — 5 operation(s) for contact groups.
+  humanURL: https://dev.frontapp.com/reference/introduction
+  baseURL: https://api2.frontapp.com
+  tags:
+  - Contact Groups
+  properties:
+  - type: OpenAPI
+    url: openapi/frontapp-contact-groups-api-openapi.yml
+- aid: frontapp:frontapp-contact-handles-api
+  name: FrontApp Contact Handles API
+  description: The Contact Handles API from FrontApp — 1 operation(s) for contact handles.
+  humanURL: https://dev.frontapp.com/reference/introduction
+  baseURL: https://api2.frontapp.com
+  tags:
+  - Contact Handles
+  properties:
+  - type: OpenAPI
+    url: openapi/frontapp-contact-handles-api-openapi.yml
+- aid: frontapp:frontapp-contact-lists-api
+  name: FrontApp Contact Lists API
+  description: The Contact Lists API from FrontApp — 5 operation(s) for contact lists.
+  humanURL: https://dev.frontapp.com/reference/introduction
+  baseURL: https://api2.frontapp.com
+  tags:
+  - Contact Lists
+  properties:
+  - type: OpenAPI
+    url: openapi/frontapp-contact-lists-api-openapi.yml
+- aid: frontapp:frontapp-contact-notes-api
+  name: FrontApp Contact Notes API
+  description: The Contact Notes API from FrontApp — 1 operation(s) for contact notes.
+  humanURL: https://dev.frontapp.com/reference/introduction
+  baseURL: https://api2.frontapp.com
+  tags:
+  - Contact Notes
+  properties:
+  - type: OpenAPI
+    url: openapi/frontapp-contact-notes-api-openapi.yml
+- aid: frontapp:frontapp-contacts-api
+  name: FrontApp Contacts API
+  description: The Contacts API from FrontApp — 6 operation(s) for contacts.
+  humanURL: https://dev.frontapp.com/reference/introduction
+  baseURL: https://api2.frontapp.com
+  tags:
+  - Contacts
+  properties:
+  - type: OpenAPI
+    url: openapi/frontapp-contacts-api-openapi.yml
+- aid: frontapp:frontapp-conversations-api
+  name: FrontApp Conversations API
+  description: The Conversations API from FrontApp — 11 operation(s) for conversations.
+  humanURL: https://dev.frontapp.com/reference/introduction
+  baseURL: https://api2.frontapp.com
+  tags:
+  - Conversations
+  properties:
+  - type: OpenAPI
+    url: openapi/frontapp-conversations-api-openapi.yml
+- aid: frontapp:frontapp-custom-fields-api
+  name: FrontApp Custom Fields API
+  description: The Custom Fields API from FrontApp — 7 operation(s) for custom fields.
+  humanURL: https://dev.frontapp.com/reference/introduction
+  baseURL: https://api2.frontapp.com
+  tags:
+  - Custom Fields
+  properties:
+  - type: OpenAPI
+    url: openapi/frontapp-custom-fields-api-openapi.yml
+- aid: frontapp:frontapp-drafts-api
+  name: FrontApp Drafts API
+  description: The Drafts API from FrontApp — 4 operation(s) for drafts.
+  humanURL: https://dev.frontapp.com/reference/introduction
+  baseURL: https://api2.frontapp.com
+  tags:
+  - Drafts
+  properties:
+  - type: OpenAPI
+    url: openapi/frontapp-drafts-api-openapi.yml
+- aid: frontapp:frontapp-events-api
+  name: FrontApp Events API
+  description: The Events API from FrontApp — 2 operation(s) for events.
+  humanURL: https://dev.frontapp.com/reference/introduction
+  baseURL: https://api2.frontapp.com
+  tags:
+  - Events
+  properties:
+  - type: OpenAPI
+    url: openapi/frontapp-events-api-openapi.yml
+- aid: frontapp:frontapp-inboxes-api
+  name: FrontApp Inboxes API
+  description: The Inboxes API from FrontApp — 7 operation(s) for inboxes.
+  humanURL: https://dev.frontapp.com/reference/introduction
+  baseURL: https://api2.frontapp.com
+  tags:
+  - Inboxes
+  properties:
+  - type: OpenAPI
+    url: openapi/frontapp-inboxes-api-openapi.yml
+- aid: frontapp:frontapp-knowledge-base-articles-api
+  name: FrontApp Knowledge Base Articles API
+  description: >-
+    The Knowledge Base Articles API from FrontApp — 6 operation(s) for knowledge base articles.
+  humanURL: https://dev.frontapp.com/reference/introduction
+  baseURL: https://api2.frontapp.com
+  tags:
+  - Knowledge Base Articles
+  properties:
+  - type: OpenAPI
+    url: openapi/frontapp-knowledge-base-articles-api-openapi.yml
+- aid: frontapp:frontapp-knowledge-base-categories-api
+  name: FrontApp Knowledge Base Categories API
+  description: >-
+    The Knowledge Base Categories API from FrontApp — 4 operation(s) for knowledge base categories.
+  humanURL: https://dev.frontapp.com/reference/introduction
+  baseURL: https://api2.frontapp.com
+  tags:
+  - Knowledge Base Categories
+  properties:
+  - type: OpenAPI
+    url: openapi/frontapp-knowledge-base-categories-api-openapi.yml
+- aid: frontapp:frontapp-knowledge-bases-api
+  name: FrontApp Knowledge Bases API
+  description: The Knowledge Bases API from FrontApp — 8 operation(s) for knowledge bases.
+  humanURL: https://dev.frontapp.com/reference/introduction
+  baseURL: https://api2.frontapp.com
+  tags:
+  - Knowledge Bases
+  properties:
+  - type: OpenAPI
+    url: openapi/frontapp-knowledge-bases-api-openapi.yml
+- aid: frontapp:frontapp-links-api
+  name: FrontApp Links API
+  description: The Links API from FrontApp — 3 operation(s) for links.
+  humanURL: https://dev.frontapp.com/reference/introduction
+  baseURL: https://api2.frontapp.com
+  tags:
+  - Links
+  properties:
+  - type: OpenAPI
+    url: openapi/frontapp-links-api-openapi.yml
+- aid: frontapp:frontapp-message-template-folders-api
+  name: FrontApp Message Template Folders API
+  description: >-
+    The Message Template Folders API from FrontApp — 5 operation(s) for message template folders.
+  humanURL: https://dev.frontapp.com/reference/introduction
+  baseURL: https://api2.frontapp.com
+  tags:
+  - Message Template Folders
+  properties:
+  - type: OpenAPI
+    url: openapi/frontapp-message-template-folders-api-openapi.yml
+- aid: frontapp:frontapp-message-templates-api
+  name: FrontApp Message Templates API
+  description: The Message Templates API from FrontApp — 5 operation(s) for message templates.
+  humanURL: https://dev.frontapp.com/reference/introduction
+  baseURL: https://api2.frontapp.com
+  tags:
+  - Message Templates
+  properties:
+  - type: OpenAPI
+    url: openapi/frontapp-message-templates-api-openapi.yml
+- aid: frontapp:frontapp-messages-api
+  name: FrontApp Messages API
+  description: The Messages API from FrontApp — 9 operation(s) for messages.
+  humanURL: https://dev.frontapp.com/reference/introduction
+  baseURL: https://api2.frontapp.com
+  tags:
+  - Messages
+  properties:
+  - type: OpenAPI
+    url: openapi/frontapp-messages-api-openapi.yml
+- aid: frontapp:frontapp-rules-api
+  name: FrontApp Rules API
+  description: The Rules API from FrontApp — 5 operation(s) for rules.
+  humanURL: https://dev.frontapp.com/reference/introduction
+  baseURL: https://api2.frontapp.com
+  tags:
+  - Rules
+  properties:
+  - type: OpenAPI
+    url: openapi/frontapp-rules-api-openapi.yml
+- aid: frontapp:frontapp-shifts-api
+  name: FrontApp Shifts API
+  description: The Shifts API from FrontApp — 5 operation(s) for shifts.
+  humanURL: https://dev.frontapp.com/reference/introduction
+  baseURL: https://api2.frontapp.com
+  tags:
+  - Shifts
+  properties:
+  - type: OpenAPI
+    url: openapi/frontapp-shifts-api-openapi.yml
+- aid: frontapp:frontapp-signatures-api
+  name: FrontApp Signatures API
+  description: The Signatures API from FrontApp — 3 operation(s) for signatures.
+  humanURL: https://dev.frontapp.com/reference/introduction
+  baseURL: https://api2.frontapp.com
+  tags:
+  - Signatures
+  properties:
+  - type: OpenAPI
+    url: openapi/frontapp-signatures-api-openapi.yml
+- aid: frontapp:frontapp-statuses-api
+  name: FrontApp Statuses API
+  description: The Statuses API from FrontApp — 2 operation(s) for statuses.
+  humanURL: https://dev.frontapp.com/reference/introduction
+  baseURL: https://api2.frontapp.com
+  tags:
+  - Statuses
+  properties:
+  - type: OpenAPI
+    url: openapi/frontapp-statuses-api-openapi.yml
+- aid: frontapp:frontapp-tags-api
+  name: FrontApp Tags API
+  description: The Tags API from FrontApp — 7 operation(s) for tags.
+  humanURL: https://dev.frontapp.com/reference/introduction
+  baseURL: https://api2.frontapp.com
+  tags:
+  - Tags
+  properties:
+  - type: OpenAPI
+    url: openapi/frontapp-tags-api-openapi.yml
+- aid: frontapp:frontapp-teammate-groups-api
+  name: FrontApp Teammate groups API
+  description: The Teammate groups API from FrontApp — 5 operation(s) for teammate groups.
+  humanURL: https://dev.frontapp.com/reference/introduction
+  baseURL: https://api2.frontapp.com
+  tags:
+  - Teammate groups
+  properties:
+  - type: OpenAPI
+    url: openapi/frontapp-teammate-groups-api-openapi.yml
+- aid: frontapp:frontapp-teammates-api
+  name: FrontApp Teammates API
+  description: The Teammates API from FrontApp — 4 operation(s) for teammates.
+  humanURL: https://dev.frontapp.com/reference/introduction
+  baseURL: https://api2.frontapp.com
+  tags:
+  - Teammates
+  properties:
+  - type: OpenAPI
+    url: openapi/frontapp-teammates-api-openapi.yml
+- aid: frontapp:frontapp-teams-api
+  name: FrontApp Teams API
+  description: The Teams API from FrontApp — 3 operation(s) for teams.
+  humanURL: https://dev.frontapp.com/reference/introduction
+  baseURL: https://api2.frontapp.com
+  tags:
+  - Teams
+  properties:
+  - type: OpenAPI
+    url: openapi/frontapp-teams-api-openapi.yml
+- aid: frontapp:frontapp-time-off-api
+  name: FrontApp Time Off API
+  description: The Time Off API from FrontApp — 3 operation(s) for time off.
+  humanURL: https://dev.frontapp.com/reference/introduction
+  baseURL: https://api2.frontapp.com
+  tags:
+  - Time Off
+  properties:
+  - type: OpenAPI
+    url: openapi/frontapp-time-off-api-openapi.yml
+- aid: frontapp:frontapp-token-identity-api
+  name: FrontApp Token Identity API
+  description: The Token Identity API from FrontApp — 1 operation(s) for token identity.
+  humanURL: https://dev.frontapp.com/reference/introduction
+  baseURL: https://api2.frontapp.com
+  tags:
+  - Token Identity
+  properties:
+  - type: OpenAPI
+    url: openapi/frontapp-token-identity-api-openapi.yml
+- aid: frontapp:frontapp-views-api
+  name: FrontApp Views API
+  description: The Views API from FrontApp — 4 operation(s) for views.
+  humanURL: https://dev.frontapp.com/reference/introduction
+  baseURL: https://api2.frontapp.com
+  tags:
+  - Views
+  properties:
+  - type: OpenAPI
+    url: openapi/frontapp-views-api-openapi.yml
 common:
 - type: DeveloperPortal
   url: https://dev.frontapp.com
