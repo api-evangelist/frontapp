@@ -1,0 +1,790 @@
+{
+  "@context": {
+    "@vocab": "https://frontapp.com/schema#",
+    "schema": "https://schema.org/",
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
+    "dcterms": "http://purl.org/dc/terms/",
+    "frontapp": "https://frontapp.com/schema#",
+    "InboundMessage": "frontapp:InboundMessage",
+    "sender": {
+      "@id": "frontapp:sender"
+    },
+    "subject": {
+      "@id": "frontapp:subject",
+      "@type": "xsd:string"
+    },
+    "body": {
+      "@id": "frontapp:body",
+      "@type": "xsd:string"
+    },
+    "metadata": {
+      "@id": "frontapp:metadata"
+    },
+    "delivered_at": {
+      "@id": "frontapp:delivered_at",
+      "@type": "xsd:integer"
+    },
+    "attachments": {
+      "@id": "frontapp:attachments",
+      "@container": "@list"
+    },
+    "OutboundMessage": "frontapp:OutboundMessage",
+    "sender_name": {
+      "@id": "frontapp:sender_name",
+      "@type": "xsd:string"
+    },
+    "to": {
+      "@id": "frontapp:to",
+      "@container": "@list"
+    },
+    "author_id": {
+      "@id": "frontapp:author_id",
+      "@type": "xsd:string"
+    },
+    "UpdateChannel": "frontapp:UpdateChannel",
+    "status": {
+      "@id": "frontapp:status",
+      "@type": "xsd:string"
+    },
+    "ApplicationMessageTemplateEditBlob": "frontapp:ApplicationMessageTemplateEditBlob",
+    "name": {
+      "@id": "frontapp:name",
+      "@type": "xsd:string"
+    },
+    "blurb": {
+      "@id": "frontapp:blurb",
+      "@type": "xsd:string"
+    },
+    "is_disabled": {
+      "@id": "frontapp:is_disabled",
+      "@type": "xsd:boolean"
+    },
+    "status_name": {
+      "@id": "frontapp:status_name",
+      "@type": "xsd:string"
+    },
+    "variable_mappings": {
+      "@id": "frontapp:variable_mappings",
+      "@container": "@list"
+    },
+    "template_preview": {
+      "@id": "frontapp:template_preview",
+      "@type": "xsd:string"
+    },
+    "ApplicationMessageTemplateResponse": "frontapp:ApplicationMessageTemplateResponse",
+    "template_id": {
+      "@id": "frontapp:template_id",
+      "@type": "xsd:decimal"
+    },
+    "CallParty": "frontapp:CallParty",
+    "handle": {
+      "@id": "frontapp:handle",
+      "@type": "xsd:string"
+    },
+    "CreateCall": "frontapp:CreateCall",
+    "direction": {
+      "@id": "frontapp:direction",
+      "@type": "xsd:string"
+    },
+    "CreateCallInbound": "frontapp:CreateCallInbound",
+    "external_call_id": {
+      "@id": "frontapp:external_call_id",
+      "@type": "xsd:string"
+    },
+    "initial_status": {
+      "@id": "frontapp:initial_status",
+      "@type": "xsd:string"
+    },
+    "from": {
+      "@id": "frontapp:from",
+      "@type": "@id"
+    },
+    "started_at": {
+      "@id": "frontapp:started_at",
+      "@type": "xsd:decimal"
+    },
+    "parent_external_call_id": {
+      "@id": "frontapp:parent_external_call_id",
+      "@type": "xsd:string"
+    },
+    "agent_email_address": {
+      "@id": "frontapp:agent_email_address",
+      "@type": "xsd:string"
+    },
+    "CreateCallOutbound": "frontapp:CreateCallOutbound",
+    "AddCallTranscript": "frontapp:AddCallTranscript",
+    "lines": {
+      "@id": "frontapp:lines",
+      "@container": "@list"
+    },
+    "TranscriptLine": "frontapp:TranscriptLine",
+    "speaker_name": {
+      "@id": "frontapp:speaker_name",
+      "@type": "xsd:string"
+    },
+    "content": {
+      "@id": "frontapp:content",
+      "@type": "xsd:string"
+    },
+    "start_time_seconds": {
+      "@id": "frontapp:start_time_seconds",
+      "@type": "xsd:decimal"
+    },
+    "speaker_type": {
+      "@id": "frontapp:speaker_type",
+      "@type": "xsd:string"
+    },
+    "AddCallSummary": "frontapp:AddCallSummary",
+    "UpdateCall": "frontapp:UpdateCall",
+    "occurred_at": {
+      "@id": "frontapp:occurred_at",
+      "@type": "xsd:decimal"
+    },
+    "call_status": {
+      "@id": "frontapp:call_status",
+      "@type": "xsd:string"
+    },
+    "AccountResponse": "frontapp:AccountResponse",
+    "_links": {
+      "@id": "frontapp:_links"
+    },
+    "id": {
+      "@id": "frontapp:id",
+      "@type": "xsd:string"
+    },
+    "logo_url": {
+      "@id": "frontapp:logo_url",
+      "@type": "xsd:string"
+    },
+    "description": {
+      "@id": "frontapp:description",
+      "@type": "xsd:string"
+    },
+    "domains": {
+      "@id": "frontapp:domains",
+      "@container": "@list"
+    },
+    "external_id": {
+      "@id": "frontapp:external_id",
+      "@type": "xsd:string"
+    },
+    "custom_fields": {
+      "@id": "frontapp:custom_fields",
+      "@type": "@id"
+    },
+    "created_at": {
+      "@id": "frontapp:created_at",
+      "@type": "xsd:decimal"
+    },
+    "updated_at": {
+      "@id": "frontapp:updated_at",
+      "@type": "xsd:decimal"
+    },
+    "Account": "frontapp:Account",
+    "AccountPatch": "frontapp:AccountPatch",
+    "ContactHandle": "frontapp:ContactHandle",
+    "source": {
+      "@id": "frontapp:source",
+      "@type": "xsd:string"
+    },
+    "ContactListResponses": "frontapp:ContactListResponses",
+    "is_private": {
+      "@id": "frontapp:is_private",
+      "@type": "xsd:boolean"
+    },
+    "ContactResponse": "frontapp:ContactResponse",
+    "avatar_url": {
+      "@id": "frontapp:avatar_url",
+      "@type": "xsd:string"
+    },
+    "links": {
+      "@id": "frontapp:links",
+      "@container": "@list"
+    },
+    "groups": {
+      "@id": "frontapp:groups",
+      "@container": "@list"
+    },
+    "lists": {
+      "@id": "frontapp:lists",
+      "@container": "@list"
+    },
+    "handles": {
+      "@id": "frontapp:handles",
+      "@container": "@list"
+    },
+    "ContactIds": "frontapp:ContactIds",
+    "contact_ids": {
+      "@id": "frontapp:contact_ids",
+      "@container": "@list"
+    },
+    "CustomFieldResponse": "frontapp:CustomFieldResponse",
+    "type": {
+      "@id": "frontapp:type",
+      "@type": "xsd:string"
+    },
+    "values": {
+      "@id": "frontapp:values",
+      "@container": "@list"
+    },
+    "AccountIds": "frontapp:AccountIds",
+    "account_ids": {
+      "@id": "frontapp:account_ids",
+      "@container": "@list"
+    },
+    "AnalyticsActivitiesColumns": "frontapp:AnalyticsActivitiesColumns",
+    "AnalyticsActivitiesExportsColumns": "frontapp:AnalyticsActivitiesExportsColumns",
+    "columns": {
+      "@id": "frontapp:columns",
+      "@container": "@list"
+    },
+    "AnalyticsActivitiesNumericParameterizedColumn": "frontapp:AnalyticsActivitiesNumericParameterizedColumn",
+    "AnalyticsActivitiesSmartQAParameterizedColumn": "frontapp:AnalyticsActivitiesSmartQAParameterizedColumn",
+    "AnalyticsActivitiesSmartQAScoreParameters": "frontapp:AnalyticsActivitiesSmartQAScoreParameters",
+    "AnalyticsExportRequest": "frontapp:AnalyticsExportRequest",
+    "start": {
+      "@id": "frontapp:start",
+      "@type": "xsd:decimal"
+    },
+    "end": {
+      "@id": "frontapp:end",
+      "@type": "xsd:decimal"
+    },
+    "timezone": {
+      "@id": "frontapp:timezone",
+      "@type": "xsd:string"
+    },
+    "filters": {
+      "@id": "frontapp:filters",
+      "@type": "@id"
+    },
+    "AnalyticsExportResponse": "frontapp:AnalyticsExportResponse",
+    "progress": {
+      "@id": "frontapp:progress",
+      "@type": "xsd:integer"
+    },
+    "url": {
+      "@id": "frontapp:url",
+      "@type": "xsd:string"
+    },
+    "filename": {
+      "@id": "frontapp:filename",
+      "@type": "xsd:string"
+    },
+    "size": {
+      "@id": "frontapp:size",
+      "@type": "xsd:decimal"
+    },
+    "AnalyticsMessagesColumns": "frontapp:AnalyticsMessagesColumns",
+    "AnalyticsMessagesExportColumns": "frontapp:AnalyticsMessagesExportColumns",
+    "ChannelIds": "frontapp:ChannelIds",
+    "channel_ids": {
+      "@id": "frontapp:channel_ids",
+      "@container": "@list"
+    },
+    "InboxIds": "frontapp:InboxIds",
+    "inbox_ids": {
+      "@id": "frontapp:inbox_ids",
+      "@container": "@list"
+    },
+    "TagIds": "frontapp:TagIds",
+    "tag_ids": {
+      "@id": "frontapp:tag_ids",
+      "@container": "@list"
+    },
+    "TeamIds": "frontapp:TeamIds",
+    "team_ids": {
+      "@id": "frontapp:team_ids",
+      "@container": "@list"
+    },
+    "TeammateIds": "frontapp:TeammateIds",
+    "teammate_ids": {
+      "@id": "frontapp:teammate_ids",
+      "@container": "@list"
+    },
+    "AnalyticsMetricId": "frontapp:AnalyticsMetricId",
+    "AnalyticsReportRequest": "frontapp:AnalyticsReportRequest",
+    "metrics": {
+      "@id": "frontapp:metrics",
+      "@container": "@list"
+    },
+    "AnalyticsReportResponse": "frontapp:AnalyticsReportResponse",
+    "uid": {
+      "@id": "frontapp:uid",
+      "@type": "xsd:string"
+    },
+    "AnalyticsScalar": "frontapp:AnalyticsScalar",
+    "value": {
+      "@id": "frontapp:value",
+      "@type": "@id"
+    },
+    "AnalyticsScalarType": "frontapp:AnalyticsScalarType",
+    "AppEvent": "frontapp:AppEvent",
+    "event_type": {
+      "@id": "frontapp:event_type",
+      "@type": "xsd:string"
+    },
+    "app_object": {
+      "@id": "frontapp:app_object"
+    },
+    "ChannelResponse": "frontapp:ChannelResponse",
+    "address": {
+      "@id": "frontapp:address",
+      "@type": "xsd:string"
+    },
+    "send_as": {
+      "@id": "frontapp:send_as",
+      "@type": "xsd:string"
+    },
+    "settings": {
+      "@id": "frontapp:settings"
+    },
+    "is_valid": {
+      "@id": "frontapp:is_valid",
+      "@type": "xsd:boolean"
+    },
+    "CreateChannel": "frontapp:CreateChannel",
+    "application_uid": {
+      "@id": "frontapp:application_uid",
+      "@type": "xsd:string"
+    },
+    "credentials": {
+      "@id": "frontapp:credentials"
+    },
+    "Attachment": "frontapp:Attachment",
+    "content_type": {
+      "@id": "frontapp:content_type",
+      "@type": "xsd:string"
+    },
+    "CreateDraft": "frontapp:CreateDraft",
+    "cc": {
+      "@id": "frontapp:cc",
+      "@container": "@list"
+    },
+    "bcc": {
+      "@id": "frontapp:bcc",
+      "@container": "@list"
+    },
+    "quote_body": {
+      "@id": "frontapp:quote_body",
+      "@type": "xsd:string"
+    },
+    "mode": {
+      "@id": "frontapp:mode",
+      "@type": "xsd:string"
+    },
+    "signature_id": {
+      "@id": "frontapp:signature_id",
+      "@type": "xsd:string"
+    },
+    "should_add_default_signature": {
+      "@id": "frontapp:should_add_default_signature",
+      "@type": "xsd:boolean"
+    },
+    "MessageResponse": "frontapp:MessageResponse",
+    "message_uid": {
+      "@id": "frontapp:message_uid",
+      "@type": "xsd:string"
+    },
+    "is_inbound": {
+      "@id": "frontapp:is_inbound",
+      "@type": "xsd:boolean"
+    },
+    "draft_mode": {
+      "@id": "frontapp:draft_mode",
+      "@type": "xsd:string"
+    },
+    "error_type": {
+      "@id": "frontapp:error_type",
+      "@type": "xsd:string"
+    },
+    "version": {
+      "@id": "frontapp:version",
+      "@type": "xsd:string"
+    },
+    "author": {
+      "@id": "frontapp:author",
+      "@type": "@id"
+    },
+    "recipients": {
+      "@id": "frontapp:recipients",
+      "@container": "@list"
+    },
+    "text": {
+      "@id": "frontapp:text",
+      "@type": "xsd:string"
+    },
+    "signature": {
+      "@id": "frontapp:signature",
+      "@type": "@id"
+    },
+    "RecipientResponse": "frontapp:RecipientResponse",
+    "role": {
+      "@id": "frontapp:role",
+      "@type": "xsd:string"
+    },
+    "SignatureResponse": "frontapp:SignatureResponse",
+    "sender_info": {
+      "@id": "frontapp:sender_info",
+      "@type": "xsd:string"
+    },
+    "is_visible_for_all_teammate_channels": {
+      "@id": "frontapp:is_visible_for_all_teammate_channels",
+      "@type": "xsd:boolean"
+    },
+    "is_default": {
+      "@id": "frontapp:is_default",
+      "@type": "xsd:boolean"
+    },
+    "TeammateResponse": "frontapp:TeammateResponse",
+    "email": {
+      "@id": "frontapp:email",
+      "@type": "xsd:string"
+    },
+    "username": {
+      "@id": "frontapp:username",
+      "@type": "xsd:string"
+    },
+    "first_name": {
+      "@id": "frontapp:first_name",
+      "@type": "xsd:string"
+    },
+    "last_name": {
+      "@id": "frontapp:last_name",
+      "@type": "xsd:string"
+    },
+    "is_admin": {
+      "@id": "frontapp:is_admin",
+      "@type": "xsd:boolean"
+    },
+    "is_available": {
+      "@id": "frontapp:is_available",
+      "@type": "xsd:boolean"
+    },
+    "is_blocked": {
+      "@id": "frontapp:is_blocked",
+      "@type": "xsd:boolean"
+    },
+    "DeleteDraft": "frontapp:DeleteDraft",
+    "CustomMessage": "frontapp:CustomMessage",
+    "body_format": {
+      "@id": "frontapp:body_format",
+      "@type": "xsd:string"
+    },
+    "OutboundReplyMessage": "frontapp:OutboundReplyMessage",
+    "channel_id": {
+      "@id": "frontapp:channel_id",
+      "@type": "xsd:string"
+    },
+    "options": {
+      "@id": "frontapp:options"
+    },
+    "ImportMessage": "frontapp:ImportMessage",
+    "assignee_id": {
+      "@id": "frontapp:assignee_id",
+      "@type": "xsd:string"
+    },
+    "tags": {
+      "@id": "frontapp:tags",
+      "@container": "@list"
+    },
+    "conversation_id": {
+      "@id": "frontapp:conversation_id",
+      "@type": "xsd:string"
+    },
+    "SeenReceiptResponse": "frontapp:SeenReceiptResponse",
+    "first_seen_at": {
+      "@id": "frontapp:first_seen_at",
+      "@type": "xsd:decimal"
+    },
+    "seen_by": {
+      "@id": "frontapp:seen_by",
+      "@type": "@id"
+    },
+    "CommentResponse": "frontapp:CommentResponse",
+    "posted_at": {
+      "@id": "frontapp:posted_at",
+      "@type": "xsd:decimal"
+    },
+    "is_pinned": {
+      "@id": "frontapp:is_pinned",
+      "@type": "xsd:boolean"
+    },
+    "UpdateComment": "frontapp:UpdateComment",
+    "CreateComment": "frontapp:CreateComment",
+    "RuleResponse": "frontapp:RuleResponse",
+    "actions": {
+      "@id": "frontapp:actions",
+      "@container": "@list"
+    },
+    "StatusResponse": "frontapp:StatusResponse",
+    "category": {
+      "@id": "frontapp:category",
+      "@type": "xsd:string"
+    },
+    "TagResponse": "frontapp:TagResponse",
+    "highlight": {
+      "@id": "frontapp:highlight",
+      "@type": "xsd:string"
+    },
+    "is_visible_in_conversation_lists": {
+      "@id": "frontapp:is_visible_in_conversation_lists",
+      "@type": "xsd:boolean"
+    },
+    "CreateTag": "frontapp:CreateTag",
+    "UpdateTag": "frontapp:UpdateTag",
+    "parent_tag_id": {
+      "@id": "frontapp:parent_tag_id",
+      "@type": "xsd:string"
+    },
+    "ConversationResponse": "frontapp:ConversationResponse",
+    "status_id": {
+      "@id": "frontapp:status_id",
+      "@type": "xsd:string"
+    },
+    "status_category": {
+      "@id": "frontapp:status_category",
+      "@type": "xsd:string"
+    },
+    "ticket_ids": {
+      "@id": "frontapp:ticket_ids",
+      "@container": "@list"
+    },
+    "assignee": {
+      "@id": "frontapp:assignee",
+      "@type": "@id"
+    },
+    "recipient": {
+      "@id": "frontapp:recipient",
+      "@type": "@id"
+    },
+    "waiting_since": {
+      "@id": "frontapp:waiting_since",
+      "@type": "xsd:decimal"
+    },
+    "scheduled_reminders": {
+      "@id": "frontapp:scheduled_reminders",
+      "@container": "@list"
+    },
+    "due_at": {
+      "@id": "frontapp:due_at",
+      "@type": "xsd:decimal"
+    },
+    "LinkResponse": "frontapp:LinkResponse",
+    "external_url": {
+      "@id": "frontapp:external_url",
+      "@type": "xsd:string"
+    },
+    "Reminder": "frontapp:Reminder",
+    "scheduled_at": {
+      "@id": "frontapp:scheduled_at",
+      "@type": "xsd:decimal"
+    },
+    "CreateContactList": "frontapp:CreateContactList",
+    "AddContactsToList": "frontapp:AddContactsToList",
+    "RemoveContactsFromList": "frontapp:RemoveContactsFromList",
+    "Contact": "frontapp:Contact",
+    "avatar": {
+      "@id": "frontapp:avatar",
+      "@type": "xsd:string"
+    },
+    "group_names": {
+      "@id": "frontapp:group_names",
+      "@container": "@list"
+    },
+    "list_names": {
+      "@id": "frontapp:list_names",
+      "@container": "@list"
+    },
+    "MergeContacts": "frontapp:MergeContacts",
+    "target_contact_id": {
+      "@id": "frontapp:target_contact_id",
+      "@type": "xsd:string"
+    },
+    "ContactNoteResponses": "frontapp:ContactNoteResponses",
+    "CreateContactNote": "frontapp:CreateContactNote",
+    "CreateConversation": "frontapp:CreateConversation",
+    "inbox_id": {
+      "@id": "frontapp:inbox_id",
+      "@type": "xsd:string"
+    },
+    "comment": {
+      "@id": "frontapp:comment"
+    },
+    "UpdateConversation": "frontapp:UpdateConversation",
+    "UpdateConversationAssignee": "frontapp:UpdateConversationAssignee",
+    "EventResponse": "frontapp:EventResponse",
+    "emitted_at": {
+      "@id": "frontapp:emitted_at",
+      "@type": "xsd:decimal"
+    },
+    "target": {
+      "@id": "frontapp:target"
+    },
+    "conversation": {
+      "@id": "frontapp:conversation",
+      "@type": "@id"
+    },
+    "InboxResponse": "frontapp:InboxResponse",
+    "is_public": {
+      "@id": "frontapp:is_public",
+      "@type": "xsd:boolean"
+    },
+    "UpdateConversationReminders": "frontapp:UpdateConversationReminders",
+    "teammate_id": {
+      "@id": "frontapp:teammate_id",
+      "@type": "xsd:string"
+    },
+    "CreateInbox": "frontapp:CreateInbox",
+    "CreateTeamInbox": "frontapp:CreateTeamInbox",
+    "CreatePrivateInbox": "frontapp:CreatePrivateInbox",
+    "KnowledgeBaseSlimResponse": "frontapp:KnowledgeBaseSlimResponse",
+    "locales": {
+      "@id": "frontapp:locales",
+      "@container": "@list"
+    },
+    "KnowledgeBaseCreate": "frontapp:KnowledgeBaseCreate",
+    "KnowledgeBaseResponse": "frontapp:KnowledgeBaseResponse",
+    "locale": {
+      "@id": "frontapp:locale",
+      "@type": "xsd:string"
+    },
+    "KnowledgeBaseCategorySlimResponse": "frontapp:KnowledgeBaseCategorySlimResponse",
+    "slug": {
+      "@id": "frontapp:slug",
+      "@type": "xsd:string"
+    },
+    "is_hidden": {
+      "@id": "frontapp:is_hidden",
+      "@type": "xsd:boolean"
+    },
+    "KnowledgeBasePatch": "frontapp:KnowledgeBasePatch",
+    "KnowledgeBaseArticleSlimResponse": "frontapp:KnowledgeBaseArticleSlimResponse",
+    "KnowledgeBaseArticleResponse": "frontapp:KnowledgeBaseArticleResponse",
+    "keywords": {
+      "@id": "frontapp:keywords",
+      "@container": "@list"
+    },
+    "last_edited_at": {
+      "@id": "frontapp:last_edited_at",
+      "@type": "xsd:decimal"
+    },
+    "KnowledgeBaseArticlePatch": "frontapp:KnowledgeBaseArticlePatch",
+    "KnowledgeBaseArticleCreate": "frontapp:KnowledgeBaseArticleCreate",
+    "category_id": {
+      "@id": "frontapp:category_id",
+      "@type": "xsd:string"
+    },
+    "KnowledgeBaseCategoryResponse": "frontapp:KnowledgeBaseCategoryResponse",
+    "KnowledgeBaseCategoryPatch": "frontapp:KnowledgeBaseCategoryPatch",
+    "KnowledgeBaseCategoryCreate": "frontapp:KnowledgeBaseCategoryCreate",
+    "parent_category_id": {
+      "@id": "frontapp:parent_category_id",
+      "@type": "xsd:string"
+    },
+    "CreateLink": "frontapp:CreateLink",
+    "pattern": {
+      "@id": "frontapp:pattern",
+      "@type": "xsd:string"
+    },
+    "UpdateLink": "frontapp:UpdateLink",
+    "IdentityResponse": "frontapp:IdentityResponse",
+    "MessageTemplateFolderResponse": "frontapp:MessageTemplateFolderResponse",
+    "CreateMessageTemplateFolder": "frontapp:CreateMessageTemplateFolder",
+    "parent_folder_id": {
+      "@id": "frontapp:parent_folder_id",
+      "@type": "xsd:string"
+    },
+    "UpdateMessageTemplateFolder": "frontapp:UpdateMessageTemplateFolder",
+    "CreateMessageTemplateFolderAsChild": "frontapp:CreateMessageTemplateFolderAsChild",
+    "CreateMessageTemplateAsChild": "frontapp:CreateMessageTemplateAsChild",
+    "MessageTemplateResponse": "frontapp:MessageTemplateResponse",
+    "is_available_for_all_inboxes": {
+      "@id": "frontapp:is_available_for_all_inboxes",
+      "@type": "xsd:boolean"
+    },
+    "CreateSharedMessageTemplate": "frontapp:CreateSharedMessageTemplate",
+    "folder_id": {
+      "@id": "frontapp:folder_id",
+      "@type": "xsd:string"
+    },
+    "CreatePrivateMessageTemplate": "frontapp:CreatePrivateMessageTemplate",
+    "ShiftInterval": "frontapp:ShiftInterval",
+    "ShiftIntervals": "frontapp:ShiftIntervals",
+    "mon": {
+      "@id": "frontapp:mon",
+      "@type": "@id"
+    },
+    "tue": {
+      "@id": "frontapp:tue",
+      "@type": "@id"
+    },
+    "wed": {
+      "@id": "frontapp:wed",
+      "@type": "@id"
+    },
+    "thu": {
+      "@id": "frontapp:thu",
+      "@type": "@id"
+    },
+    "fri": {
+      "@id": "frontapp:fri",
+      "@type": "@id"
+    },
+    "sat": {
+      "@id": "frontapp:sat",
+      "@type": "@id"
+    },
+    "sun": {
+      "@id": "frontapp:sun",
+      "@type": "@id"
+    },
+    "ShiftResponse": "frontapp:ShiftResponse",
+    "color": {
+      "@id": "frontapp:color",
+      "@type": "xsd:string"
+    },
+    "times": {
+      "@id": "frontapp:times",
+      "@type": "@id"
+    },
+    "CreateShift": "frontapp:CreateShift",
+    "UpdateShift": "frontapp:UpdateShift",
+    "UpdateSignature": "frontapp:UpdateSignature",
+    "CreatePrivateSignature": "frontapp:CreatePrivateSignature",
+    "CreateSharedSignature": "frontapp:CreateSharedSignature",
+    "TeammateGroupResponse": "frontapp:TeammateGroupResponse",
+    "is_managed_by_scim": {
+      "@id": "frontapp:is_managed_by_scim",
+      "@type": "xsd:boolean"
+    },
+    "permissions": {
+      "@id": "frontapp:permissions"
+    },
+    "CreateTeammateGroup": "frontapp:CreateTeammateGroup",
+    "UpdateTeammateGroup": "frontapp:UpdateTeammateGroup",
+    "TeamPreviewResponse": "frontapp:TeamPreviewResponse",
+    "UpdateTeammate": "frontapp:UpdateTeammate",
+    "TimeOffResponse": "frontapp:TimeOffResponse",
+    "start_at": {
+      "@id": "frontapp:start_at",
+      "@type": "xsd:decimal"
+    },
+    "end_at": {
+      "@id": "frontapp:end_at",
+      "@type": "xsd:decimal"
+    },
+    "auto_responder": {
+      "@id": "frontapp:auto_responder"
+    },
+    "CreateTimeOff": "frontapp:CreateTimeOff"
+  },
+  "@type": "schema:Dataset",
+  "schema:name": "FrontApp API JSON-LD context",
+  "schema:description": "A JSON-LD @context for the objects FrontApp's own API contract declares: one class per component schema, one property per declared field, typed from the contract. Derived by script (derive-json-ld.py, 2026-10-14) from openapi/frontapp-channel-api-openapi.yml, openapi/frontapp-core-api-openapi.yml.",
+  "dcterms:created": "2026-10-14",
+  "dcterms:source": [
+    "openapi/frontapp-channel-api-openapi.yml",
+    "openapi/frontapp-core-api-openapi.yml"
+  ]
+}

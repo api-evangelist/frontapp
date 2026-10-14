@@ -1,0 +1,93 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/frontapp/main/json-schema/frontapp-outbound-message-schema.json",
+  "title": "OutboundMessage",
+  "description": "Payload to receive an outbound message from an external system into Front.",
+  "x-generated": "2026-10-14",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/frontapp-channel-api-openapi.yml#/components/schemas/OutboundMessage",
+  "required": [
+    "to",
+    "body",
+    "metadata"
+  ],
+  "properties": {
+    "sender_name": {
+      "type": "string",
+      "description": "Name of the sender"
+    },
+    "to": {
+      "type": "array",
+      "description": "Data of the message recipient",
+      "items": {
+        "type": "object",
+        "required": [
+          "handle"
+        ],
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "Name of the recipient"
+          },
+          "handle": {
+            "type": "string",
+            "description": "Handle of the recipient. It can be any string used to uniquely identify the sender. **Important:** When sending a phone number, include a country code preceded by a plus (+) sign. For example, +33 for France. If you do not send a country code or include a plus sign, Front will normalize your phone number to the USA (+1)."
+          },
+          "email": {
+            "type": "string",
+            "description": "Email of the recipient. When provided, links this contact to existing contacts with the same email to prevent duplicates across channels."
+          }
+        }
+      }
+    },
+    "subject": {
+      "type": "string",
+      "description": "Subject of the message"
+    },
+    "author_id": {
+      "type": "string",
+      "description": "ID of the teammate on behalf of whom the message is sent"
+    },
+    "body": {
+      "type": "string",
+      "description": "The body of the message in HTML or plain text format."
+    },
+    "metadata": {
+      "type": "object",
+      "required": [
+        "external_id",
+        "external_conversation_id"
+      ],
+      "properties": {
+        "external_id": {
+          "type": "string",
+          "maxLength": 200,
+          "description": "External identifier of the message"
+        },
+        "external_conversation_id": {
+          "type": "string",
+          "maxLength": 200,
+          "description": "External identifier of the conversation. Will be used to thread messages."
+        },
+        "referenced_message_external_id": {
+          "type": "string",
+          "maxLength": 200,
+          "description": "External identifier of the message that this message is replying to. Use this for explicit replies."
+        }
+      }
+    },
+    "delivered_at": {
+      "type": "integer",
+      "description": "Time in seconds at which message was created in external system"
+    },
+    "attachments": {
+      "description": "Binary data of attached files. Must use `Content-Type: multipart/form-data` if specified. See [example](https://gist.github.com/hdornier/e04d04921032e98271f46ff8a539a4cb) or read more about [Attachments](https://dev.frontapp.com/docs/attachments-1).  Max 25 MB.",
+      "type": "array",
+      "items": {
+        "type": "string",
+        "format": "binary"
+      }
+    }
+  }
+}

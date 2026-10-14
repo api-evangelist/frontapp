@@ -1,13 +1,14 @@
 aid: frontapp
+
 name: FrontApp
-description: Front is a customer service and communication platform that combines the efficiency of a
-  help desk with the familiarity of email, giving teams a shared inbox across email, SMS, chat, and social
-  channels. The Front Core API is a REST API (base https://api2.frontapp.com) exposing 340+ endpoints
-  across conversations, messages, drafts, comments, contacts, accounts, inboxes, channels, tags, teammates,
-  teams, knowledge bases, shifts, analytics, links, message templates, and signatures. It supports API-token
-  and OAuth 2.0 authentication with 50+ granular scopes, cursor pagination, per-company rate limiting
-  with standard headers, webhooks and application triggers for events, and an official hosted MCP server
-  for AI agents. Front is a portfolio company of Battery Ventures.
+
+description: Front is a customer service and communication platform that combines the efficiency of a help desk with the familiarity of email,
+  giving teams a shared inbox across email, SMS, chat, and social channels. The Front Core API is a REST API (base https://api2.frontapp.com)
+  exposing 340+ endpoints across conversations, messages, drafts, comments, contacts, accounts, inboxes, channels, tags, teammates, teams, knowledge
+  bases, shifts, analytics, links, message templates, and signatures. It supports API-token and OAuth 2.0 authentication with 50+ granular scopes,
+  cursor pagination, per-company rate limiting with standard headers, webhooks and application triggers for events, and an official hosted MCP
+  server for AI agents. Front is a portfolio company of Battery Ventures.
+
 deliveryModel:
   model: saas
   open_source: false
@@ -19,6 +20,7 @@ deliveryModel:
   - pricing
   generated: '2026-08-28'
   method: derived
+
 accessModel:
   pricing: unknown
   onboarding: self-serve
@@ -31,20 +33,34 @@ accessModel:
   - authentication
   generated: '2026-07-22'
   method: derived
+
 image: https://avatars.githubusercontent.com/frontapp
+
 url: https://raw.githubusercontent.com/api-evangelist/frontapp/refs/heads/main/apis.yml
+
 x-type: company
+
 x-source: vc-portfolio
+
 x-backed-by:
 - battery-ventures
+
 x-tier: stub
+
 x-tier-reason: portfolio-lead
+
 specificationVersion: '0.23'
+
 created: '2026-07-17'
+
 modified: '2026-09-16'
+
 x-docs-platform: readme
+
 x-docs-platform-confidence: high
+
 x-docs-platform-checked: 2026-10-03
+
 tags:
 - Company
 - Communications
@@ -54,6 +70,7 @@ tags:
 - Messaging
 - Collaboration
 - Help Desk
+
 tags_raw:
 - Company
 - Communication
@@ -63,41 +80,30 @@ tags_raw:
 - Messaging
 - Collaboration
 - Help Desk
-apis:
-- aid: frontapp:frontapp-core-api
-  name: Front Core API
-  humanURL: https://dev.frontapp.com/reference/introduction
-  baseURL: https://api2.frontapp.com
-  tags:
-  - Conversations
-  - Message
-  - Contacts
-  - Inboxes
-  - Communications
-  tags_raw:
-  - Conversations
-  - Messages
-  - Contacts
-  - Inboxes
-  - Communication
-  description: The Front Core API is a REST API over Front's shared-inbox platform. It exposes conversations,
-    messages, drafts, comments, contacts, accounts, inboxes, channels, tags, teammates, teams, knowledge
-    bases, shifts, analytics, links, message templates, and signatures, with API-token and OAuth 2.0 authentication,
-    cursor pagination, and webhooks for events.
-  properties:
-  - url: https://dev.frontapp.com
-    type: DeveloperPortal
-  - url: https://dev.frontapp.com/docs/welcome
-    type: Documentation
-  - url: https://dev.frontapp.com/reference
-    type: APIReference
-  - url: https://dev.frontapp.com/docs/core-api-getting-started
-    type: GettingStarted
-  - url: https://dev.frontapp.com/docs/authentication
-    type: Authentication
-  - url: https://dev.frontapp.com/docs/webhooks-1
-    type: Webhooks
+
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com
+- FN: APIs.json
+  email: info@apis.io
+
 common:
+- type: AgenticAccess
+  url: agentic-access/frontapp-agentic-access.yml
+- type: Spectral
+  url: rules/frontapp-rules.yml
+- type: JSONLD
+  url: json-ld/frontapp-context.jsonld
+- type: Vocabulary
+  url: vocabulary/frontapp-vocabulary.yml
+- type: DataModel
+  url: data-model/frontapp-data-model.yml
+- type: ErrorCatalog
+  url: errors/frontapp-problem-types.yml
+- type: Hosts
+  url: hosts/frontapp-hosts.yml
+- type: Vendors
+  url: vendors/frontapp-vendors.yml
 - type: Website
   url: https://frontapp.com
 - type: DeveloperPortal
@@ -137,9 +143,8 @@ common:
 - type: MCPServer
   url: https://mcp.frontapp.com/mcp
   name: MCP Server
-  description: Front's official hosted MCP server (open beta) exposes conversations, messages, comments,
-    tags, contacts, accounts, and organization tools to MCP clients over Streamable HTTP with OAuth 2.1
-    + PKCE; agents inherit the authorizing teammate's permissions.
+  description: Front's official hosted MCP server (open beta) exposes conversations, messages, comments, tags, contacts, accounts, and organization
+    tools to MCP clients over Streamable HTTP with OAuth 2.1 + PKCE; agents inherit the authorizing teammate's permissions.
 - type: Authentication
   url: authentication/frontapp-authentication.yml
 - type: OAuthScopes
@@ -172,13 +177,93 @@ common:
   url: security/frontapp-trust-center.yml
 - type: Compliance
   url: https://trust.front.com/
-maintainers:
-- FN: Kin Lane
-  email: kin@apievangelist.com
-- FN: APIs.json
-  email: info@apis.io
+
+apis:
+- aid: frontapp:frontapp-core-api
+  name: Front Core API
+  humanURL: https://dev.frontapp.com/reference/introduction
+  baseURL: https://api2.frontapp.com
+  tags:
+  - Conversations
+  - Message
+  - Contacts
+  - Inboxes
+  - Communications
+  tags_raw:
+  - Conversations
+  - Messages
+  - Contacts
+  - Inboxes
+  - Communication
+  description: The Front Core API is a REST API over Front's shared-inbox platform. It exposes conversations, messages, drafts, comments, contacts,
+    accounts, inboxes, channels, tags, teammates, teams, knowledge bases, shifts, analytics, links, message templates, and signatures, with API-token
+    and OAuth 2.0 authentication, cursor pagination, and webhooks for events.
+  properties:
+  - url: https://dev.frontapp.com
+    type: DeveloperPortal
+  - url: https://dev.frontapp.com/docs/welcome
+    type: Documentation
+  - url: https://dev.frontapp.com/reference
+    type: APIReference
+  - url: https://dev.frontapp.com/docs/core-api-getting-started
+    type: GettingStarted
+  - url: https://dev.frontapp.com/docs/authentication
+    type: Authentication
+  - url: https://dev.frontapp.com/docs/webhooks-1
+    type: Webhooks
+- aid: frontapp:frontapp-channel-api
+  name: FrontApp Channel API
+  description: The Channel API from FrontApp — 11 operation(s) for channel.
+  humanURL: https://dev.frontapp.com/reference/introduction
+  baseURL: https://api2.frontapp.com
+  tags:
+  - Channel
+  properties:
+  - type: OpenAPI
+    url: openapi/frontapp-channel-api-openapi.yml
+  - type: JSONSchema
+    url: json-schema/frontapp-outbound-message-schema.json
+  - type: JSONSchema
+    url: json-schema/frontapp-inbound-message-schema.json
+  - type: JSONSchema
+    url: json-schema/frontapp-application-message-template-edit-blob-schema.json
+  - type: JSONSchema
+    url: json-schema/frontapp-create-call-schema.json
+  - type: JSONSchema
+    url: json-schema/frontapp-update-call-schema.json
+  - type: JSONSchema
+    url: json-schema/frontapp-application-message-template-schema.json
+- aid: frontapp:frontapp-core-api
+  name: FrontApp Core API
+  description: The Core API from FrontApp — 147 operation(s) for core.
+  humanURL: https://dev.frontapp.com/reference/introduction
+  baseURL: https://api2.frontapp.com
+  tags:
+  - Core
+  properties:
+  - type: OpenAPI
+    url: openapi/frontapp-core-api-openapi.yml
+  - type: JSONSchema
+    url: json-schema/frontapp-import-message-schema.json
+  - type: JSONSchema
+    url: json-schema/frontapp-outbound-reply-message-schema.json
+  - type: JSONSchema
+    url: json-schema/frontapp-outbound-message-schema.json
+  - type: JSONSchema
+    url: json-schema/frontapp-create-channel-schema.json
+  - type: JSONSchema
+    url: json-schema/frontapp-create-draft-schema.json
+  - type: JSONSchema
+    url: json-schema/frontapp-update-conversation-schema.json
+
 x-enrichment:
   date: '2026-07-19'
   status: backfilled
   pass: local-v1
   note: backfilled from .gitignore signal + verified work evidence
+
+x-readme-harvest:
+  date: '2026-10-14'
+  ops: 258
+  tool: harvest-readme-openapi.py
+  portal: https://dev.frontapp.com

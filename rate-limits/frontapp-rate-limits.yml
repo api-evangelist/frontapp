@@ -1,6 +1,7 @@
 generated: '2026-07-19'
 method: searched
 source: https://dev.frontapp.com/docs/rate-limiting
+name: FrontApp API Rate Limits
 docs: https://dev.frontapp.com/docs/rate-limiting
 scope: per-company
 plans:

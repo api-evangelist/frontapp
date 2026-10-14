@@ -1,0 +1,73 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/frontapp/main/json-schema/frontapp-create-channel-schema.json",
+  "title": "CreateChannel",
+  "x-generated": "2026-10-14",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/frontapp-core-api-openapi.yml#/components/schemas/CreateChannel",
+  "required": [
+    "type"
+  ],
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "Name of the channel"
+    },
+    "settings": {
+      "type": "object",
+      "description": "Settings of the channel",
+      "properties": {
+        "undo_send_time": {
+          "type": "integer",
+          "description": "The time (measured in seconds) that users have to undo a send operation in the channel.",
+          "enum": [
+            0,
+            5,
+            10,
+            15,
+            30,
+            60
+          ]
+        },
+        "all_teammates_can_reply": {
+          "type": "boolean",
+          "description": "Whether teammates without inbox access can reply on this channel. Only allowed for shared channels."
+        },
+        "webhook_url": {
+          "type": "string",
+          "description": "The webhook URL outbound messages should be sent to. Only allowed for \"custom\" type channels."
+        },
+        "sid": {
+          "type": "string",
+          "description": "The SID of the Twilio channel. Only allowed for \"twilio\" type channels."
+        },
+        "auth_token": {
+          "type": "string",
+          "description": "The auth token for the Twilio account. Only allowed for \"twilio\" type channels."
+        }
+      }
+    },
+    "type": {
+      "type": "string",
+      "description": "Type of the channel",
+      "enum": [
+        "custom",
+        "smtp",
+        "twilio"
+      ]
+    },
+    "send_as": {
+      "type": "string",
+      "description": "Sending address of your channel. Required for SMTP and Twilio channels."
+    },
+    "application_uid": {
+      "type": "string",
+      "description": "The UID of a developer app that defines a channel. When provided, an application\nchannel bound to that app is created (the channel `type` must be \"custom\").\n"
+    },
+    "credentials": {
+      "type": "object",
+      "description": "Credentials used to authenticate requests to the application's service. Only used with\n`application_uid`, and its shape depends on the application server's authentication type:\n  - `none`: omit.\n  - `api_key`: `{ \"api_key\": string }`.\n  - `basic`: `{ \"username\": string, \"password\": string }`.\n  - `bearer`: `{ \"access_token\": string }`.\n  - OAuth2 `client_credentials`: `{ \"client_id\": string, \"client_secret\": string }`\n  - OAuth2 `password`: `{ \"username\": string, \"password\": string }`\n  - OAuth2 `authorization_code`: omit. The channel is created unauthenticated and the OAuth\n    flow must be completed interactively afterwards.\n"
+    }
+  }
+}

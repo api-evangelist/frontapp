@@ -1,0 +1,137 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/frontapp/main/json-schema/frontapp-create-call-schema.json",
+  "title": "CreateCall",
+  "x-generated": "2026-10-14",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/frontapp-channel-api-openapi.yml#/components/schemas/CreateCall",
+  "oneOf": [
+    {
+      "$ref": "#/$defs/CreateCallInbound"
+    },
+    {
+      "$ref": "#/$defs/CreateCallOutbound"
+    }
+  ],
+  "properties": {
+    "direction": {
+      "type": "string",
+      "enum": [
+        "inbound",
+        "outbound"
+      ],
+      "description": "Use `inbound` with required `from` (external party); use `outbound` with required `to` (callee)."
+    }
+  },
+  "$defs": {
+    "CallParty": {
+      "type": "object",
+      "required": [
+        "handle"
+      ],
+      "properties": {
+        "handle": {
+          "type": "string",
+          "description": "Party identifier compatible with the application channel contact type."
+        },
+        "name": {
+          "type": "string",
+          "description": "Optional display name for the party."
+        }
+      }
+    },
+    "CreateCallInbound": {
+      "type": "object",
+      "required": [
+        "external_call_id",
+        "initial_status",
+        "direction",
+        "from",
+        "parent_external_call_id"
+      ],
+      "properties": {
+        "external_call_id": {
+          "type": "string",
+          "description": "Stable identifier for this call in the provider system."
+        },
+        "initial_status": {
+          "type": "string",
+          "enum": [
+            "queued",
+            "ringing"
+          ]
+        },
+        "direction": {
+          "type": "string",
+          "enum": [
+            "inbound"
+          ],
+          "description": "Inbound calls must include `from` (external party who initiated). The channel is treated as the receiving side (e.g. agent or queue)."
+        },
+        "from": {
+          "$ref": "#/$defs/CallParty",
+          "description": "External party who initiated the inbound call."
+        },
+        "started_at": {
+          "type": "number",
+          "description": "Optional Unix timestamp (ms) when the call started."
+        },
+        "parent_external_call_id": {
+          "type": "string",
+          "description": "External ID of the parent call (e.g. where the call was transferred from). This will be used to thread the call into an existing conversation with a matching parent call ID."
+        },
+        "agent_email_address": {
+          "type": "string",
+          "description": "Optional email of the teammate associated with the call."
+        }
+      }
+    },
+    "CreateCallOutbound": {
+      "type": "object",
+      "required": [
+        "external_call_id",
+        "initial_status",
+        "direction",
+        "to",
+        "parent_external_call_id"
+      ],
+      "properties": {
+        "external_call_id": {
+          "type": "string",
+          "description": "Stable identifier for this call in the provider system."
+        },
+        "initial_status": {
+          "type": "string",
+          "enum": [
+            "queued",
+            "ringing"
+          ]
+        },
+        "direction": {
+          "type": "string",
+          "enum": [
+            "outbound"
+          ],
+          "description": "Outbound calls must include `to` (callee). The channel is treated as the originating side (e.g. agent)."
+        },
+        "to": {
+          "$ref": "#/$defs/CallParty",
+          "description": "Party being called (callee)."
+        },
+        "started_at": {
+          "type": "number",
+          "description": "Optional Unix timestamp (ms) when the call started."
+        },
+        "parent_external_call_id": {
+          "type": "string",
+          "description": "External ID of the parent call (e.g. where the call was transferred from). This will be used to thread the call into an existing conversation with a matching parent call ID."
+        },
+        "agent_email_address": {
+          "type": "string",
+          "description": "Optional email of the teammate associated with the call."
+        }
+      }
+    }
+  }
+}

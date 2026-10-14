@@ -1,0 +1,137 @@
+generated: '2026-10-14'
+method: derived
+source: the pre-flight dossier, apis.yml pointers, spec servers, well-known, vendors -- nothing fetched here
+generator: derive-hosts.py
+summary:
+  hosts: 12
+  own: 6
+  other_domain: 4
+  platform: 2
+  roles:
+  - collections
+  - identity
+  - marketing
+  - other
+  - portal
+  - source
+  - status
+  - support
+  - website
+hosts:
+- host: api2.frontapp.com
+  found_by:
+  - apis[]
+  types: []
+  serves:
+  - api
+  registrable_domain: frontapp.com
+  role: other
+  relation: own
+- host: app.frontapp.com
+  found_by:
+  - pointer
+  types:
+  - Login
+  serves: []
+  registrable_domain: frontapp.com
+  role: identity
+  relation: own
+- host: community.front.com
+  found_by:
+  - pointer
+  types:
+  - Support
+  serves: []
+  registrable_domain: front.com
+  role: support
+  relation: other-domain
+- host: dev.frontapp.com
+  found_by:
+  - pointer
+  - apis[]
+  types:
+  - DeveloperPortal
+  - Documentation
+  - APIReference
+  - GettingStarted
+  serves:
+  - docs
+  registrable_domain: frontapp.com
+  role: portal
+  relation: own
+- host: front.com
+  found_by:
+  - pointer
+  types:
+  - Blog
+  - Pricing
+  - TermsOfService
+  - PrivacyPolicy
+  - Security
+  serves: []
+  registrable_domain: front.com
+  role: marketing
+  relation: other-domain
+- host: frontapp.com
+  found_by:
+  - pointer
+  types:
+  - Website
+  serves: []
+  registrable_domain: frontapp.com
+  role: website
+  relation: own
+- host: github.com
+  found_by:
+  - pointer
+  types:
+  - GitHubOrganization
+  serves: []
+  registrable_domain: github.com
+  role: source
+  relation: platform
+- host: help.front.com
+  found_by:
+  - pointer
+  types:
+  - HelpCenter
+  serves: []
+  registrable_domain: front.com
+  role: support
+  relation: other-domain
+- host: mcp.frontapp.com
+  found_by:
+  - pointer
+  types:
+  - MCPServer
+  serves: []
+  registrable_domain: frontapp.com
+  role: other
+  relation: own
+- host: status.frontapp.com
+  found_by:
+  - pointer
+  types:
+  - StatusPage
+  serves: []
+  registrable_domain: frontapp.com
+  role: status
+  relation: own
+- host: trust.front.com
+  found_by:
+  - pointer
+  types:
+  - Compliance
+  serves: []
+  registrable_domain: front.com
+  role: other
+  relation: other-domain
+- host: www.postman.com
+  found_by:
+  - pointer
+  types:
+  - Postman
+  serves: []
+  registrable_domain: postman.com
+  role: collections
+  relation: platform

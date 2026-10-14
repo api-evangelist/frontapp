@@ -1,0 +1,57 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/frontapp/main/json-schema/frontapp-application-message-template-edit-blob-schema.json",
+  "title": "ApplicationMessageTemplateEditBlob",
+  "x-generated": "2026-10-14",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/frontapp-channel-api-openapi.yml#/components/schemas/ApplicationMessageTemplateEditBlob",
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "Name of the message template."
+    },
+    "blurb": {
+      "type": "string",
+      "description": "A limited preview of the message template content."
+    },
+    "is_disabled": {
+      "type": "boolean",
+      "description": "Whether the message template is enabled for use in the external service."
+    },
+    "status_name": {
+      "type": "string",
+      "description": "Either \"PENDING\", \"APPROVED\", or \"REJECTED\". This value helps admins understand why a template may be enabled or disabled in the external service."
+    },
+    "variable_mappings": {
+      "type": "array",
+      "description": "List of variable mappings",
+      "items": {
+        "type": "object",
+        "required": [
+          "uid",
+          "type",
+          "name"
+        ],
+        "properties": {
+          "uid": {
+            "type": "string",
+            "description": "Value of the variable"
+          },
+          "name": {
+            "type": "string",
+            "description": "Name of the variable"
+          },
+          "type": {
+            "type": "string",
+            "description": "Type of the variable"
+          }
+        }
+      }
+    },
+    "template_preview": {
+      "type": "string",
+      "description": "Preview of the template"
+    }
+  }
+}

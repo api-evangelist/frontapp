@@ -1,0 +1,32 @@
+generated: '2026-10-14'
+method: derived
+generator: derive-problem-types.py
+source:
+- openapi/frontapp-channel-api-openapi.yml
+- openapi/frontapp-core-api-openapi.yml
+format: custom
+envelope:
+  media_type: null
+  schema: null
+coverage:
+  operations: 258
+  statuses_declared: 3
+problems:
+- status: 400
+  title: Bad Request
+  description: Bad Request
+  operations: 12
+  media_types: []
+  schema: null
+- status: 403
+  title: Forbidden
+  description: If your plan does not include linked conversations.
+  operations: 3
+  media_types: []
+  schema: null
+- status: 404
+  title: Not Found
+  description: Ticketing is not enabled, therefore, there are no ticket statuses.
+  operations: 4
+  media_types: []
+  schema: null

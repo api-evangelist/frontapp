@@ -1,0 +1,428 @@
+generated: '2026-10-14'
+method: derived
+generator: derive-vocabulary.py
+source:
+- openapi/frontapp-channel-api-openapi.yml
+- openapi/frontapp-core-api-openapi.yml
+vocabulary:
+  name: FrontApp Domain Vocabulary
+  description: 'Terms declared by FrontApp''s own API contract: its resource groups, objects and enumerations, with the contract''s definitions.
+    Derived, not authored.'
+  version: '2026-10-14'
+  terms:
+  - term: InboundMessage
+    definition: 'Object declared by the contract with fields: sender, subject, body, metadata, delivered_at, attachments.'
+    tags:
+    - Object
+    source: openapi/frontapp-channel-api-openapi.yml#/components/schemas/InboundMessage
+  - term: OutboundMessage
+    definition: Payload to receive an outbound message from an external system into Front.
+    tags:
+    - Object
+    source: openapi/frontapp-channel-api-openapi.yml#/components/schemas/OutboundMessage
+  - term: UpdateChannel
+    definition: 'Object declared by the contract with fields: status.'
+    tags:
+    - Object
+    source: openapi/frontapp-channel-api-openapi.yml#/components/schemas/UpdateChannel
+  - term: ApplicationMessageTemplateEditBlob
+    definition: 'Object declared by the contract with fields: name, blurb, is_disabled, status_name, variable_mappings, template_preview.'
+    tags:
+    - Object
+    source: openapi/frontapp-channel-api-openapi.yml#/components/schemas/ApplicationMessageTemplateEditBlob
+  - term: ApplicationMessageTemplateResponse
+    definition: Response for an application message template.
+    tags:
+    - Object
+    source: openapi/frontapp-channel-api-openapi.yml#/components/schemas/ApplicationMessageTemplateResponse
+  - term: CallParty
+    definition: 'Object declared by the contract with fields: handle, name.'
+    tags:
+    - Object
+    source: openapi/frontapp-channel-api-openapi.yml#/components/schemas/CallParty
+  - term: CreateCall
+    definition: 'Object declared by the contract with fields: direction.'
+    tags:
+    - Object
+    source: openapi/frontapp-channel-api-openapi.yml#/components/schemas/CreateCall
+  - term: CreateCallInbound
+    definition: 'Object declared by the contract with fields: external_call_id, initial_status, direction, from, started_at, parent_external_call_id,
+      agent_email_address.'
+    tags:
+    - Object
+    source: openapi/frontapp-channel-api-openapi.yml#/components/schemas/CreateCallInbound
+  - term: CreateCallOutbound
+    definition: 'Object declared by the contract with fields: external_call_id, initial_status, direction, to, started_at, parent_external_call_id,
+      agent_email_address.'
+    tags:
+    - Object
+    source: openapi/frontapp-channel-api-openapi.yml#/components/schemas/CreateCallOutbound
+  - term: AddCallTranscript
+    definition: 'Object declared by the contract with fields: lines.'
+    tags:
+    - Object
+    source: openapi/frontapp-channel-api-openapi.yml#/components/schemas/AddCallTranscript
+  - term: TranscriptLine
+    definition: 'Object declared by the contract with fields: speaker_name, content, start_time_seconds, speaker_type.'
+    tags:
+    - Object
+    source: openapi/frontapp-channel-api-openapi.yml#/components/schemas/TranscriptLine
+  - term: AddCallSummary
+    definition: 'Object declared by the contract with fields: content.'
+    tags:
+    - Object
+    source: openapi/frontapp-channel-api-openapi.yml#/components/schemas/AddCallSummary
+  - term: UpdateCall
+    definition: 'Object declared by the contract with fields: occurred_at, call_status, agent_email_address.'
+    tags:
+    - Object
+    source: openapi/frontapp-channel-api-openapi.yml#/components/schemas/UpdateCall
+  - term: AccountResponse
+    definition: 'Object declared by the contract with fields: _links, id, name, logo_url, description, domains, external_id, custom_fields, created_at,
+      updated_at.'
+    tags:
+    - Object
+    source: openapi/frontapp-core-api-openapi.yml#/components/schemas/AccountResponse
+  - term: CustomFieldParameter
+    definition: An object whose key is the `name` property defined for the custom field in the Front UI. The value of the key must use the same
+      `type` specified for the custom field, as described in https://dev.frontapp.com/reference/custom-fields
+    tags:
+    - Object
+    source: openapi/frontapp-core-api-openapi.yml#/components/schemas/CustomFieldParameter
+  - term: Account
+    definition: 'Object declared by the contract with fields: name, description, domains, external_id, custom_fields.'
+    tags:
+    - Object
+    source: openapi/frontapp-core-api-openapi.yml#/components/schemas/Account
+  - term: AccountPatch
+    definition: 'Object declared by the contract with fields: name, description, domains, custom_fields.'
+    tags:
+    - Object
+    source: openapi/frontapp-core-api-openapi.yml#/components/schemas/AccountPatch
+  - term: ContactHandle
+    definition: 'Object declared by the contract with fields: handle, source.'
+    tags:
+    - Object
+    source: openapi/frontapp-core-api-openapi.yml#/components/schemas/ContactHandle
+  - term: ContactListResponses
+    definition: 'Object declared by the contract with fields: _links, id, name, is_private.'
+    tags:
+    - Object
+    source: openapi/frontapp-core-api-openapi.yml#/components/schemas/ContactListResponses
+  - term: ContactResponse
+    definition: 'Object declared by the contract with fields: _links, id, name, description, avatar_url, links, groups, lists, handles, custom_fields,
+      is_private.'
+    tags:
+    - Object
+    source: openapi/frontapp-core-api-openapi.yml#/components/schemas/ContactResponse
+  - term: ContactIds
+    definition: 'Object declared by the contract with fields: contact_ids.'
+    tags:
+    - Object
+    source: openapi/frontapp-core-api-openapi.yml#/components/schemas/ContactIds
+  - term: CustomFieldResponse
+    definition: 'Object declared by the contract with fields: _links, id, name, description, type, values.'
+    tags:
+    - Object
+    source: openapi/frontapp-core-api-openapi.yml#/components/schemas/CustomFieldResponse
+  - term: AccountIds
+    definition: 'Object declared by the contract with fields: account_ids.'
+    tags:
+    - Object
+    source: openapi/frontapp-core-api-openapi.yml#/components/schemas/AccountIds
+  - term: Columns
+    definition: 'Enumeration declared by the contract with values: Activity ID, Type, Source, Message ID, Segment ID, Conversation ID, Ticket
+      IDs, Segment, Segment start, Segment end, Direction, Status. (60 more)'
+    tags:
+    - Enumeration
+    source: openapi/frontapp-core-api-openapi.yml#/components/schemas/AnalyticsActivitiesColumns
+  - term: AnalyticsActivitiesExportsColumns
+    definition: 'Object declared by the contract with fields: columns.'
+    tags:
+    - Object
+    source: openapi/frontapp-core-api-openapi.yml#/components/schemas/AnalyticsActivitiesExportsColumns
+  - term: Columns with numeric parameter
+    definition: 'Object declared by the contract with fields: name, id.'
+    tags:
+    - Object
+    source: openapi/frontapp-core-api-openapi.yml#/components/schemas/AnalyticsActivitiesNumericParameterizedColumn
+  - term: Smart QA Columns
+    definition: 'Object declared by the contract with fields: name, id.'
+    tags:
+    - Object
+    source: openapi/frontapp-core-api-openapi.yml#/components/schemas/AnalyticsActivitiesSmartQAParameterizedColumn
+  - term: AnalyticsActivitiesSmartQAScoreParameters
+    definition: 'Enumeration declared by the contract with values: Comprehension, Solution_Offered, Professionalism, Professional_Behavior, Professional_Relationship,
+      Readability, Grammar_Spelling, General_Empathy, Cognitive_Empathy, Emotional_Empathy, Compassionate_Empathy, Tone. (11 more)'
+    tags:
+    - Enumeration
+    source: openapi/frontapp-core-api-openapi.yml#/components/schemas/AnalyticsActivitiesSmartQAScoreParameters
+  - term: AnalyticsExportRequest
+    definition: 'Object declared by the contract with fields: type, start, end, timezone, filters.'
+    tags:
+    - Object
+    source: openapi/frontapp-core-api-openapi.yml#/components/schemas/AnalyticsExportRequest
+  - term: AnalyticsExportResponse
+    definition: 'Object declared by the contract with fields: _links, id, status, progress, url, filename, size, created_at, filters.'
+    tags:
+    - Object
+    source: openapi/frontapp-core-api-openapi.yml#/components/schemas/AnalyticsExportResponse
+  - term: AnalyticsFilters
+    definition: Resources to compute the analytics for. Defaults to all.
+    tags:
+    - Object
+    source: openapi/frontapp-core-api-openapi.yml#/components/schemas/AnalyticsFilters
+  - term: AnalyticsMessagesColumns
+    definition: 'Enumeration declared by the contract with values: Message ID, Segment ID, Conversation ID, Ticket IDs, Segment, Direction, Status,
+      Inbox, Inbox API ID, Inbox at activity time, Inbox API IDs at activity time, Message date. (33 more)'
+    tags:
+    - Enumeration
+    source: openapi/frontapp-core-api-openapi.yml#/components/schemas/AnalyticsMessagesColumns
+  - term: AnalyticsMessagesExportColumns
+    definition: 'Object declared by the contract with fields: columns.'
+    tags:
+    - Object
+    source: openapi/frontapp-core-api-openapi.yml#/components/schemas/AnalyticsMessagesExportColumns
+  - term: ChannelIds
+    definition: 'Object declared by the contract with fields: channel_ids.'
+    tags:
+    - Object
+    source: openapi/frontapp-core-api-openapi.yml#/components/schemas/ChannelIds
+  - term: InboxIds
+    definition: 'Object declared by the contract with fields: inbox_ids.'
+    tags:
+    - Object
+    source: openapi/frontapp-core-api-openapi.yml#/components/schemas/InboxIds
+  - term: TagIds
+    definition: 'Object declared by the contract with fields: tag_ids.'
+    tags:
+    - Object
+    source: openapi/frontapp-core-api-openapi.yml#/components/schemas/TagIds
+  - term: TeamIds
+    definition: 'Object declared by the contract with fields: team_ids.'
+    tags:
+    - Object
+    source: openapi/frontapp-core-api-openapi.yml#/components/schemas/TeamIds
+  - term: TeammateIds
+    definition: 'Object declared by the contract with fields: teammate_ids.'
+    tags:
+    - Object
+    source: openapi/frontapp-core-api-openapi.yml#/components/schemas/TeammateIds
+  - term: AnalyticsMetricId
+    definition: 'Enumeration declared by the contract with values: avg_csat_survey_response, avg_first_reaction_time, avg_first_response_time,
+      avg_handle_time, avg_reaction_time, avg_replies_to_resolution, avg_resolution_time, avg_response_time, avg_sla_breach_time, avg_tag_duration,
+      avg_total_reply_time, new_segments_count. (28 more)'
+    tags:
+    - Enumeration
+    source: openapi/frontapp-core-api-openapi.yml#/components/schemas/AnalyticsMetricId
+  - term: AnalyticsReportRequest
+    definition: 'Object declared by the contract with fields: start, end, timezone, filters, metrics.'
+    tags:
+    - Object
+    source: openapi/frontapp-core-api-openapi.yml#/components/schemas/AnalyticsReportRequest
+  - term: AnalyticsReportResponse
+    definition: 'Object declared by the contract with fields: _links, uid, status, progress, metrics.'
+    tags:
+    - Object
+    source: openapi/frontapp-core-api-openapi.yml#/components/schemas/AnalyticsReportResponse
+  - term: AnalyticsScalar
+    definition: 'Object declared by the contract with fields: id, type, value.'
+    tags:
+    - Object
+    source: openapi/frontapp-core-api-openapi.yml#/components/schemas/AnalyticsScalar
+  - term: AnalyticsScalarType
+    definition: 'Enumeration declared by the contract with values: number, percentage, string, duration, resource.'
+    tags:
+    - Enumeration
+    source: openapi/frontapp-core-api-openapi.yml#/components/schemas/AnalyticsScalarType
+  - term: AnalyticsScalarValue
+    definition: The value of a scalar metric.
+    tags:
+    - Object
+    source: openapi/frontapp-core-api-openapi.yml#/components/schemas/AnalyticsScalarValue
+  - term: AppEvent
+    definition: 'Object declared by the contract with fields: event_type, app_object.'
+    tags:
+    - Object
+    source: openapi/frontapp-core-api-openapi.yml#/components/schemas/AppEvent
+  - term: ChannelResponse
+    definition: 'Object declared by the contract with fields: _links, id, name, address, type, send_as, settings, is_private, is_valid.'
+    tags:
+    - Object
+    source: openapi/frontapp-core-api-openapi.yml#/components/schemas/ChannelResponse
+  - term: CreateChannel
+    definition: 'Object declared by the contract with fields: name, settings, type, send_as, application_uid, credentials.'
+    tags:
+    - Object
+    source: openapi/frontapp-core-api-openapi.yml#/components/schemas/CreateChannel
+  - term: Attachment
+    definition: 'Object declared by the contract with fields: id, filename, url, content_type, size, metadata.'
+    tags:
+    - Object
+    source: openapi/frontapp-core-api-openapi.yml#/components/schemas/Attachment
+  - term: CreateDraft
+    definition: 'Object declared by the contract with fields: author_id, to, cc, bcc, subject, body, quote_body, attachments, mode, signature_id,
+      should_add_default_signature.'
+    tags:
+    - Object
+    source: openapi/frontapp-core-api-openapi.yml#/components/schemas/CreateDraft
+  - term: MessageResponse
+    definition: 'Object declared by the contract with fields: _links, id, message_uid, type, is_inbound, draft_mode, error_type, version, created_at,
+      subject, blurb, author. (6 more)'
+    tags:
+    - Object
+    source: openapi/frontapp-core-api-openapi.yml#/components/schemas/MessageResponse
+  - term: RecipientResponse
+    definition: 'Object declared by the contract with fields: _links, name, handle, role.'
+    tags:
+    - Object
+    source: openapi/frontapp-core-api-openapi.yml#/components/schemas/RecipientResponse
+  - term: SignatureResponse
+    definition: 'Object declared by the contract with fields: _links, id, name, body, sender_info, is_visible_for_all_teammate_channels, is_default,
+      is_private, channel_ids.'
+    tags:
+    - Object
+    source: openapi/frontapp-core-api-openapi.yml#/components/schemas/SignatureResponse
+  - term: TeammateResponse
+    definition: A teammate is a user in Front.
+    tags:
+    - Object
+    source: openapi/frontapp-core-api-openapi.yml#/components/schemas/TeammateResponse
+  - term: DeleteDraft
+    definition: 'Object declared by the contract with fields: version.'
+    tags:
+    - Object
+    source: openapi/frontapp-core-api-openapi.yml#/components/schemas/DeleteDraft
+  - term: CustomMessage
+    definition: 'Object declared by the contract with fields: sender, subject, body, body_format, metadata, attachments.'
+    tags:
+    - Object
+    source: openapi/frontapp-core-api-openapi.yml#/components/schemas/CustomMessage
+  - term: OutboundReplyMessage
+    definition: 'Object declared by the contract with fields: to, cc, bcc, sender_name, subject, author_id, channel_id, body, text, quote_body,
+      options, attachments. (2 more)'
+    tags:
+    - Object
+    source: openapi/frontapp-core-api-openapi.yml#/components/schemas/OutboundReplyMessage
+  - term: ImportMessage
+    definition: 'Object declared by the contract with fields: sender, to, cc, bcc, subject, body, body_format, external_id, created_at, type,
+      assignee_id, tags. (3 more)'
+    tags:
+    - Object
+    source: openapi/frontapp-core-api-openapi.yml#/components/schemas/ImportMessage
+  - term: SeenReceiptResponse
+    definition: 'Object declared by the contract with fields: _links, first_seen_at, seen_by.'
+    tags:
+    - Object
+    source: openapi/frontapp-core-api-openapi.yml#/components/schemas/SeenReceiptResponse
+  - term: CommentResponse
+    definition: 'Object declared by the contract with fields: _links, id, author, body, posted_at, attachments, is_pinned.'
+    tags:
+    - Object
+    source: openapi/frontapp-core-api-openapi.yml#/components/schemas/CommentResponse
+  - term: UpdateComment
+    definition: 'Object declared by the contract with fields: body, is_pinned.'
+    tags:
+    - Object
+    source: openapi/frontapp-core-api-openapi.yml#/components/schemas/UpdateComment
+  - term: CreateComment
+    definition: 'Object declared by the contract with fields: author_id, body, is_pinned, attachments.'
+    tags:
+    - Object
+    source: openapi/frontapp-core-api-openapi.yml#/components/schemas/CreateComment
+  - term: RuleResponse
+    definition: 'Object declared by the contract with fields: _links, id, name, actions, is_private.'
+    tags:
+    - Object
+    source: openapi/frontapp-core-api-openapi.yml#/components/schemas/RuleResponse
+  - term: StatusResponse
+    definition: A ticket status of a conversation.
+    tags:
+    - Object
+    source: openapi/frontapp-core-api-openapi.yml#/components/schemas/StatusResponse
+  - term: TagResponse
+    definition: A tag is a label that can be used to classify conversations.
+    tags:
+    - Object
+    source: openapi/frontapp-core-api-openapi.yml#/components/schemas/TagResponse
+  - term: CreateTag
+    definition: A tag is a label that can be used to classify conversations.
+    tags:
+    - Object
+    source: openapi/frontapp-core-api-openapi.yml#/components/schemas/CreateTag
+  - term: UpdateTag
+    definition: 'Object declared by the contract with fields: name, description, highlight, parent_tag_id, is_visible_in_conversation_lists.'
+    tags:
+    - Object
+    source: openapi/frontapp-core-api-openapi.yml#/components/schemas/UpdateTag
+  - term: ConversationResponse
+    definition: 'Object declared by the contract with fields: _links, id, type, subject, status, status_id, status_category, ticket_ids, assignee,
+      recipient, tags, links. (9 more)'
+    tags:
+    - Object
+    source: openapi/frontapp-core-api-openapi.yml#/components/schemas/ConversationResponse
+  - term: LinkResponse
+    definition: A link used to connect a Front conversation to an external resource.
+    tags:
+    - Object
+    source: openapi/frontapp-core-api-openapi.yml#/components/schemas/LinkResponse
+  - term: Reminder
+    definition: 'Object declared by the contract with fields: _links, created_at, scheduled_at, updated_at.'
+    tags:
+    - Object
+    source: openapi/frontapp-core-api-openapi.yml#/components/schemas/Reminder
+  - term: CreateContactList
+    definition: 'Object declared by the contract with fields: name.'
+    tags:
+    - Object
+    source: openapi/frontapp-core-api-openapi.yml#/components/schemas/CreateContactList
+  - term: AddContactsToList
+    definition: 'Object declared by the contract with fields: contact_ids.'
+    tags:
+    - Object
+    source: openapi/frontapp-core-api-openapi.yml#/components/schemas/AddContactsToList
+  - term: RemoveContactsFromList
+    definition: 'Object declared by the contract with fields: contact_ids.'
+    tags:
+    - Object
+    source: openapi/frontapp-core-api-openapi.yml#/components/schemas/RemoveContactsFromList
+  - term: Contact
+    definition: 'Object declared by the contract with fields: name, description, avatar, links, group_names, list_names, custom_fields.'
+    tags:
+    - Object
+    source: openapi/frontapp-core-api-openapi.yml#/components/schemas/Contact
+  - term: MergeContacts
+    definition: 'Object declared by the contract with fields: target_contact_id, contact_ids.'
+    tags:
+    - Object
+    source: openapi/frontapp-core-api-openapi.yml#/components/schemas/MergeContacts
+  - term: ContactNoteResponses
+    definition: 'Object declared by the contract with fields: _links, author, body, created_at.'
+    tags:
+    - Object
+    source: openapi/frontapp-core-api-openapi.yml#/components/schemas/ContactNoteResponses
+  - term: CreateContactNote
+    definition: 'Object declared by the contract with fields: author_id, body.'
+    tags:
+    - Object
+    source: openapi/frontapp-core-api-openapi.yml#/components/schemas/CreateContactNote
+  - term: CreateConversation
+    definition: 'Object declared by the contract with fields: type, inbox_id, teammate_ids, subject, comment, description, due_at, custom_fields.'
+    tags:
+    - Object
+    source: openapi/frontapp-core-api-openapi.yml#/components/schemas/CreateConversation
+  - term: UpdateConversation
+    definition: 'Object declared by the contract with fields: assignee_id, inbox_id, status, status_id, tag_ids, description, due_at, custom_fields.'
+    tags:
+    - Object
+    source: openapi/frontapp-core-api-openapi.yml#/components/schemas/UpdateConversation
+  - term: UpdateConversationAssignee
+    definition: 'Object declared by the contract with fields: assignee_id.'
+    tags:
+    - Object
+    source: openapi/frontapp-core-api-openapi.yml#/components/schemas/UpdateConversationAssignee
+  - term: EventResponse
+    definition: An event is created every time something interesting is happening in Front.
+    tags:
+    - Object
+    source: openapi/frontapp-core-api-openapi.yml#/components/schemas/EventResponse
