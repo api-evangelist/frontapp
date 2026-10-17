@@ -1,0 +1,618 @@
+openapi: 3.2.0
+info:
+  version: 1.0.0
+  title: Core Teams API
+  contact:
+    name: Front Platform
+    url: https://community.front.com
+servers:
+- url: https://api2.frontapp.com
+security:
+- http: []
+tags:
+- name: Teams
+paths:
+  /teams:
+    get:
+      summary: List teams
+      operationId: list-teams
+      description: 'List the teams (workspaces) in the company.
+
+
+        Required scope: `teams:read`'
+      tags:
+      - Teams
+      responses:
+        '200':
+          $ref: '#/components/responses/listOfTeams'
+      x-required-scopes:
+      - teams:read
+  /teams/{team_id}:
+    get:
+      summary: Get team
+      operationId: get-team
+      description: 'Fetch a team (workspace).
+
+
+        Required scope: `teams:read`'
+      tags:
+      - Teams
+      parameters:
+      - in: path
+        name: team_id
+        required: true
+        description: The Team ID
+        schema:
+          type: string
+          default: tim_123
+      responses:
+        '200':
+          $ref: '#/components/responses/team'
+      x-required-scopes:
+      - teams:read
+  /teams/{team_id}/teammates:
+    post:
+      summary: Add teammates to team
+      operationId: add-teammates-to-team
+      description: 'Add one or more teammates to a team (workspace).
+
+
+        Required scope: `teams:write`'
+      tags:
+      - Teams
+      parameters:
+      - in: path
+        name: team_id
+        required: true
+        description: The Team ID
+        schema:
+          type: string
+          default: tim_123
+      requestBody:
+        required: true
+        description: Teammate IDs to add. Alternatively, you can supply emails as a [resource alias](https://dev.frontapp.com/docs/resource-aliases-1).
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TeammateIds'
+      responses:
+        '204':
+          description: No content
+      x-required-scopes:
+      - teams:write
+    delete:
+      summary: Remove teammates from team
+      operationId: remove-teammates-from-team
+      description: 'Remove one or more teammates from a team (workspace).
+
+
+        Required scope: `teams:write`'
+      tags:
+      - Teams
+      parameters:
+      - in: path
+        name: team_id
+        required: true
+        description: The Team ID
+        schema:
+          type: string
+          default: tim_123
+      requestBody:
+        description: Teammate IDs to remove from the team. Alternatively, you can supply emails as a [resource alias](https://dev.frontapp.com/docs/resource-aliases-1).
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TeammateIds'
+      responses:
+        '204':
+          description: No content
+      x-required-scopes:
+      - teams:write
+components:
+  schemas:
+    CustomFieldParameter:
+      type: object
+      description: An object whose key is the `name` property defined for the custom field in the Front UI. The value of the key must use the same `type` specified for the custom field, as described in https://dev.frontapp.com/reference/custom-fields
+      example:
+        city: London, UK
+        isVIP: true
+        renewal_date: 1525417200
+        sla_time: 90
+        owner: leela@planet-express.com
+        replyTo: inb_55c8c149
+        Job Title: firefighter
+    TeammateIds:
+      type: object
+      required:
+      - teammate_ids
+      properties:
+        teammate_ids:
+          type: array
+          items:
+            $ref: '#/components/schemas/ResourceID'
+    ResourceID:
+      type: string
+    TeamResponse:
+      type: object
+      required:
+      - _links
+      - id
+      - name
+      - inboxes
+      - members
+      properties:
+        _links:
+          type: object
+          properties:
+            self:
+              type: string
+              description: Link to resource
+              example: https://yourCompany.api.frontapp.com/teams/tim_aqsa
+        id:
+          type: string
+          description: Unique identifier of the team
+          example: tim_aqsa
+        name:
+          type: string
+          description: Name of the team
+          example: Stanley's crossword puzzle team
+        inboxes:
+          type: array
+          description: List of the inboxes in the team
+          items:
+            $ref: '#/components/schemas/InboxResponse'
+        members:
+          type: array
+          description: List of the teammates that have access to the team
+          items:
+            $ref: '#/components/schemas/TeammateResponse'
+    TeamPreviewResponse:
+      type: object
+      required:
+      - _links
+      - id
+      - name
+      properties:
+        _links:
+          type: object
+          properties:
+            self:
+              type: string
+              description: Link to resource
+              example: https://yourCompany.api.frontapp.com/teams/tim_aqsa
+        id:
+          type: string
+          description: Unique identifier of the team
+          example: tim_aqsa
+        name:
+          type: string
+          description: Name of the team
+          example: Stanley's crossword puzzle team
+    InboxResponse:
+      type: object
+      properties:
+        _links:
+          type: object
+          properties:
+            self:
+              type: string
+              description: Link to resource
+              example: https://yourCompany.api.frontapp.com/inboxes/inb_1ix6
+            related:
+              type: object
+              properties:
+                teammates:
+                  type: string
+                  description: Link to inbox teammates
+                  example: https://yourCompany.api.frontapp.com/inboxes/inb_1ix6/teammates
+                conversations:
+                  type: string
+                  description: Link to inbox conversations
+                  example: https://yourCompany.api.frontapp.com/inboxes/inb_1ix6/conversations
+                channels:
+                  type: string
+                  description: Link to inbox channels
+                  example: https://yourCompany.api.frontapp.com/inboxes/inb_1ix6/channels
+                owner:
+                  type: string
+                  description: Link to inbox owner
+                  example: https://yourCompany.api.frontapp.com/teams/tim_k30
+        id:
+          type: string
+          description: Unique identifier for the inbox
+          example: inb_1ix6
+        name:
+          type: string
+          description: Name of the inbox
+          example: The Dundies
+        is_private:
+          type: boolean
+          description: Whether or not the inbox is individual
+          example: false
+        is_public:
+          type: boolean
+          description: Whether or not the inbox is available to all members of a team by default
+          example: true
+        custom_fields:
+          description: Custom fields for this inbox
+          $ref: '#/components/schemas/CustomFieldParameter'
+    TeammateResponse:
+      type: object
+      description: A teammate is a user in Front.
+      required:
+      - _links
+      - id
+      - email
+      - username
+      - first_name
+      - last_name
+      - license_type
+      - is_admin
+      - is_available
+      - is_blocked
+      - type
+      - custom_fields
+      properties:
+        _links:
+          type: object
+          properties:
+            self:
+              type: string
+              description: Link to resource
+              example: https://yourCompany.api.frontapp.com/teammates/tea_6r55a
+            related:
+              type: object
+              properties:
+                inboxes:
+                  type: string
+                  description: Link to teammate's inboxes
+                  example: https://yourCompany.api.frontapp.com/teammates/tea_6r55a/inboxes
+                conversations:
+                  type: string
+                  description: Link to teammate's conversations
+                  example: https://yourCompany.api.frontapp.com/teammates/tea_6r55a/conversations
+                botSource:
+                  type: string
+                  description: Link to the source resource of the bot (e.g. rule)
+                  example: https://yourCompany.api.frontapp.com/rules/rul_6r55a
+        id:
+          type: string
+          description: Unique identifier of the teammate
+          example: tea_6r55a
+        email:
+          type: string
+          description: Email address of the teammate
+          example: michael.scott@dundermifflin.com
+        username:
+          type: string
+          description: Username of the teammate (used for "@" mentions)
+          example: PrisonMike
+        first_name:
+          type: string
+          description: First name of the teammate
+          example: Michael
+        last_name:
+          type: string
+          description: Last name of the teammate
+          example: Scott
+        is_admin:
+          type: boolean
+          description: Whether or not the teammate is an admin in your company
+          example: true
+        is_available:
+          type: boolean
+          description: Whether or not the teammate is available
+          example: false
+        is_blocked:
+          type: boolean
+          description: Whether or not the teammate account has been blocked
+          example: false
+        type:
+          type: string
+          description: "Type of the teammate, normal teammates are denoted as \"user\", while visitors are denoted as \"visitor\".\nBot users are denoted by their parent resource type.\nThe following bot types are available:\n  * ai: acting on behalf of an AI\n  * api: acting on behalf of OAuth clients\n  * application: acting on behalf of an Application\n  * bulk_reply: acting on behalf of a Bulk Reply\n  * csat: used for authoring CSAT response comments\n  * integration: acting on behalf of an Integration\n  * macro: acting on behalf of a Macro, author of comments and drafts\n  * rule: acting on behalf of a Rule, author of comments and drafts\n  * smart_csat: acting on behalf of a Smart CSAT\n"
+          enum:
+          - user
+          - visitor
+          - ai
+          - api
+          - application
+          - bulk_reply
+          - csat
+          - integration
+          - macro
+          - rule
+          - smart_csat
+        custom_fields:
+          description: Custom fields for this teammate
+          $ref: '#/components/schemas/CustomFieldParameter'
+  responses:
+    team:
+      description: A team
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/TeamResponse'
+    listOfTeams:
+      description: Array of teams
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              _links:
+                type: object
+                properties:
+                  self:
+                    type: string
+                    description: Link to resource
+                    example: https://yourCompany.api.frontapp.com/teams
+              _results:
+                type: array
+                items:
+                  $ref: '#/components/schemas/TeamPreviewResponse'
+  securitySchemes:
+    http:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+x-api-id: front
+x-explorer-enabled: false
+x-proxy-enabled: true
+x-samples-enabled: true
+x-provenance:
+  method: searched
+  source: https://dev.frontapp.com/reference
+  harvested: '2026-10-14'
+  tool: harvest-readme-openapi.py
+  note: Assembled verbatim from the OpenAPI definition ReadMe embeds in each operation page of the provider's developer portal; paths and components merged by API title, nothing authored.
+  assembled_from:
+  - https://dev.frontapp.com/reference/add-comment-reply.md
+  - https://dev.frontapp.com/reference/add-comment.md
+  - https://dev.frontapp.com/reference/add-company-teammate-group-team-inboxes.md
+  - https://dev.frontapp.com/reference/add-company-teammate-group-teammates.md
+  - https://dev.frontapp.com/reference/add-company-teammate-group-teams.md
+  - https://dev.frontapp.com/reference/add-contact-handle.md
+  - https://dev.frontapp.com/reference/add-contact-to-account.md
+  - https://dev.frontapp.com/reference/add-contacts-to-contact-list.md
+  - https://dev.frontapp.com/reference/add-contacts-to-group.md
+  - https://dev.frontapp.com/reference/add-conversation-followers.md
+  - https://dev.frontapp.com/reference/add-conversation-link.md
+  - https://dev.frontapp.com/reference/add-conversation-tag.md
+  - https://dev.frontapp.com/reference/add-inbox-access.md
+  - https://dev.frontapp.com/reference/add-note.md
+  - https://dev.frontapp.com/reference/add-teammates-to-shift.md
+  - https://dev.frontapp.com/reference/add-teammates-to-team.md
+  - https://dev.frontapp.com/reference/add-view-teammates.md
+  - https://dev.frontapp.com/reference/api-token-details.md
+  - https://dev.frontapp.com/reference/create-a-channel.md
+  - https://dev.frontapp.com/reference/create-a-knowledge-base.md
+  - https://dev.frontapp.com/reference/create-account.md
+  - https://dev.frontapp.com/reference/create-analytics-export.md
+  - https://dev.frontapp.com/reference/create-analytics-report.md
+  - https://dev.frontapp.com/reference/create-article-in-a-knowledge-base-in-default-locale.md
+  - https://dev.frontapp.com/reference/create-article-in-a-knowledge-base-in-specified-locale.md
+  - https://dev.frontapp.com/reference/create-child-folder.md
+  - https://dev.frontapp.com/reference/create-child-tag.md
+  - https://dev.frontapp.com/reference/create-child-template.md
+  - https://dev.frontapp.com/reference/create-company-tag.md
+  - https://dev.frontapp.com/reference/create-company-teammate-group.md
+  - https://dev.frontapp.com/reference/create-contact-list.md
+  - https://dev.frontapp.com/reference/create-contact.md
+  - https://dev.frontapp.com/reference/create-conversation.md
+  - https://dev.frontapp.com/reference/create-draft-reply.md
+  - https://dev.frontapp.com/reference/create-draft.md
+  - https://dev.frontapp.com/reference/create-folder.md
+  - https://dev.frontapp.com/reference/create-group.md
+  - https://dev.frontapp.com/reference/create-inbox.md
+  - https://dev.frontapp.com/reference/create-knowledge-base-category-in-default-locale.md
+  - https://dev.frontapp.com/reference/create-knowledge-base-category-in-specified-locale.md
+  - https://dev.frontapp.com/reference/create-link.md
+  - https://dev.frontapp.com/reference/create-linked-conversations.md
+  - https://dev.frontapp.com/reference/create-message-reply.md
+  - https://dev.frontapp.com/reference/create-message-template.md
+  - https://dev.frontapp.com/reference/create-message.md
+  - https://dev.frontapp.com/reference/create-shift.md
+  - https://dev.frontapp.com/reference/create-tag.md
+  - https://dev.frontapp.com/reference/create-team-contact-list.md
+  - https://dev.frontapp.com/reference/create-team-contact.md
+  - https://dev.frontapp.com/reference/create-team-folder.md
+  - https://dev.frontapp.com/reference/create-team-group.md
+  - https://dev.frontapp.com/reference/create-team-inbox.md
+  - https://dev.frontapp.com/reference/create-team-message-template.md
+  - https://dev.frontapp.com/reference/create-team-shift.md
+  - https://dev.frontapp.com/reference/create-team-signature.md
+  - https://dev.frontapp.com/reference/create-team-tag.md
+  - https://dev.frontapp.com/reference/create-team-view.md
+  - https://dev.frontapp.com/reference/create-teammate-contact-list.md
+  - https://dev.frontapp.com/reference/create-teammate-contact.md
+  - https://dev.frontapp.com/reference/create-teammate-folder.md
+  - https://dev.frontapp.com/reference/create-teammate-group.md
+  - https://dev.frontapp.com/reference/create-teammate-message-template.md
+  - https://dev.frontapp.com/reference/create-teammate-private-inbox.md
+  - https://dev.frontapp.com/reference/create-teammate-signature.md
+  - https://dev.frontapp.com/reference/create-teammate-tag.md
+  - https://dev.frontapp.com/reference/create-time-off.md
+  - https://dev.frontapp.com/reference/delete-a-contact.md
+  - https://dev.frontapp.com/reference/delete-a-knowledge-base-category.md
+  - https://dev.frontapp.com/reference/delete-an-account.md
+  - https://dev.frontapp.com/reference/delete-an-article.md
+  - https://dev.frontapp.com/reference/delete-company-teammate-group.md
+  - https://dev.frontapp.com/reference/delete-contact-handle.md
+  - https://dev.frontapp.com/reference/delete-contact-list.md
+  - https://dev.frontapp.com/reference/delete-conversation-followers.md
+  - https://dev.frontapp.com/reference/delete-conversation.md
+  - https://dev.frontapp.com/reference/delete-draft.md
+  - https://dev.frontapp.com/reference/delete-folder.md
+  - https://dev.frontapp.com/reference/delete-group.md
+  - https://dev.frontapp.com/reference/delete-message-template.md
+  - https://dev.frontapp.com/reference/delete-signature.md
+  - https://dev.frontapp.com/reference/delete-tag.md
+  - https://dev.frontapp.com/reference/delete-time-off.md
+  - https://dev.frontapp.com/reference/download-attachment-for-a-comment.md
+  - https://dev.frontapp.com/reference/download-attachment-for-a-message-template.md
+  - https://dev.frontapp.com/reference/download-attachment-for-a-message.md
+  - https://dev.frontapp.com/reference/download-attachment-from-an-article.md
+  - https://dev.frontapp.com/reference/download-attachment.md
+  - https://dev.frontapp.com/reference/edit-draft.md
+  - https://dev.frontapp.com/reference/fetch-an-account.md
+  - https://dev.frontapp.com/reference/get-a-knowledge-base-article.md
+  - https://dev.frontapp.com/reference/get-a-knowledge-base-category.md
+  - https://dev.frontapp.com/reference/get-a-knowledge-base-with-content-in-default-locale.md
+  - https://dev.frontapp.com/reference/get-a-knowledge-base-with-content-in-specified-locale.md
+  - https://dev.frontapp.com/reference/get-a-knowledge-base.md
+  - https://dev.frontapp.com/reference/get-analytics-export.md
+  - https://dev.frontapp.com/reference/get-analytics-report.md
+  - https://dev.frontapp.com/reference/get-channel.md
+  - https://dev.frontapp.com/reference/get-child-folders.md
+  - https://dev.frontapp.com/reference/get-child-templates.md
+  - https://dev.frontapp.com/reference/get-comment.md
+  - https://dev.frontapp.com/reference/get-company-teammate-group.md
+  - https://dev.frontapp.com/reference/get-contact.md
+  - https://dev.frontapp.com/reference/get-conversation-by-id.md
+  - https://dev.frontapp.com/reference/get-event.md
+  - https://dev.frontapp.com/reference/get-folder.md
+  - https://dev.frontapp.com/reference/get-inbox.md
+  - https://dev.frontapp.com/reference/get-knowledge-base-article-with-content-in-default-locale.md
+  - https://dev.frontapp.com/reference/get-knowledge-base-article-with-content-in-specified-locale.md
+  - https://dev.frontapp.com/reference/get-knowledge-base-category-content-in-default-locale.md
+  - https://dev.frontapp.com/reference/get-knowledge-base-category-with-content-in-specified-locale.md
+  - https://dev.frontapp.com/reference/get-link.md
+  - https://dev.frontapp.com/reference/get-message-seen-status.md
+  - https://dev.frontapp.com/reference/get-message-template.md
+  - https://dev.frontapp.com/reference/get-message.md
+  - https://dev.frontapp.com/reference/get-rule.md
+  - https://dev.frontapp.com/reference/get-shift.md
+  - https://dev.frontapp.com/reference/get-signatures.md
+  - https://dev.frontapp.com/reference/get-tag.md
+  - https://dev.frontapp.com/reference/get-team.md
+  - https://dev.frontapp.com/reference/get-teammate.md
+  - https://dev.frontapp.com/reference/get-ticket-status-by-id.md
+  - https://dev.frontapp.com/reference/get-time-off.md
+  - https://dev.frontapp.com/reference/get-view.md
+  - https://dev.frontapp.com/reference/import-inbox-message.md
+  - https://dev.frontapp.com/reference/list-account-contacts.md
+  - https://dev.frontapp.com/reference/list-account-custom-fields.md
+  - https://dev.frontapp.com/reference/list-accounts.md
+  - https://dev.frontapp.com/reference/list-all-company-rules.md
+  - https://dev.frontapp.com/reference/list-articles-in-a-category.md
+  - https://dev.frontapp.com/reference/list-articles-in-a-knowledge-base.md
+  - https://dev.frontapp.com/reference/list-assigned-conversations.md
+  - https://dev.frontapp.com/reference/list-categories-in-a-knowledge-base.md
+  - https://dev.frontapp.com/reference/list-channels.md
+  - https://dev.frontapp.com/reference/list-comment-mentions.md
+  - https://dev.frontapp.com/reference/list-company-tags.md
+  - https://dev.frontapp.com/reference/list-company-teammate-group-team-inboxes.md
+  - https://dev.frontapp.com/reference/list-company-teammate-group-teammates.md
+  - https://dev.frontapp.com/reference/list-company-teammate-group-teams.md
+  - https://dev.frontapp.com/reference/list-company-teammate-groups.md
+  - https://dev.frontapp.com/reference/list-company-ticket-statuses.md
+  - https://dev.frontapp.com/reference/list-contact-conversations.md
+  - https://dev.frontapp.com/reference/list-contact-custom-fields.md
+  - https://dev.frontapp.com/reference/list-contact-lists.md
+  - https://dev.frontapp.com/reference/list-contacts-in-contact-list.md
+  - https://dev.frontapp.com/reference/list-contacts-in-group.md
+  - https://dev.frontapp.com/reference/list-contacts.md
+  - https://dev.frontapp.com/reference/list-conversation-comments.md
+  - https://dev.frontapp.com/reference/list-conversation-custom-fields.md
+  - https://dev.frontapp.com/reference/list-conversation-drafts.md
+  - https://dev.frontapp.com/reference/list-conversation-events.md
+  - https://dev.frontapp.com/reference/list-conversation-followers.md
+  - https://dev.frontapp.com/reference/list-conversation-inboxes.md
+  - https://dev.frontapp.com/reference/list-conversation-messages.md
+  - https://dev.frontapp.com/reference/list-conversations.md
+  - https://dev.frontapp.com/reference/list-custom-fields.md
+  - https://dev.frontapp.com/reference/list-events.md
+  - https://dev.frontapp.com/reference/list-folders.md
+  - https://dev.frontapp.com/reference/list-groups.md
+  - https://dev.frontapp.com/reference/list-inbox-access.md
+  - https://dev.frontapp.com/reference/list-inbox-channels.md
+  - https://dev.frontapp.com/reference/list-inbox-conversations.md
+  - https://dev.frontapp.com/reference/list-inbox-custom-fields.md
+  - https://dev.frontapp.com/reference/list-inboxes.md
+  - https://dev.frontapp.com/reference/list-knowledge-bases.md
+  - https://dev.frontapp.com/reference/list-link-conversations.md
+  - https://dev.frontapp.com/reference/list-link-custom-fields.md
+  - https://dev.frontapp.com/reference/list-linked-conversations.md
+  - https://dev.frontapp.com/reference/list-links.md
+  - https://dev.frontapp.com/reference/list-message-templates.md
+  - https://dev.frontapp.com/reference/list-notes.md
+  - https://dev.frontapp.com/reference/list-rules.md
+  - https://dev.frontapp.com/reference/list-shifts-teammates.md
+  - https://dev.frontapp.com/reference/list-shifts.md
+  - https://dev.frontapp.com/reference/list-tag-children.md
+  - https://dev.frontapp.com/reference/list-tagged-conversations.md
+  - https://dev.frontapp.com/reference/list-tags.md
+  - https://dev.frontapp.com/reference/list-team-channels.md
+  - https://dev.frontapp.com/reference/list-team-contact-lists.md
+  - https://dev.frontapp.com/reference/list-team-contacts.md
+  - https://dev.frontapp.com/reference/list-team-folders.md
+  - https://dev.frontapp.com/reference/list-team-groups.md
+  - https://dev.frontapp.com/reference/list-team-inboxes.md
+  - https://dev.frontapp.com/reference/list-team-message-templates.md
+  - https://dev.frontapp.com/reference/list-team-rules.md
+  - https://dev.frontapp.com/reference/list-team-shifts.md
+  - https://dev.frontapp.com/reference/list-team-signatures.md
+  - https://dev.frontapp.com/reference/list-team-tags.md
+  - https://dev.frontapp.com/reference/list-team-time-offs.md
+  - https://dev.frontapp.com/reference/list-team-views.md
+  - https://dev.frontapp.com/reference/list-teammate-channels.md
+  - https://dev.frontapp.com/reference/list-teammate-contact-lists.md
+  - https://dev.frontapp.com/reference/list-teammate-contacts.md
+  - https://dev.frontapp.com/reference/list-teammate-custom-fields.md
+  - https://dev.frontapp.com/reference/list-teammate-folders.md
+  - https://dev.frontapp.com/reference/list-teammate-groups.md
+  - https://dev.frontapp.com/reference/list-teammate-inboxes.md
+  - https://dev.frontapp.com/reference/list-teammate-message-templates.md
+  - https://dev.frontapp.com/reference/list-teammate-private-inboxes.md
+  - https://dev.frontapp.com/reference/list-teammate-rules.md
+  - https://dev.frontapp.com/reference/list-teammate-shifts.md
+  - https://dev.frontapp.com/reference/list-teammate-signatures.md
+  - https://dev.frontapp.com/reference/list-teammate-tags.md
+  - https://dev.frontapp.com/reference/list-teammate-time-offs.md
+  - https://dev.frontapp.com/reference/list-teammates.md
+  - https://dev.frontapp.com/reference/list-teams.md
+  - https://dev.frontapp.com/reference/list-views.md
+  - https://dev.frontapp.com/reference/mark-message-seen.md
+  - https://dev.frontapp.com/reference/merge-contacts.md
+  - https://dev.frontapp.com/reference/receive-custom-messages.md
+  - https://dev.frontapp.com/reference/remove-company-teammate-group-team-inboxes.md
+  - https://dev.frontapp.com/reference/remove-company-teammate-group-teammates.md
+  - https://dev.frontapp.com/reference/remove-company-teammate-group-teams.md
+  - https://dev.frontapp.com/reference/remove-contact-from-account.md
+  - https://dev.frontapp.com/reference/remove-contacts-from-contact-list.md
+  - https://dev.frontapp.com/reference/remove-contacts-from-group.md
+  - https://dev.frontapp.com/reference/remove-conversation-links.md
+  - https://dev.frontapp.com/reference/remove-conversation-tag.md
+  - https://dev.frontapp.com/reference/remove-teammates-from-shift.md
+  - https://dev.frontapp.com/reference/remove-teammates-from-team.md
+  - https://dev.frontapp.com/reference/removes-inbox-access.md
+  - https://dev.frontapp.com/reference/search-conversations.md
+  - https://dev.frontapp.com/reference/trigger-app-event.md
+  - https://dev.frontapp.com/reference/update-a-company-teammate-group.md
+  - https://dev.frontapp.com/reference/update-a-contact.md
+  - https://dev.frontapp.com/reference/update-a-link.md
+  - https://dev.frontapp.com/reference/update-a-tag.md
+  - https://dev.frontapp.com/reference/update-account.md
+  - https://dev.frontapp.com/reference/update-article-content-in-default-locale.md
+  - https://dev.frontapp.com/reference/update-article-content-in-specified-locale.md
+  - https://dev.frontapp.com/reference/update-channel.md
+  - https://dev.frontapp.com/reference/update-comment.md
+  - https://dev.frontapp.com/reference/update-conversation-assignee.md
+  - https://dev.frontapp.com/reference/update-conversation-reminders.md
+  - https://dev.frontapp.com/reference/update-conversation.md
+  - https://dev.frontapp.com/reference/update-folder.md
+  - https://dev.frontapp.com/reference/update-knowledge-base-category-in-default-locale.md
+  - https://dev.frontapp.com/reference/update-knowledge-base-category-in-specified-locale.md
+  - https://dev.frontapp.com/reference/update-knowledge-base-in-default-locale.md
+  - https://dev.frontapp.com/reference/update-knowledge-base-in-specified-locale.md
+  - https://dev.frontapp.com/reference/update-message-template.md
+  - https://dev.frontapp.com/reference/update-shift.md
+  - https://dev.frontapp.com/reference/update-signature.md
+  - https://dev.frontapp.com/reference/update-teammate.md
+  - https://dev.frontapp.com/reference/update-time-off.md
+  - https://dev.frontapp.com/reference/update-view.md
+  - https://dev.frontapp.com/reference/validate-channel.md
+  merge:
+    pages: 246
+    deduped: 928
+    conflicts_kept_first: 0

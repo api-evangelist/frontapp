@@ -1,0 +1,670 @@
+openapi: 3.2.0
+info:
+  version: 1.0.0
+  title: Core Knowledge Base Categories API
+  contact:
+    name: Front Platform
+    url: https://community.front.com
+servers:
+- url: https://api2.frontapp.com
+security:
+- http: []
+tags:
+- name: Knowledge Base Categories
+paths:
+  /knowledge_base_categories/{category_id}:
+    get:
+      summary: Get a knowledge base category
+      operationId: get-a-knowledge-base-category
+      description: 'Fetches a knowledge base category.
+
+
+        Required scope: `knowledge_bases:read`'
+      tags:
+      - Knowledge Base Categories
+      parameters:
+      - in: path
+        name: category_id
+        required: true
+        description: The ID of the category to fetch
+        schema:
+          type: string
+          default: kbc_123
+      responses:
+        '200':
+          $ref: '#/components/responses/knowledgeBaseCategorySlim'
+      x-required-scopes:
+      - knowledge_bases:read
+    delete:
+      summary: Delete a knowledge base category
+      operationId: delete-a-knowledge-base-category
+      description: 'Deletes a knowledge base category.
+
+
+        > ⚠️ Warning
+
+        >
+
+        > When a category is deleted, all articles in the category are also deleted.
+
+
+        Required scope: `knowledge_bases:delete`'
+      tags:
+      - Knowledge Base Categories
+      parameters:
+      - in: path
+        name: category_id
+        required: true
+        description: The ID of the category to delete
+        schema:
+          type: string
+          default: kbc_123
+      responses:
+        '204':
+          description: No content
+      x-required-scopes:
+      - knowledge_bases:delete
+  /knowledge_base_categories/{category_id}/content:
+    get:
+      summary: Get knowledge base category content in default locale
+      operationId: get-knowledge-base-category-content-in-default-locale
+      description: 'Fetches a knowledge base category with content in the default locale.
+
+
+        Required scope: `knowledge_bases:read`'
+      tags:
+      - Knowledge Base Categories
+      parameters:
+      - in: path
+        name: category_id
+        required: true
+        description: The ID of the category to fetch
+        schema:
+          type: string
+          default: kbc_123
+      responses:
+        '200':
+          $ref: '#/components/responses/knowledgeBaseCategory'
+      x-required-scopes:
+      - knowledge_bases:read
+    patch:
+      summary: Update knowledge base category in default locale
+      operationId: update-knowledge-base-category-in-default-locale
+      description: 'Updates a knowledge base category in the default locale. Will republish the knowledge base if the knowledge base is currently published.
+
+
+        Required scope: `knowledge_bases:write`'
+      tags:
+      - Knowledge Base Categories
+      parameters:
+      - in: path
+        name: category_id
+        required: true
+        description: The ID of the category to update
+        schema:
+          type: string
+          default: kbc_123
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/KnowledgeBaseCategoryPatch'
+      responses:
+        '200':
+          $ref: '#/components/responses/knowledgeBaseCategory'
+      x-required-scopes:
+      - knowledge_bases:write
+  /knowledge_base_categories/{category_id}/locales/{locale}/content:
+    get:
+      summary: Get knowledge base category with content in specified locale
+      operationId: get-knowledge-base-category-with-content-in-specified-locale
+      description: 'Fetches a knowledge base category with content for a given locale.
+
+
+        Required scope: `knowledge_bases:read`'
+      tags:
+      - Knowledge Base Categories
+      parameters:
+      - in: path
+        name: category_id
+        required: true
+        description: The ID of the category to fetch
+        schema:
+          type: string
+          default: kbc_123
+      - in: path
+        name: locale
+        required: true
+        description: The [locale](https://dev.frontapp.com/reference/knowledge-bases#locales) of the content to fetch
+        schema:
+          type: string
+          default: en
+      responses:
+        '200':
+          $ref: '#/components/responses/knowledgeBaseCategory'
+      x-required-scopes:
+      - knowledge_bases:read
+    patch:
+      summary: Update knowledge base category in specified locale
+      operationId: update-knowledge-base-category-in-specified-locale
+      description: 'Updates a knowledge base category for a given locale. Will republish the knowledge base if the knowledge base is currently published.
+
+
+        Required scope: `knowledge_bases:write`'
+      tags:
+      - Knowledge Base Categories
+      parameters:
+      - in: path
+        name: category_id
+        required: true
+        description: The ID of the category to update
+        schema:
+          type: string
+          default: kbc_123
+      - in: path
+        name: locale
+        required: true
+        description: The [locale](https://dev.frontapp.com/reference/knowledge-bases#locales) of the updated content
+        schema:
+          type: string
+          default: en
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/KnowledgeBaseCategoryPatch'
+      responses:
+        '200':
+          $ref: '#/components/responses/knowledgeBaseCategory'
+      x-required-scopes:
+      - knowledge_bases:write
+  /knowledge_bases/{knowledge_base_id}/categories:
+    get:
+      summary: List categories in a knowledge base
+      operationId: list-categories-in-a-knowledge-base
+      description: 'List categories in a knowledge base.
+
+
+        Required scope: `knowledge_bases:read`'
+      tags:
+      - Knowledge Base Categories
+      parameters:
+      - in: path
+        name: knowledge_base_id
+        required: true
+        description: The ID of the knowledge base
+        schema:
+          type: string
+          default: knb_123
+      - $ref: '#/components/parameters/limit'
+      - $ref: '#/components/parameters/pageToken'
+      responses:
+        '200':
+          $ref: '#/components/responses/listOfKnowledgeBaseCategories'
+      x-required-scopes:
+      - knowledge_bases:read
+components:
+  schemas:
+    KnowledgeBaseCategoryPatch:
+      type: object
+      properties:
+        name:
+          type: string
+          description: Name of the knowledge base category
+        description:
+          type: string
+          description: Description of the knowledge base category
+    KnowledgeBaseCategoryResponse:
+      type: object
+      required:
+      - _links
+      - id
+      - name
+      - description
+      - is_hidden
+      - locale
+      properties:
+        _links:
+          type: object
+          properties:
+            self:
+              type: string
+              description: Link to resource
+              example: https://yourCompany.api.frontapp.com/knowledge_base_categories/kbc_12
+            related:
+              type: object
+              properties:
+                knowledge_base:
+                  type: string
+                  description: Link to the category's knowledge base
+                  example: https://yourCompany.api.frontapp.com/knowledge_bases/knb_12
+                parent_category:
+                  type:
+                  - string
+                  - 'null'
+                  description: Link to the category's parent
+                  example: https://yourCompany.api.frontapp.com/knowledge_base_catgories/kbc_10
+                articles:
+                  type: string
+                  description: Link to articles in this category
+                  example: https://yourCompany.api.frontapp.com/knowledge_base_categories/kbc_12/articles
+        id:
+          type: string
+          description: Unique identifier of the knowledge base category
+          example: kbc_12
+        name:
+          type:
+          - string
+          - 'null'
+          description: Category name
+          example: Getting started
+        description:
+          type:
+          - string
+          - 'null'
+          description: Description of the category
+          example: How to get started in Front
+        is_hidden:
+          type: boolean
+          description: Is the category hidden
+          example: false
+        locale:
+          type: string
+          enum:
+          - fr
+          - en
+          description: Locale of this category
+          example: en
+        created_at:
+          type: number
+          description: Timestamp when the category was created
+          example: 1622672452.363
+        updated_at:
+          type: number
+          description: Timestamp when the category was updated
+          example: 1654309308.278
+    KnowledgeBaseCategorySlimResponse:
+      type: object
+      required:
+      - _links
+      - id
+      - slug
+      - is_hidden
+      - locales
+      properties:
+        _links:
+          type: object
+          properties:
+            self:
+              type: string
+              description: Link to resource
+              example: https://yourCompany.api.frontapp.com/knowledge_base_categories/kbc_12
+            related:
+              type: object
+              properties:
+                knowledge_base:
+                  type: string
+                  description: Link to the category's knowledge base
+                  example: https://yourCompany.api.frontapp.com/knowledge_bases/knb_12
+                parent_category:
+                  type:
+                  - string
+                  - 'null'
+                  description: Link to the category's parent
+                  example: https://yourCompany.api.frontapp.com/knowledge_base_catgories/kbc_10
+                articles:
+                  type: string
+                  description: Link to articles in this category
+                  example: https://yourCompany.api.frontapp.com/knowledge_base_categories/kbc_12/articles
+        id:
+          type: string
+          description: Unique identifier of the knowledge base category
+          example: kbc_12
+        slug:
+          type: string
+          description: URL slug of the category. Construct the full URL using the template of protocol/knowledge base domain/locale/slug, such as https://yourDomain.com/en/categories/2
+          example: /categories/2
+        is_hidden:
+          type: boolean
+          description: Is the category hidden from navigation and breadcrumbs (topics are accessed as direct links)
+          example: false
+        locales:
+          type: array
+          description: List of the locales the category supports
+          example:
+          - en
+          - es
+          items:
+            type: string
+        created_at:
+          type: number
+          description: Timestamp when the category was created
+          example: 1622672452.363
+        updated_at:
+          type: number
+          description: Timestamp when the category was updated
+          example: 1654309308.278
+  responses:
+    listOfKnowledgeBaseCategories:
+      description: Array of knowledge base categories
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              _pagination:
+                type: object
+                properties:
+                  next:
+                    type:
+                    - string
+                    - 'null'
+                    description: Link to next [page of results](https://dev.frontapp.com/docs/pagination)
+                    example: https://yourCompany.api.frontapp.com/knowledge_bases/knb_1/categories?page_token=134287aba8eaa55cf366400c63300a75bab0c
+              _links:
+                type: object
+                properties:
+                  self:
+                    type: string
+                    description: Link to resource
+                    example: https://yourCompany.api.frontapp.com/knowledge_bases/knb_1/categories
+              _results:
+                type: array
+                items:
+                  $ref: '#/components/schemas/KnowledgeBaseCategorySlimResponse'
+    knowledgeBaseCategorySlim:
+      description: A knowledge base category
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/KnowledgeBaseCategorySlimResponse'
+    knowledgeBaseCategory:
+      description: A knowledge base category with content
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/KnowledgeBaseCategoryResponse'
+  parameters:
+    limit:
+      name: limit
+      in: query
+      description: Max number of results per [page](https://dev.frontapp.com/docs/pagination)
+      schema:
+        type: integer
+        maximum: 100
+        example: 25
+    pageToken:
+      name: page_token
+      in: query
+      description: Token to use to request the [next page](https://dev.frontapp.com/docs/pagination)
+      schema:
+        type: string
+        example: https://yourCompany.api.frontapp.com/endpoint?limit=25&page_token=92f32bcd7625333caf4e0f8fc26d920c812f
+  securitySchemes:
+    http:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+x-api-id: front
+x-explorer-enabled: false
+x-proxy-enabled: true
+x-samples-enabled: true
+x-provenance:
+  method: searched
+  source: https://dev.frontapp.com/reference
+  harvested: '2026-10-14'
+  tool: harvest-readme-openapi.py
+  note: Assembled verbatim from the OpenAPI definition ReadMe embeds in each operation page of the provider's developer portal; paths and components merged by API title, nothing authored.
+  assembled_from:
+  - https://dev.frontapp.com/reference/add-comment-reply.md
+  - https://dev.frontapp.com/reference/add-comment.md
+  - https://dev.frontapp.com/reference/add-company-teammate-group-team-inboxes.md
+  - https://dev.frontapp.com/reference/add-company-teammate-group-teammates.md
+  - https://dev.frontapp.com/reference/add-company-teammate-group-teams.md
+  - https://dev.frontapp.com/reference/add-contact-handle.md
+  - https://dev.frontapp.com/reference/add-contact-to-account.md
+  - https://dev.frontapp.com/reference/add-contacts-to-contact-list.md
+  - https://dev.frontapp.com/reference/add-contacts-to-group.md
+  - https://dev.frontapp.com/reference/add-conversation-followers.md
+  - https://dev.frontapp.com/reference/add-conversation-link.md
+  - https://dev.frontapp.com/reference/add-conversation-tag.md
+  - https://dev.frontapp.com/reference/add-inbox-access.md
+  - https://dev.frontapp.com/reference/add-note.md
+  - https://dev.frontapp.com/reference/add-teammates-to-shift.md
+  - https://dev.frontapp.com/reference/add-teammates-to-team.md
+  - https://dev.frontapp.com/reference/add-view-teammates.md
+  - https://dev.frontapp.com/reference/api-token-details.md
+  - https://dev.frontapp.com/reference/create-a-channel.md
+  - https://dev.frontapp.com/reference/create-a-knowledge-base.md
+  - https://dev.frontapp.com/reference/create-account.md
+  - https://dev.frontapp.com/reference/create-analytics-export.md
+  - https://dev.frontapp.com/reference/create-analytics-report.md
+  - https://dev.frontapp.com/reference/create-article-in-a-knowledge-base-in-default-locale.md
+  - https://dev.frontapp.com/reference/create-article-in-a-knowledge-base-in-specified-locale.md
+  - https://dev.frontapp.com/reference/create-child-folder.md
+  - https://dev.frontapp.com/reference/create-child-tag.md
+  - https://dev.frontapp.com/reference/create-child-template.md
+  - https://dev.frontapp.com/reference/create-company-tag.md
+  - https://dev.frontapp.com/reference/create-company-teammate-group.md
+  - https://dev.frontapp.com/reference/create-contact-list.md
+  - https://dev.frontapp.com/reference/create-contact.md
+  - https://dev.frontapp.com/reference/create-conversation.md
+  - https://dev.frontapp.com/reference/create-draft-reply.md
+  - https://dev.frontapp.com/reference/create-draft.md
+  - https://dev.frontapp.com/reference/create-folder.md
+  - https://dev.frontapp.com/reference/create-group.md
+  - https://dev.frontapp.com/reference/create-inbox.md
+  - https://dev.frontapp.com/reference/create-knowledge-base-category-in-default-locale.md
+  - https://dev.frontapp.com/reference/create-knowledge-base-category-in-specified-locale.md
+  - https://dev.frontapp.com/reference/create-link.md
+  - https://dev.frontapp.com/reference/create-linked-conversations.md
+  - https://dev.frontapp.com/reference/create-message-reply.md
+  - https://dev.frontapp.com/reference/create-message-template.md
+  - https://dev.frontapp.com/reference/create-message.md
+  - https://dev.frontapp.com/reference/create-shift.md
+  - https://dev.frontapp.com/reference/create-tag.md
+  - https://dev.frontapp.com/reference/create-team-contact-list.md
+  - https://dev.frontapp.com/reference/create-team-contact.md
+  - https://dev.frontapp.com/reference/create-team-folder.md
+  - https://dev.frontapp.com/reference/create-team-group.md
+  - https://dev.frontapp.com/reference/create-team-inbox.md
+  - https://dev.frontapp.com/reference/create-team-message-template.md
+  - https://dev.frontapp.com/reference/create-team-shift.md
+  - https://dev.frontapp.com/reference/create-team-signature.md
+  - https://dev.frontapp.com/reference/create-team-tag.md
+  - https://dev.frontapp.com/reference/create-team-view.md
+  - https://dev.frontapp.com/reference/create-teammate-contact-list.md
+  - https://dev.frontapp.com/reference/create-teammate-contact.md
+  - https://dev.frontapp.com/reference/create-teammate-folder.md
+  - https://dev.frontapp.com/reference/create-teammate-group.md
+  - https://dev.frontapp.com/reference/create-teammate-message-template.md
+  - https://dev.frontapp.com/reference/create-teammate-private-inbox.md
+  - https://dev.frontapp.com/reference/create-teammate-signature.md
+  - https://dev.frontapp.com/reference/create-teammate-tag.md
+  - https://dev.frontapp.com/reference/create-time-off.md
+  - https://dev.frontapp.com/reference/delete-a-contact.md
+  - https://dev.frontapp.com/reference/delete-a-knowledge-base-category.md
+  - https://dev.frontapp.com/reference/delete-an-account.md
+  - https://dev.frontapp.com/reference/delete-an-article.md
+  - https://dev.frontapp.com/reference/delete-company-teammate-group.md
+  - https://dev.frontapp.com/reference/delete-contact-handle.md
+  - https://dev.frontapp.com/reference/delete-contact-list.md
+  - https://dev.frontapp.com/reference/delete-conversation-followers.md
+  - https://dev.frontapp.com/reference/delete-conversation.md
+  - https://dev.frontapp.com/reference/delete-draft.md
+  - https://dev.frontapp.com/reference/delete-folder.md
+  - https://dev.frontapp.com/reference/delete-group.md
+  - https://dev.frontapp.com/reference/delete-message-template.md
+  - https://dev.frontapp.com/reference/delete-signature.md
+  - https://dev.frontapp.com/reference/delete-tag.md
+  - https://dev.frontapp.com/reference/delete-time-off.md
+  - https://dev.frontapp.com/reference/download-attachment-for-a-comment.md
+  - https://dev.frontapp.com/reference/download-attachment-for-a-message-template.md
+  - https://dev.frontapp.com/reference/download-attachment-for-a-message.md
+  - https://dev.frontapp.com/reference/download-attachment-from-an-article.md
+  - https://dev.frontapp.com/reference/download-attachment.md
+  - https://dev.frontapp.com/reference/edit-draft.md
+  - https://dev.frontapp.com/reference/fetch-an-account.md
+  - https://dev.frontapp.com/reference/get-a-knowledge-base-article.md
+  - https://dev.frontapp.com/reference/get-a-knowledge-base-category.md
+  - https://dev.frontapp.com/reference/get-a-knowledge-base-with-content-in-default-locale.md
+  - https://dev.frontapp.com/reference/get-a-knowledge-base-with-content-in-specified-locale.md
+  - https://dev.frontapp.com/reference/get-a-knowledge-base.md
+  - https://dev.frontapp.com/reference/get-analytics-export.md
+  - https://dev.frontapp.com/reference/get-analytics-report.md
+  - https://dev.frontapp.com/reference/get-channel.md
+  - https://dev.frontapp.com/reference/get-child-folders.md
+  - https://dev.frontapp.com/reference/get-child-templates.md
+  - https://dev.frontapp.com/reference/get-comment.md
+  - https://dev.frontapp.com/reference/get-company-teammate-group.md
+  - https://dev.frontapp.com/reference/get-contact.md
+  - https://dev.frontapp.com/reference/get-conversation-by-id.md
+  - https://dev.frontapp.com/reference/get-event.md
+  - https://dev.frontapp.com/reference/get-folder.md
+  - https://dev.frontapp.com/reference/get-inbox.md
+  - https://dev.frontapp.com/reference/get-knowledge-base-article-with-content-in-default-locale.md
+  - https://dev.frontapp.com/reference/get-knowledge-base-article-with-content-in-specified-locale.md
+  - https://dev.frontapp.com/reference/get-knowledge-base-category-content-in-default-locale.md
+  - https://dev.frontapp.com/reference/get-knowledge-base-category-with-content-in-specified-locale.md
+  - https://dev.frontapp.com/reference/get-link.md
+  - https://dev.frontapp.com/reference/get-message-seen-status.md
+  - https://dev.frontapp.com/reference/get-message-template.md
+  - https://dev.frontapp.com/reference/get-message.md
+  - https://dev.frontapp.com/reference/get-rule.md
+  - https://dev.frontapp.com/reference/get-shift.md
+  - https://dev.frontapp.com/reference/get-signatures.md
+  - https://dev.frontapp.com/reference/get-tag.md
+  - https://dev.frontapp.com/reference/get-team.md
+  - https://dev.frontapp.com/reference/get-teammate.md
+  - https://dev.frontapp.com/reference/get-ticket-status-by-id.md
+  - https://dev.frontapp.com/reference/get-time-off.md
+  - https://dev.frontapp.com/reference/get-view.md
+  - https://dev.frontapp.com/reference/import-inbox-message.md
+  - https://dev.frontapp.com/reference/list-account-contacts.md
+  - https://dev.frontapp.com/reference/list-account-custom-fields.md
+  - https://dev.frontapp.com/reference/list-accounts.md
+  - https://dev.frontapp.com/reference/list-all-company-rules.md
+  - https://dev.frontapp.com/reference/list-articles-in-a-category.md
+  - https://dev.frontapp.com/reference/list-articles-in-a-knowledge-base.md
+  - https://dev.frontapp.com/reference/list-assigned-conversations.md
+  - https://dev.frontapp.com/reference/list-categories-in-a-knowledge-base.md
+  - https://dev.frontapp.com/reference/list-channels.md
+  - https://dev.frontapp.com/reference/list-comment-mentions.md
+  - https://dev.frontapp.com/reference/list-company-tags.md
+  - https://dev.frontapp.com/reference/list-company-teammate-group-team-inboxes.md
+  - https://dev.frontapp.com/reference/list-company-teammate-group-teammates.md
+  - https://dev.frontapp.com/reference/list-company-teammate-group-teams.md
+  - https://dev.frontapp.com/reference/list-company-teammate-groups.md
+  - https://dev.frontapp.com/reference/list-company-ticket-statuses.md
+  - https://dev.frontapp.com/reference/list-contact-conversations.md
+  - https://dev.frontapp.com/reference/list-contact-custom-fields.md
+  - https://dev.frontapp.com/reference/list-contact-lists.md
+  - https://dev.frontapp.com/reference/list-contacts-in-contact-list.md
+  - https://dev.frontapp.com/reference/list-contacts-in-group.md
+  - https://dev.frontapp.com/reference/list-contacts.md
+  - https://dev.frontapp.com/reference/list-conversation-comments.md
+  - https://dev.frontapp.com/reference/list-conversation-custom-fields.md
+  - https://dev.frontapp.com/reference/list-conversation-drafts.md
+  - https://dev.frontapp.com/reference/list-conversation-events.md
+  - https://dev.frontapp.com/reference/list-conversation-followers.md
+  - https://dev.frontapp.com/reference/list-conversation-inboxes.md
+  - https://dev.frontapp.com/reference/list-conversation-messages.md
+  - https://dev.frontapp.com/reference/list-conversations.md
+  - https://dev.frontapp.com/reference/list-custom-fields.md
+  - https://dev.frontapp.com/reference/list-events.md
+  - https://dev.frontapp.com/reference/list-folders.md
+  - https://dev.frontapp.com/reference/list-groups.md
+  - https://dev.frontapp.com/reference/list-inbox-access.md
+  - https://dev.frontapp.com/reference/list-inbox-channels.md
+  - https://dev.frontapp.com/reference/list-inbox-conversations.md
+  - https://dev.frontapp.com/reference/list-inbox-custom-fields.md
+  - https://dev.frontapp.com/reference/list-inboxes.md
+  - https://dev.frontapp.com/reference/list-knowledge-bases.md
+  - https://dev.frontapp.com/reference/list-link-conversations.md
+  - https://dev.frontapp.com/reference/list-link-custom-fields.md
+  - https://dev.frontapp.com/reference/list-linked-conversations.md
+  - https://dev.frontapp.com/reference/list-links.md
+  - https://dev.frontapp.com/reference/list-message-templates.md
+  - https://dev.frontapp.com/reference/list-notes.md
+  - https://dev.frontapp.com/reference/list-rules.md
+  - https://dev.frontapp.com/reference/list-shifts-teammates.md
+  - https://dev.frontapp.com/reference/list-shifts.md
+  - https://dev.frontapp.com/reference/list-tag-children.md
+  - https://dev.frontapp.com/reference/list-tagged-conversations.md
+  - https://dev.frontapp.com/reference/list-tags.md
+  - https://dev.frontapp.com/reference/list-team-channels.md
+  - https://dev.frontapp.com/reference/list-team-contact-lists.md
+  - https://dev.frontapp.com/reference/list-team-contacts.md
+  - https://dev.frontapp.com/reference/list-team-folders.md
+  - https://dev.frontapp.com/reference/list-team-groups.md
+  - https://dev.frontapp.com/reference/list-team-inboxes.md
+  - https://dev.frontapp.com/reference/list-team-message-templates.md
+  - https://dev.frontapp.com/reference/list-team-rules.md
+  - https://dev.frontapp.com/reference/list-team-shifts.md
+  - https://dev.frontapp.com/reference/list-team-signatures.md
+  - https://dev.frontapp.com/reference/list-team-tags.md
+  - https://dev.frontapp.com/reference/list-team-time-offs.md
+  - https://dev.frontapp.com/reference/list-team-views.md
+  - https://dev.frontapp.com/reference/list-teammate-channels.md
+  - https://dev.frontapp.com/reference/list-teammate-contact-lists.md
+  - https://dev.frontapp.com/reference/list-teammate-contacts.md
+  - https://dev.frontapp.com/reference/list-teammate-custom-fields.md
+  - https://dev.frontapp.com/reference/list-teammate-folders.md
+  - https://dev.frontapp.com/reference/list-teammate-groups.md
+  - https://dev.frontapp.com/reference/list-teammate-inboxes.md
+  - https://dev.frontapp.com/reference/list-teammate-message-templates.md
+  - https://dev.frontapp.com/reference/list-teammate-private-inboxes.md
+  - https://dev.frontapp.com/reference/list-teammate-rules.md
+  - https://dev.frontapp.com/reference/list-teammate-shifts.md
+  - https://dev.frontapp.com/reference/list-teammate-signatures.md
+  - https://dev.frontapp.com/reference/list-teammate-tags.md
+  - https://dev.frontapp.com/reference/list-teammate-time-offs.md
+  - https://dev.frontapp.com/reference/list-teammates.md
+  - https://dev.frontapp.com/reference/list-teams.md
+  - https://dev.frontapp.com/reference/list-views.md
+  - https://dev.frontapp.com/reference/mark-message-seen.md
+  - https://dev.frontapp.com/reference/merge-contacts.md
+  - https://dev.frontapp.com/reference/receive-custom-messages.md
+  - https://dev.frontapp.com/reference/remove-company-teammate-group-team-inboxes.md
+  - https://dev.frontapp.com/reference/remove-company-teammate-group-teammates.md
+  - https://dev.frontapp.com/reference/remove-company-teammate-group-teams.md
+  - https://dev.frontapp.com/reference/remove-contact-from-account.md
+  - https://dev.frontapp.com/reference/remove-contacts-from-contact-list.md
+  - https://dev.frontapp.com/reference/remove-contacts-from-group.md
+  - https://dev.frontapp.com/reference/remove-conversation-links.md
+  - https://dev.frontapp.com/reference/remove-conversation-tag.md
+  - https://dev.frontapp.com/reference/remove-teammates-from-shift.md
+  - https://dev.frontapp.com/reference/remove-teammates-from-team.md
+  - https://dev.frontapp.com/reference/removes-inbox-access.md
+  - https://dev.frontapp.com/reference/search-conversations.md
+  - https://dev.frontapp.com/reference/trigger-app-event.md
+  - https://dev.frontapp.com/reference/update-a-company-teammate-group.md
+  - https://dev.frontapp.com/reference/update-a-contact.md
+  - https://dev.frontapp.com/reference/update-a-link.md
+  - https://dev.frontapp.com/reference/update-a-tag.md
+  - https://dev.frontapp.com/reference/update-account.md
+  - https://dev.frontapp.com/reference/update-article-content-in-default-locale.md
+  - https://dev.frontapp.com/reference/update-article-content-in-specified-locale.md
+  - https://dev.frontapp.com/reference/update-channel.md
+  - https://dev.frontapp.com/reference/update-comment.md
+  - https://dev.frontapp.com/reference/update-conversation-assignee.md
+  - https://dev.frontapp.com/reference/update-conversation-reminders.md
+  - https://dev.frontapp.com/reference/update-conversation.md
+  - https://dev.frontapp.com/reference/update-folder.md
+  - https://dev.frontapp.com/reference/update-knowledge-base-category-in-default-locale.md
+  - https://dev.frontapp.com/reference/update-knowledge-base-category-in-specified-locale.md
+  - https://dev.frontapp.com/reference/update-knowledge-base-in-default-locale.md
+  - https://dev.frontapp.com/reference/update-knowledge-base-in-specified-locale.md
+  - https://dev.frontapp.com/reference/update-message-template.md
+  - https://dev.frontapp.com/reference/update-shift.md
+  - https://dev.frontapp.com/reference/update-signature.md
+  - https://dev.frontapp.com/reference/update-teammate.md
+  - https://dev.frontapp.com/reference/update-time-off.md
+  - https://dev.frontapp.com/reference/update-view.md
+  - https://dev.frontapp.com/reference/validate-channel.md
+  merge:
+    pages: 246
+    deduped: 928
+    conflicts_kept_first: 0

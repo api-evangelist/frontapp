@@ -1,0 +1,642 @@
+openapi: 3.2.0
+info:
+  version: 1.0.0
+  title: Core Views API
+  contact:
+    name: Front Platform
+    url: https://community.front.com
+servers:
+- url: https://api2.frontapp.com
+security:
+- http: []
+tags:
+- name: Views
+paths:
+  /teams/{team_id}/views:
+    get:
+      summary: List team views
+      operationId: list-team-views
+      description: 'List the views of a team.
+
+
+        Required scope: `views:read`'
+      tags:
+      - Views
+      parameters:
+      - in: path
+        name: team_id
+        required: true
+        description: The team ID
+        schema:
+          type: string
+          default: tim_xyz
+      - $ref: '#/components/parameters/limit'
+      - $ref: '#/components/parameters/pageToken'
+      responses:
+        '200':
+          $ref: '#/components/responses/listOfViews'
+      x-required-scopes:
+      - views:read
+    post:
+      summary: Create team view
+      operationId: create-team-view
+      description: 'Create a new view for a team.
+
+
+        Required scope: `views:write`'
+      tags:
+      - Views
+      parameters:
+      - in: path
+        name: team_id
+        required: true
+        description: The team ID
+        schema:
+          type: string
+          default: tim_xyz
+      requestBody:
+        required: true
+        description: View to create
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateView'
+      responses:
+        '201':
+          $ref: '#/components/responses/view'
+      x-required-scopes:
+      - views:write
+  /views:
+    get:
+      summary: List views
+      operationId: list-views
+      description: 'List the views accessible to the authenticated token.
+
+
+        Required scope: `views:read`'
+      tags:
+      - Views
+      parameters:
+      - $ref: '#/components/parameters/limit'
+      - $ref: '#/components/parameters/pageToken'
+      responses:
+        '200':
+          $ref: '#/components/responses/listOfViews'
+      x-required-scopes:
+      - views:read
+  /views/{view_id}:
+    get:
+      summary: Get view
+      operationId: get-view
+      description: 'Fetch a view.
+
+
+        Required scope: `views:read`'
+      tags:
+      - Views
+      parameters:
+      - in: path
+        name: view_id
+        required: true
+        description: The view ID
+        schema:
+          type: string
+          default: lns_abc123
+      responses:
+        '200':
+          $ref: '#/components/responses/view'
+      x-required-scopes:
+      - views:read
+    patch:
+      summary: Update view
+      operationId: update-view
+      description: 'Update a view.
+
+
+        Required scope: `views:write`'
+      tags:
+      - Views
+      parameters:
+      - in: path
+        name: view_id
+        required: true
+        description: The view ID
+        schema:
+          type: string
+          default: lns_abc123
+      requestBody:
+        required: true
+        description: View properties to update
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateView'
+      responses:
+        '204':
+          description: No content
+      x-required-scopes:
+      - views:write
+  /views/{view_id}/teammates:
+    post:
+      summary: Add view to teammate sidebars
+      operationId: add-view-teammates
+      description: 'Makes this view visible in specified teammates'' sidebar navigation.
+
+
+        Required scope: `views:write`'
+      tags:
+      - Views
+      parameters:
+      - in: path
+        name: view_id
+        required: true
+        description: The view ID
+        schema:
+          type: string
+          default: lns_abc123
+      requestBody:
+        required: true
+        description: Teammate IDs to add. Alternatively, you can supply emails as a [resource alias](https://dev.frontapp.com/docs/resource-aliases-1).
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - teammate_ids
+              properties:
+                teammate_ids:
+                  type: array
+                  items:
+                    type: string
+      responses:
+        '204':
+          description: No content
+      x-required-scopes:
+      - views:write
+components:
+  responses:
+    view:
+      description: A view
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/SharedViewResponse'
+    listOfViews:
+      description: Array of views
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              _pagination:
+                type: object
+                properties:
+                  next:
+                    type:
+                    - string
+                    - 'null'
+                    description: Link to next [page of results](https://dev.frontapp.com/docs/pagination)
+                    example: https://yourCompany.api.frontapp.com/views?page_token=ce787da6f075740cf187d926f5e9f612bc7875763a8dd37d5
+              _links:
+                type: object
+                properties:
+                  self:
+                    type: string
+                    description: Link to resource
+                    example: https://yourCompany.api.frontapp.com/views
+              _results:
+                type: array
+                items:
+                  $ref: '#/components/schemas/SharedViewResponse'
+  schemas:
+    UpdateView:
+      properties:
+        name:
+          type: string
+          description: Name of the view
+        inbox_ids:
+          type: array
+          description: List of inbox IDs to filter by
+          items:
+            $ref: '#/components/schemas/ResourceID'
+        tag_ids:
+          type: array
+          description: List of tag IDs to filter by
+          items:
+            $ref: '#/components/schemas/ResourceID'
+        not_tag_ids:
+          type: array
+          description: List of tag IDs to exclude
+          items:
+            $ref: '#/components/schemas/ResourceID'
+        no_tags:
+          type: boolean
+          description: Whether to filter for conversations without tags
+        assignee_ids:
+          type: array
+          description: List of assignee IDs to filter by
+          items:
+            $ref: '#/components/schemas/ResourceID'
+        not_assignee_ids:
+          type: array
+          description: List of assignee IDs to exclude
+          items:
+            $ref: '#/components/schemas/ResourceID'
+        highlight:
+          type: string
+          description: Color highlight for the view
+    ResourceID:
+      type: string
+    CreateView:
+      properties:
+        name:
+          type: string
+          description: Name of the view
+        inbox_ids:
+          type: array
+          description: List of inbox IDs to filter by
+          items:
+            $ref: '#/components/schemas/ResourceID'
+        tag_ids:
+          type: array
+          description: List of tag IDs to filter by
+          items:
+            $ref: '#/components/schemas/ResourceID'
+        not_tag_ids:
+          type: array
+          description: List of tag IDs to exclude
+          items:
+            $ref: '#/components/schemas/ResourceID'
+        no_tags:
+          type: boolean
+          description: Whether to filter for conversations without tags
+        assignee_ids:
+          type: array
+          description: List of assignee IDs to filter by
+          items:
+            $ref: '#/components/schemas/ResourceID'
+        not_assignee_ids:
+          type: array
+          description: List of assignee IDs to exclude
+          items:
+            $ref: '#/components/schemas/ResourceID'
+        highlight:
+          type: string
+          description: Color highlight for the view
+      required:
+      - name
+      - inbox_ids
+    SharedViewResponse:
+      type: object
+      required:
+      - _links
+      - id
+      - name
+      - highlight
+      - inbox_ids
+      - tag_ids
+      - not_tag_ids
+      - no_tags
+      - assignee_ids
+      - not_assignee_ids
+      properties:
+        _links:
+          type: object
+          properties:
+            self:
+              type: string
+              description: Link to resource
+              example: https://yourCompany.api.frontapp.com/views/lns_abc123
+            related:
+              type: object
+              properties:
+                owner:
+                  type:
+                  - string
+                  - 'null'
+                  description: Link to the team that owns the view
+                  example: https://yourCompany.api.frontapp.com/teams/tim_xyz
+        id:
+          type: string
+          description: Unique identifier of the shared view
+          example: lns_abc123
+        name:
+          type: string
+          description: Name of the shared view
+          example: High Priority Support
+        highlight:
+          type:
+          - string
+          - 'null'
+          description: Color highlight for the view
+          example: pink
+        inbox_ids:
+          type: array
+          items:
+            type: string
+          description: List of inbox IDs included in the view
+        tag_ids:
+          type: array
+          items:
+            type: string
+          description: List of tag IDs to filter by
+        not_tag_ids:
+          type: array
+          items:
+            type: string
+          description: List of tag IDs to exclude
+        no_tags:
+          type: boolean
+          description: Whether to filter for conversations without tags
+        assignee_ids:
+          type: array
+          items:
+            type: string
+          description: List of assignee IDs to filter by
+        not_assignee_ids:
+          type: array
+          items:
+            type: string
+          description: List of assignee IDs to exclude
+  parameters:
+    limit:
+      name: limit
+      in: query
+      description: Max number of results per [page](https://dev.frontapp.com/docs/pagination)
+      schema:
+        type: integer
+        maximum: 100
+        example: 25
+    pageToken:
+      name: page_token
+      in: query
+      description: Token to use to request the [next page](https://dev.frontapp.com/docs/pagination)
+      schema:
+        type: string
+        example: https://yourCompany.api.frontapp.com/endpoint?limit=25&page_token=92f32bcd7625333caf4e0f8fc26d920c812f
+  securitySchemes:
+    http:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+x-api-id: front
+x-explorer-enabled: false
+x-proxy-enabled: true
+x-samples-enabled: true
+x-provenance:
+  method: searched
+  source: https://dev.frontapp.com/reference
+  harvested: '2026-10-14'
+  tool: harvest-readme-openapi.py
+  note: Assembled verbatim from the OpenAPI definition ReadMe embeds in each operation page of the provider's developer portal; paths and components merged by API title, nothing authored.
+  assembled_from:
+  - https://dev.frontapp.com/reference/add-comment-reply.md
+  - https://dev.frontapp.com/reference/add-comment.md
+  - https://dev.frontapp.com/reference/add-company-teammate-group-team-inboxes.md
+  - https://dev.frontapp.com/reference/add-company-teammate-group-teammates.md
+  - https://dev.frontapp.com/reference/add-company-teammate-group-teams.md
+  - https://dev.frontapp.com/reference/add-contact-handle.md
+  - https://dev.frontapp.com/reference/add-contact-to-account.md
+  - https://dev.frontapp.com/reference/add-contacts-to-contact-list.md
+  - https://dev.frontapp.com/reference/add-contacts-to-group.md
+  - https://dev.frontapp.com/reference/add-conversation-followers.md
+  - https://dev.frontapp.com/reference/add-conversation-link.md
+  - https://dev.frontapp.com/reference/add-conversation-tag.md
+  - https://dev.frontapp.com/reference/add-inbox-access.md
+  - https://dev.frontapp.com/reference/add-note.md
+  - https://dev.frontapp.com/reference/add-teammates-to-shift.md
+  - https://dev.frontapp.com/reference/add-teammates-to-team.md
+  - https://dev.frontapp.com/reference/add-view-teammates.md
+  - https://dev.frontapp.com/reference/api-token-details.md
+  - https://dev.frontapp.com/reference/create-a-channel.md
+  - https://dev.frontapp.com/reference/create-a-knowledge-base.md
+  - https://dev.frontapp.com/reference/create-account.md
+  - https://dev.frontapp.com/reference/create-analytics-export.md
+  - https://dev.frontapp.com/reference/create-analytics-report.md
+  - https://dev.frontapp.com/reference/create-article-in-a-knowledge-base-in-default-locale.md
+  - https://dev.frontapp.com/reference/create-article-in-a-knowledge-base-in-specified-locale.md
+  - https://dev.frontapp.com/reference/create-child-folder.md
+  - https://dev.frontapp.com/reference/create-child-tag.md
+  - https://dev.frontapp.com/reference/create-child-template.md
+  - https://dev.frontapp.com/reference/create-company-tag.md
+  - https://dev.frontapp.com/reference/create-company-teammate-group.md
+  - https://dev.frontapp.com/reference/create-contact-list.md
+  - https://dev.frontapp.com/reference/create-contact.md
+  - https://dev.frontapp.com/reference/create-conversation.md
+  - https://dev.frontapp.com/reference/create-draft-reply.md
+  - https://dev.frontapp.com/reference/create-draft.md
+  - https://dev.frontapp.com/reference/create-folder.md
+  - https://dev.frontapp.com/reference/create-group.md
+  - https://dev.frontapp.com/reference/create-inbox.md
+  - https://dev.frontapp.com/reference/create-knowledge-base-category-in-default-locale.md
+  - https://dev.frontapp.com/reference/create-knowledge-base-category-in-specified-locale.md
+  - https://dev.frontapp.com/reference/create-link.md
+  - https://dev.frontapp.com/reference/create-linked-conversations.md
+  - https://dev.frontapp.com/reference/create-message-reply.md
+  - https://dev.frontapp.com/reference/create-message-template.md
+  - https://dev.frontapp.com/reference/create-message.md
+  - https://dev.frontapp.com/reference/create-shift.md
+  - https://dev.frontapp.com/reference/create-tag.md
+  - https://dev.frontapp.com/reference/create-team-contact-list.md
+  - https://dev.frontapp.com/reference/create-team-contact.md
+  - https://dev.frontapp.com/reference/create-team-folder.md
+  - https://dev.frontapp.com/reference/create-team-group.md
+  - https://dev.frontapp.com/reference/create-team-inbox.md
+  - https://dev.frontapp.com/reference/create-team-message-template.md
+  - https://dev.frontapp.com/reference/create-team-shift.md
+  - https://dev.frontapp.com/reference/create-team-signature.md
+  - https://dev.frontapp.com/reference/create-team-tag.md
+  - https://dev.frontapp.com/reference/create-team-view.md
+  - https://dev.frontapp.com/reference/create-teammate-contact-list.md
+  - https://dev.frontapp.com/reference/create-teammate-contact.md
+  - https://dev.frontapp.com/reference/create-teammate-folder.md
+  - https://dev.frontapp.com/reference/create-teammate-group.md
+  - https://dev.frontapp.com/reference/create-teammate-message-template.md
+  - https://dev.frontapp.com/reference/create-teammate-private-inbox.md
+  - https://dev.frontapp.com/reference/create-teammate-signature.md
+  - https://dev.frontapp.com/reference/create-teammate-tag.md
+  - https://dev.frontapp.com/reference/create-time-off.md
+  - https://dev.frontapp.com/reference/delete-a-contact.md
+  - https://dev.frontapp.com/reference/delete-a-knowledge-base-category.md
+  - https://dev.frontapp.com/reference/delete-an-account.md
+  - https://dev.frontapp.com/reference/delete-an-article.md
+  - https://dev.frontapp.com/reference/delete-company-teammate-group.md
+  - https://dev.frontapp.com/reference/delete-contact-handle.md
+  - https://dev.frontapp.com/reference/delete-contact-list.md
+  - https://dev.frontapp.com/reference/delete-conversation-followers.md
+  - https://dev.frontapp.com/reference/delete-conversation.md
+  - https://dev.frontapp.com/reference/delete-draft.md
+  - https://dev.frontapp.com/reference/delete-folder.md
+  - https://dev.frontapp.com/reference/delete-group.md
+  - https://dev.frontapp.com/reference/delete-message-template.md
+  - https://dev.frontapp.com/reference/delete-signature.md
+  - https://dev.frontapp.com/reference/delete-tag.md
+  - https://dev.frontapp.com/reference/delete-time-off.md
+  - https://dev.frontapp.com/reference/download-attachment-for-a-comment.md
+  - https://dev.frontapp.com/reference/download-attachment-for-a-message-template.md
+  - https://dev.frontapp.com/reference/download-attachment-for-a-message.md
+  - https://dev.frontapp.com/reference/download-attachment-from-an-article.md
+  - https://dev.frontapp.com/reference/download-attachment.md
+  - https://dev.frontapp.com/reference/edit-draft.md
+  - https://dev.frontapp.com/reference/fetch-an-account.md
+  - https://dev.frontapp.com/reference/get-a-knowledge-base-article.md
+  - https://dev.frontapp.com/reference/get-a-knowledge-base-category.md
+  - https://dev.frontapp.com/reference/get-a-knowledge-base-with-content-in-default-locale.md
+  - https://dev.frontapp.com/reference/get-a-knowledge-base-with-content-in-specified-locale.md
+  - https://dev.frontapp.com/reference/get-a-knowledge-base.md
+  - https://dev.frontapp.com/reference/get-analytics-export.md
+  - https://dev.frontapp.com/reference/get-analytics-report.md
+  - https://dev.frontapp.com/reference/get-channel.md
+  - https://dev.frontapp.com/reference/get-child-folders.md
+  - https://dev.frontapp.com/reference/get-child-templates.md
+  - https://dev.frontapp.com/reference/get-comment.md
+  - https://dev.frontapp.com/reference/get-company-teammate-group.md
+  - https://dev.frontapp.com/reference/get-contact.md
+  - https://dev.frontapp.com/reference/get-conversation-by-id.md
+  - https://dev.frontapp.com/reference/get-event.md
+  - https://dev.frontapp.com/reference/get-folder.md
+  - https://dev.frontapp.com/reference/get-inbox.md
+  - https://dev.frontapp.com/reference/get-knowledge-base-article-with-content-in-default-locale.md
+  - https://dev.frontapp.com/reference/get-knowledge-base-article-with-content-in-specified-locale.md
+  - https://dev.frontapp.com/reference/get-knowledge-base-category-content-in-default-locale.md
+  - https://dev.frontapp.com/reference/get-knowledge-base-category-with-content-in-specified-locale.md
+  - https://dev.frontapp.com/reference/get-link.md
+  - https://dev.frontapp.com/reference/get-message-seen-status.md
+  - https://dev.frontapp.com/reference/get-message-template.md
+  - https://dev.frontapp.com/reference/get-message.md
+  - https://dev.frontapp.com/reference/get-rule.md
+  - https://dev.frontapp.com/reference/get-shift.md
+  - https://dev.frontapp.com/reference/get-signatures.md
+  - https://dev.frontapp.com/reference/get-tag.md
+  - https://dev.frontapp.com/reference/get-team.md
+  - https://dev.frontapp.com/reference/get-teammate.md
+  - https://dev.frontapp.com/reference/get-ticket-status-by-id.md
+  - https://dev.frontapp.com/reference/get-time-off.md
+  - https://dev.frontapp.com/reference/get-view.md
+  - https://dev.frontapp.com/reference/import-inbox-message.md
+  - https://dev.frontapp.com/reference/list-account-contacts.md
+  - https://dev.frontapp.com/reference/list-account-custom-fields.md
+  - https://dev.frontapp.com/reference/list-accounts.md
+  - https://dev.frontapp.com/reference/list-all-company-rules.md
+  - https://dev.frontapp.com/reference/list-articles-in-a-category.md
+  - https://dev.frontapp.com/reference/list-articles-in-a-knowledge-base.md
+  - https://dev.frontapp.com/reference/list-assigned-conversations.md
+  - https://dev.frontapp.com/reference/list-categories-in-a-knowledge-base.md
+  - https://dev.frontapp.com/reference/list-channels.md
+  - https://dev.frontapp.com/reference/list-comment-mentions.md
+  - https://dev.frontapp.com/reference/list-company-tags.md
+  - https://dev.frontapp.com/reference/list-company-teammate-group-team-inboxes.md
+  - https://dev.frontapp.com/reference/list-company-teammate-group-teammates.md
+  - https://dev.frontapp.com/reference/list-company-teammate-group-teams.md
+  - https://dev.frontapp.com/reference/list-company-teammate-groups.md
+  - https://dev.frontapp.com/reference/list-company-ticket-statuses.md
+  - https://dev.frontapp.com/reference/list-contact-conversations.md
+  - https://dev.frontapp.com/reference/list-contact-custom-fields.md
+  - https://dev.frontapp.com/reference/list-contact-lists.md
+  - https://dev.frontapp.com/reference/list-contacts-in-contact-list.md
+  - https://dev.frontapp.com/reference/list-contacts-in-group.md
+  - https://dev.frontapp.com/reference/list-contacts.md
+  - https://dev.frontapp.com/reference/list-conversation-comments.md
+  - https://dev.frontapp.com/reference/list-conversation-custom-fields.md
+  - https://dev.frontapp.com/reference/list-conversation-drafts.md
+  - https://dev.frontapp.com/reference/list-conversation-events.md
+  - https://dev.frontapp.com/reference/list-conversation-followers.md
+  - https://dev.frontapp.com/reference/list-conversation-inboxes.md
+  - https://dev.frontapp.com/reference/list-conversation-messages.md
+  - https://dev.frontapp.com/reference/list-conversations.md
+  - https://dev.frontapp.com/reference/list-custom-fields.md
+  - https://dev.frontapp.com/reference/list-events.md
+  - https://dev.frontapp.com/reference/list-folders.md
+  - https://dev.frontapp.com/reference/list-groups.md
+  - https://dev.frontapp.com/reference/list-inbox-access.md
+  - https://dev.frontapp.com/reference/list-inbox-channels.md
+  - https://dev.frontapp.com/reference/list-inbox-conversations.md
+  - https://dev.frontapp.com/reference/list-inbox-custom-fields.md
+  - https://dev.frontapp.com/reference/list-inboxes.md
+  - https://dev.frontapp.com/reference/list-knowledge-bases.md
+  - https://dev.frontapp.com/reference/list-link-conversations.md
+  - https://dev.frontapp.com/reference/list-link-custom-fields.md
+  - https://dev.frontapp.com/reference/list-linked-conversations.md
+  - https://dev.frontapp.com/reference/list-links.md
+  - https://dev.frontapp.com/reference/list-message-templates.md
+  - https://dev.frontapp.com/reference/list-notes.md
+  - https://dev.frontapp.com/reference/list-rules.md
+  - https://dev.frontapp.com/reference/list-shifts-teammates.md
+  - https://dev.frontapp.com/reference/list-shifts.md
+  - https://dev.frontapp.com/reference/list-tag-children.md
+  - https://dev.frontapp.com/reference/list-tagged-conversations.md
+  - https://dev.frontapp.com/reference/list-tags.md
+  - https://dev.frontapp.com/reference/list-team-channels.md
+  - https://dev.frontapp.com/reference/list-team-contact-lists.md
+  - https://dev.frontapp.com/reference/list-team-contacts.md
+  - https://dev.frontapp.com/reference/list-team-folders.md
+  - https://dev.frontapp.com/reference/list-team-groups.md
+  - https://dev.frontapp.com/reference/list-team-inboxes.md
+  - https://dev.frontapp.com/reference/list-team-message-templates.md
+  - https://dev.frontapp.com/reference/list-team-rules.md
+  - https://dev.frontapp.com/reference/list-team-shifts.md
+  - https://dev.frontapp.com/reference/list-team-signatures.md
+  - https://dev.frontapp.com/reference/list-team-tags.md
+  - https://dev.frontapp.com/reference/list-team-time-offs.md
+  - https://dev.frontapp.com/reference/list-team-views.md
+  - https://dev.frontapp.com/reference/list-teammate-channels.md
+  - https://dev.frontapp.com/reference/list-teammate-contact-lists.md
+  - https://dev.frontapp.com/reference/list-teammate-contacts.md
+  - https://dev.frontapp.com/reference/list-teammate-custom-fields.md
+  - https://dev.frontapp.com/reference/list-teammate-folders.md
+  - https://dev.frontapp.com/reference/list-teammate-groups.md
+  - https://dev.frontapp.com/reference/list-teammate-inboxes.md
+  - https://dev.frontapp.com/reference/list-teammate-message-templates.md
+  - https://dev.frontapp.com/reference/list-teammate-private-inboxes.md
+  - https://dev.frontapp.com/reference/list-teammate-rules.md
+  - https://dev.frontapp.com/reference/list-teammate-shifts.md
+  - https://dev.frontapp.com/reference/list-teammate-signatures.md
+  - https://dev.frontapp.com/reference/list-teammate-tags.md
+  - https://dev.frontapp.com/reference/list-teammate-time-offs.md
+  - https://dev.frontapp.com/reference/list-teammates.md
+  - https://dev.frontapp.com/reference/list-teams.md
+  - https://dev.frontapp.com/reference/list-views.md
+  - https://dev.frontapp.com/reference/mark-message-seen.md
+  - https://dev.frontapp.com/reference/merge-contacts.md
+  - https://dev.frontapp.com/reference/receive-custom-messages.md
+  - https://dev.frontapp.com/reference/remove-company-teammate-group-team-inboxes.md
+  - https://dev.frontapp.com/reference/remove-company-teammate-group-teammates.md
+  - https://dev.frontapp.com/reference/remove-company-teammate-group-teams.md
+  - https://dev.frontapp.com/reference/remove-contact-from-account.md
+  - https://dev.frontapp.com/reference/remove-contacts-from-contact-list.md
+  - https://dev.frontapp.com/reference/remove-contacts-from-group.md
+  - https://dev.frontapp.com/reference/remove-conversation-links.md
+  - https://dev.frontapp.com/reference/remove-conversation-tag.md
+  - https://dev.frontapp.com/reference/remove-teammates-from-shift.md
+  - https://dev.frontapp.com/reference/remove-teammates-from-team.md
+  - https://dev.frontapp.com/reference/removes-inbox-access.md
+  - https://dev.frontapp.com/reference/search-conversations.md
+  - https://dev.frontapp.com/reference/trigger-app-event.md
+  - https://dev.frontapp.com/reference/update-a-company-teammate-group.md
+  - https://dev.frontapp.com/reference/update-a-contact.md
+  - https://dev.frontapp.com/reference/update-a-link.md
+  - https://dev.frontapp.com/reference/update-a-tag.md
+  - https://dev.frontapp.com/reference/update-account.md
+  - https://dev.frontapp.com/reference/update-article-content-in-default-locale.md
+  - https://dev.frontapp.com/reference/update-article-content-in-specified-locale.md
+  - https://dev.frontapp.com/reference/update-channel.md
+  - https://dev.frontapp.com/reference/update-comment.md
+  - https://dev.frontapp.com/reference/update-conversation-assignee.md
+  - https://dev.frontapp.com/reference/update-conversation-reminders.md
+  - https://dev.frontapp.com/reference/update-conversation.md
+  - https://dev.frontapp.com/reference/update-folder.md
+  - https://dev.frontapp.com/reference/update-knowledge-base-category-in-default-locale.md
+  - https://dev.frontapp.com/reference/update-knowledge-base-category-in-specified-locale.md
+  - https://dev.frontapp.com/reference/update-knowledge-base-in-default-locale.md
+  - https://dev.frontapp.com/reference/update-knowledge-base-in-specified-locale.md
+  - https://dev.frontapp.com/reference/update-message-template.md
+  - https://dev.frontapp.com/reference/update-shift.md
+  - https://dev.frontapp.com/reference/update-signature.md
+  - https://dev.frontapp.com/reference/update-teammate.md
+  - https://dev.frontapp.com/reference/update-time-off.md
+  - https://dev.frontapp.com/reference/update-view.md
+  - https://dev.frontapp.com/reference/validate-channel.md
+  merge:
+    pages: 246
+    deduped: 928
+    conflicts_kept_first: 0

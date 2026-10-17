@@ -1,0 +1,712 @@
+openapi: 3.2.0
+info:
+  version: 1.0.0
+  title: Core Message Template Folders API
+  contact:
+    name: Front Platform
+    url: https://community.front.com
+servers:
+- url: https://api2.frontapp.com
+security:
+- http: []
+tags:
+- name: Message Template Folders
+paths:
+  /message_template_folders:
+    get:
+      summary: List folders
+      operationId: list-folders
+      description: 'List the message template folders.
+
+
+        Required scope: `message_templates:read`'
+      tags:
+      - Message Template Folders
+      parameters:
+      - $ref: '#/components/parameters/sortByCannedAnswerFolders'
+      - $ref: '#/components/parameters/sortOrder'
+      responses:
+        '200':
+          $ref: '#/components/responses/listOfCannedAnswerFolders'
+      x-required-scopes:
+      - message_templates:read
+    post:
+      summary: Create folder
+      operationId: create-folder
+      description: 'Create a new message template folder in the oldest active workspace that the token has access to. If you need to specify the workspace, we recommend using the Create team folder endpoint instead.
+
+
+        Required scope: `message_templates:write`'
+      tags:
+      - Message Template Folders
+      requestBody:
+        required: true
+        description: Message template folder to create
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateMessageTemplateFolder'
+      responses:
+        '201':
+          $ref: '#/components/responses/cannedAnswerFolder'
+      x-required-scopes:
+      - message_templates:write
+  /message_template_folders/{message_template_folder_id}:
+    get:
+      summary: Get folder
+      operationId: get-folder
+      description: 'Fetch a message template folder.
+
+
+        Required scope: `message_templates:read`'
+      tags:
+      - Message Template Folders
+      parameters:
+      - in: path
+        name: message_template_folder_id
+        required: true
+        description: The message template folder ID
+        schema:
+          type: string
+          default: rsf_123
+      responses:
+        '200':
+          $ref: '#/components/responses/cannedAnswerFolder'
+      x-required-scopes:
+      - message_templates:read
+    patch:
+      summary: Update folder
+      operationId: update-folder
+      description: 'Update message template folder
+
+
+        Required scope: `message_templates:write`'
+      tags:
+      - Message Template Folders
+      requestBody:
+        required: true
+        description: Message template folder to update
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateMessageTemplateFolder'
+      parameters:
+      - in: path
+        name: message_template_folder_id
+        required: true
+        description: The message template folder ID
+        schema:
+          type: string
+          default: rsf_123
+      responses:
+        '200':
+          $ref: '#/components/responses/cannedAnswerFolder'
+      x-required-scopes:
+      - message_templates:write
+    delete:
+      summary: Delete folder
+      operationId: delete-folder
+      description: 'Delete a message template folder and child folders/templates
+
+
+        Required scope: `message_templates:delete`'
+      tags:
+      - Message Template Folders
+      parameters:
+      - in: path
+        name: message_template_folder_id
+        required: true
+        description: The message template folder id
+        schema:
+          type: string
+          default: rsf_123
+      responses:
+        '202':
+          $ref: '#/components/responses/acceptedCannedAnswerFolderDeletion'
+      x-required-scopes:
+      - message_templates:delete
+  /message_template_folders/{message_template_folder_id}/message_template_folders:
+    get:
+      summary: Get child folders
+      operationId: get-child-folders
+      description: 'Fetch the child message templates folders of a message template folder.
+
+
+        Required scope: `message_templates:read`'
+      tags:
+      - Message Template Folders
+      parameters:
+      - in: path
+        name: message_template_folder_id
+        required: true
+        description: The message template folder ID
+        schema:
+          type: string
+          default: rsf_123
+      responses:
+        '200':
+          $ref: '#/components/responses/listOfCannedAnswerFolders'
+      x-required-scopes:
+      - message_templates:read
+    post:
+      summary: Create child folder
+      operationId: create-child-folder
+      description: 'Create a new message template folder as a child of the given folder
+
+
+        Required scope: `message_templates:write`'
+      tags:
+      - Message Template Folders
+      requestBody:
+        required: true
+        description: Message template folder to create
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateMessageTemplateFolderAsChild'
+      parameters:
+      - in: path
+        name: message_template_folder_id
+        required: true
+        description: The parent message template folder ID
+        schema:
+          type: string
+          default: rsf_123
+      responses:
+        '201':
+          $ref: '#/components/responses/cannedAnswerFolder'
+      x-required-scopes:
+      - message_templates:write
+  /teammates/{teammate_id}/message_template_folders:
+    get:
+      summary: List teammate folders
+      operationId: list-teammate-folders
+      description: 'List the message template folders belonging to the requested teammate.
+
+
+        Required scope: `message_templates:read`'
+      tags:
+      - Message Template Folders
+      parameters:
+      - in: path
+        name: teammate_id
+        required: true
+        description: The teammate ID. Alternatively, you can supply an email as a [resource alias](https://dev.frontapp.com/docs/resource-aliases-1).
+        schema:
+          type: string
+          default: tea_123
+      - $ref: '#/components/parameters/sortByCannedAnswerFolders'
+      - $ref: '#/components/parameters/sortOrder'
+      responses:
+        '200':
+          $ref: '#/components/responses/listOfCannedAnswerFolders'
+      x-required-scopes:
+      - message_templates:read
+    post:
+      summary: Create teammate folder
+      operationId: create-teammate-folder
+      description: 'Create a new message template folder belonging to the requested teammate.
+
+
+        Required scope: `message_templates:write`'
+      tags:
+      - Message Template Folders
+      requestBody:
+        required: true
+        description: Message template folder to create
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateMessageTemplateFolder'
+      parameters:
+      - in: path
+        name: teammate_id
+        required: true
+        description: The teammate ID. Alternatively, you can supply an email as a [resource alias](https://dev.frontapp.com/docs/resource-aliases-1).
+        schema:
+          type: string
+          default: tea_123
+      responses:
+        '201':
+          $ref: '#/components/responses/cannedAnswerFolder'
+      x-required-scopes:
+      - message_templates:write
+  /teams/{team_id}/message_template_folders:
+    get:
+      summary: List team folders
+      operationId: list-team-folders
+      description: 'List the message template folders belonging to the requested team (workspace).
+
+
+        Required scope: `message_templates:read`'
+      tags:
+      - Message Template Folders
+      parameters:
+      - in: path
+        name: team_id
+        required: true
+        description: The team ID
+        schema:
+          type: string
+          default: tim_55c8c149
+      - $ref: '#/components/parameters/sortByCannedAnswerFolders'
+      - $ref: '#/components/parameters/sortOrder'
+      responses:
+        '200':
+          $ref: '#/components/responses/listOfCannedAnswerFolders'
+      x-required-scopes:
+      - message_templates:read
+    post:
+      summary: Create team folder
+      operationId: create-team-folder
+      description: 'Create a new message template folder belonging to the requested team (workspace).
+
+
+        Required scope: `message_templates:write`'
+      tags:
+      - Message Template Folders
+      requestBody:
+        required: true
+        description: Message template folder to create
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateMessageTemplateFolder'
+      parameters:
+      - in: path
+        name: team_id
+        required: true
+        description: The team ID
+        schema:
+          type: string
+          default: tim_55c8c149
+      responses:
+        '201':
+          $ref: '#/components/responses/cannedAnswerFolder'
+      x-required-scopes:
+      - message_templates:write
+components:
+  schemas:
+    MessageTemplateFolderResponse:
+      type: object
+      required:
+      - _links
+      - id
+      - name
+      properties:
+        _links:
+          type: object
+          properties:
+            self:
+              type: string
+              description: Link to resource
+              example: https://yourCompany.api.frontapp.com/message_template_folders/rsf_g2
+            related:
+              type: object
+              properties:
+                owner:
+                  type:
+                  - string
+                  - 'null'
+                  description: Link to resource's owner. Null if the current folder does not have an owner.
+                  example: https://yourCompany.api.frontapp.com/teams/tim_s47
+                parent_folder:
+                  type:
+                  - string
+                  - 'null'
+                  description: Link to parent folder. Null if the current folder does not have a parent.
+                  example: https://yourCompany.api.frontapp.com/message_template_folders/rsf_g1
+                child_folders:
+                  type:
+                  - string
+                  - 'null'
+                  description: Link to child folders. Null if the current folder does not have children.
+                  example: https://yourCompany.api.frontapp.com/message_template_folders/rsf_g2/message_template_folders
+                child_answers:
+                  type:
+                  - string
+                  - 'null'
+                  description: Link to message templates contained within this folder or children folders. Null if the current folder does not have any message templates.
+                  example: https://yourCompany.api.frontapp.com/message_template_folders/rsf_g2/message_templates
+        id:
+          type: string
+          description: Unique identifier of the message template folder
+          example: rsf_g2
+        name:
+          type: string
+          description: Name of the message template folder
+          example: Complaints to Toby (or about Toby)
+        created_at:
+          type: number
+          description: Timestamp at which the message template folder was created.
+          example: 1680300342.904
+        updated_at:
+          type: number
+          description: Timestamp at which the message template folder was updated.
+          example: 1688668654.501
+    UpdateMessageTemplateFolder:
+      type: object
+      description: A message template folder that is used to store message templates or other folders.
+      properties:
+        name:
+          type: string
+          description: Name of the message template folder
+        parent_folder_id:
+          type: string
+          description: ID of the parent folder to be placed into. Goes into the root folder if unspecified or if null.
+    CreateMessageTemplateFolder:
+      type: object
+      description: A message template folder that is used to store message templates or other folders.
+      required:
+      - name
+      properties:
+        name:
+          type: string
+          description: Name of the message template folder
+          example: PTO templates
+        parent_folder_id:
+          type: string
+          description: ID of the parent folder to be placed into. Goes into the root folder if unspecified or if null.
+          example: null
+    CreateMessageTemplateFolderAsChild:
+      type: object
+      description: A message template folder that is used to store message templates or other folders.
+      required:
+      - name
+      properties:
+        name:
+          type: string
+          description: Name of the message template folder
+          example: PTO templates
+  responses:
+    listOfCannedAnswerFolders:
+      description: Array of message template folders
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              _pagination:
+                type: object
+                properties:
+                  next:
+                    type:
+                    - string
+                    - 'null'
+                    description: Link to next [page of results](https://dev.frontapp.com/docs/pagination)
+                    example: https://yourCompany.api.frontapp.com/message_template_folders?page_token=9fa92a7f385fd7be43f7153055b30e6d
+              _links:
+                type: object
+                properties:
+                  self:
+                    type: string
+                    description: Link to resource
+                    example: https://yourCompany.api.frontapp.com/message_template_folders
+              _results:
+                type: array
+                items:
+                  $ref: '#/components/schemas/MessageTemplateFolderResponse'
+    acceptedCannedAnswerFolderDeletion:
+      description: A message template folder accepted for deletion
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              status:
+                type: string
+                default: accepted
+                example: accepted
+              message_template_folder_id:
+                type: string
+                description: id of the message template to be deleted
+                example: rsf_g2
+    cannedAnswerFolder:
+      description: A message template folder
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/MessageTemplateFolderResponse'
+  parameters:
+    sortOrder:
+      name: sort_order
+      in: query
+      description: Order by which results should be sorted
+      schema:
+        type: string
+        enum:
+        - asc
+        - desc
+        example: asc
+    sortByCannedAnswerFolders:
+      name: sort_by
+      in: query
+      description: Field used to sort the message template folders. Either `created_at` or `updated_at`.
+      schema:
+        type: string
+  securitySchemes:
+    http:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+x-api-id: front
+x-explorer-enabled: false
+x-proxy-enabled: true
+x-samples-enabled: true
+x-provenance:
+  method: searched
+  source: https://dev.frontapp.com/reference
+  harvested: '2026-10-14'
+  tool: harvest-readme-openapi.py
+  note: Assembled verbatim from the OpenAPI definition ReadMe embeds in each operation page of the provider's developer portal; paths and components merged by API title, nothing authored.
+  assembled_from:
+  - https://dev.frontapp.com/reference/add-comment-reply.md
+  - https://dev.frontapp.com/reference/add-comment.md
+  - https://dev.frontapp.com/reference/add-company-teammate-group-team-inboxes.md
+  - https://dev.frontapp.com/reference/add-company-teammate-group-teammates.md
+  - https://dev.frontapp.com/reference/add-company-teammate-group-teams.md
+  - https://dev.frontapp.com/reference/add-contact-handle.md
+  - https://dev.frontapp.com/reference/add-contact-to-account.md
+  - https://dev.frontapp.com/reference/add-contacts-to-contact-list.md
+  - https://dev.frontapp.com/reference/add-contacts-to-group.md
+  - https://dev.frontapp.com/reference/add-conversation-followers.md
+  - https://dev.frontapp.com/reference/add-conversation-link.md
+  - https://dev.frontapp.com/reference/add-conversation-tag.md
+  - https://dev.frontapp.com/reference/add-inbox-access.md
+  - https://dev.frontapp.com/reference/add-note.md
+  - https://dev.frontapp.com/reference/add-teammates-to-shift.md
+  - https://dev.frontapp.com/reference/add-teammates-to-team.md
+  - https://dev.frontapp.com/reference/add-view-teammates.md
+  - https://dev.frontapp.com/reference/api-token-details.md
+  - https://dev.frontapp.com/reference/create-a-channel.md
+  - https://dev.frontapp.com/reference/create-a-knowledge-base.md
+  - https://dev.frontapp.com/reference/create-account.md
+  - https://dev.frontapp.com/reference/create-analytics-export.md
+  - https://dev.frontapp.com/reference/create-analytics-report.md
+  - https://dev.frontapp.com/reference/create-article-in-a-knowledge-base-in-default-locale.md
+  - https://dev.frontapp.com/reference/create-article-in-a-knowledge-base-in-specified-locale.md
+  - https://dev.frontapp.com/reference/create-child-folder.md
+  - https://dev.frontapp.com/reference/create-child-tag.md
+  - https://dev.frontapp.com/reference/create-child-template.md
+  - https://dev.frontapp.com/reference/create-company-tag.md
+  - https://dev.frontapp.com/reference/create-company-teammate-group.md
+  - https://dev.frontapp.com/reference/create-contact-list.md
+  - https://dev.frontapp.com/reference/create-contact.md
+  - https://dev.frontapp.com/reference/create-conversation.md
+  - https://dev.frontapp.com/reference/create-draft-reply.md
+  - https://dev.frontapp.com/reference/create-draft.md
+  - https://dev.frontapp.com/reference/create-folder.md
+  - https://dev.frontapp.com/reference/create-group.md
+  - https://dev.frontapp.com/reference/create-inbox.md
+  - https://dev.frontapp.com/reference/create-knowledge-base-category-in-default-locale.md
+  - https://dev.frontapp.com/reference/create-knowledge-base-category-in-specified-locale.md
+  - https://dev.frontapp.com/reference/create-link.md
+  - https://dev.frontapp.com/reference/create-linked-conversations.md
+  - https://dev.frontapp.com/reference/create-message-reply.md
+  - https://dev.frontapp.com/reference/create-message-template.md
+  - https://dev.frontapp.com/reference/create-message.md
+  - https://dev.frontapp.com/reference/create-shift.md
+  - https://dev.frontapp.com/reference/create-tag.md
+  - https://dev.frontapp.com/reference/create-team-contact-list.md
+  - https://dev.frontapp.com/reference/create-team-contact.md
+  - https://dev.frontapp.com/reference/create-team-folder.md
+  - https://dev.frontapp.com/reference/create-team-group.md
+  - https://dev.frontapp.com/reference/create-team-inbox.md
+  - https://dev.frontapp.com/reference/create-team-message-template.md
+  - https://dev.frontapp.com/reference/create-team-shift.md
+  - https://dev.frontapp.com/reference/create-team-signature.md
+  - https://dev.frontapp.com/reference/create-team-tag.md
+  - https://dev.frontapp.com/reference/create-team-view.md
+  - https://dev.frontapp.com/reference/create-teammate-contact-list.md
+  - https://dev.frontapp.com/reference/create-teammate-contact.md
+  - https://dev.frontapp.com/reference/create-teammate-folder.md
+  - https://dev.frontapp.com/reference/create-teammate-group.md
+  - https://dev.frontapp.com/reference/create-teammate-message-template.md
+  - https://dev.frontapp.com/reference/create-teammate-private-inbox.md
+  - https://dev.frontapp.com/reference/create-teammate-signature.md
+  - https://dev.frontapp.com/reference/create-teammate-tag.md
+  - https://dev.frontapp.com/reference/create-time-off.md
+  - https://dev.frontapp.com/reference/delete-a-contact.md
+  - https://dev.frontapp.com/reference/delete-a-knowledge-base-category.md
+  - https://dev.frontapp.com/reference/delete-an-account.md
+  - https://dev.frontapp.com/reference/delete-an-article.md
+  - https://dev.frontapp.com/reference/delete-company-teammate-group.md
+  - https://dev.frontapp.com/reference/delete-contact-handle.md
+  - https://dev.frontapp.com/reference/delete-contact-list.md
+  - https://dev.frontapp.com/reference/delete-conversation-followers.md
+  - https://dev.frontapp.com/reference/delete-conversation.md
+  - https://dev.frontapp.com/reference/delete-draft.md
+  - https://dev.frontapp.com/reference/delete-folder.md
+  - https://dev.frontapp.com/reference/delete-group.md
+  - https://dev.frontapp.com/reference/delete-message-template.md
+  - https://dev.frontapp.com/reference/delete-signature.md
+  - https://dev.frontapp.com/reference/delete-tag.md
+  - https://dev.frontapp.com/reference/delete-time-off.md
+  - https://dev.frontapp.com/reference/download-attachment-for-a-comment.md
+  - https://dev.frontapp.com/reference/download-attachment-for-a-message-template.md
+  - https://dev.frontapp.com/reference/download-attachment-for-a-message.md
+  - https://dev.frontapp.com/reference/download-attachment-from-an-article.md
+  - https://dev.frontapp.com/reference/download-attachment.md
+  - https://dev.frontapp.com/reference/edit-draft.md
+  - https://dev.frontapp.com/reference/fetch-an-account.md
+  - https://dev.frontapp.com/reference/get-a-knowledge-base-article.md
+  - https://dev.frontapp.com/reference/get-a-knowledge-base-category.md
+  - https://dev.frontapp.com/reference/get-a-knowledge-base-with-content-in-default-locale.md
+  - https://dev.frontapp.com/reference/get-a-knowledge-base-with-content-in-specified-locale.md
+  - https://dev.frontapp.com/reference/get-a-knowledge-base.md
+  - https://dev.frontapp.com/reference/get-analytics-export.md
+  - https://dev.frontapp.com/reference/get-analytics-report.md
+  - https://dev.frontapp.com/reference/get-channel.md
+  - https://dev.frontapp.com/reference/get-child-folders.md
+  - https://dev.frontapp.com/reference/get-child-templates.md
+  - https://dev.frontapp.com/reference/get-comment.md
+  - https://dev.frontapp.com/reference/get-company-teammate-group.md
+  - https://dev.frontapp.com/reference/get-contact.md
+  - https://dev.frontapp.com/reference/get-conversation-by-id.md
+  - https://dev.frontapp.com/reference/get-event.md
+  - https://dev.frontapp.com/reference/get-folder.md
+  - https://dev.frontapp.com/reference/get-inbox.md
+  - https://dev.frontapp.com/reference/get-knowledge-base-article-with-content-in-default-locale.md
+  - https://dev.frontapp.com/reference/get-knowledge-base-article-with-content-in-specified-locale.md
+  - https://dev.frontapp.com/reference/get-knowledge-base-category-content-in-default-locale.md
+  - https://dev.frontapp.com/reference/get-knowledge-base-category-with-content-in-specified-locale.md
+  - https://dev.frontapp.com/reference/get-link.md
+  - https://dev.frontapp.com/reference/get-message-seen-status.md
+  - https://dev.frontapp.com/reference/get-message-template.md
+  - https://dev.frontapp.com/reference/get-message.md
+  - https://dev.frontapp.com/reference/get-rule.md
+  - https://dev.frontapp.com/reference/get-shift.md
+  - https://dev.frontapp.com/reference/get-signatures.md
+  - https://dev.frontapp.com/reference/get-tag.md
+  - https://dev.frontapp.com/reference/get-team.md
+  - https://dev.frontapp.com/reference/get-teammate.md
+  - https://dev.frontapp.com/reference/get-ticket-status-by-id.md
+  - https://dev.frontapp.com/reference/get-time-off.md
+  - https://dev.frontapp.com/reference/get-view.md
+  - https://dev.frontapp.com/reference/import-inbox-message.md
+  - https://dev.frontapp.com/reference/list-account-contacts.md
+  - https://dev.frontapp.com/reference/list-account-custom-fields.md
+  - https://dev.frontapp.com/reference/list-accounts.md
+  - https://dev.frontapp.com/reference/list-all-company-rules.md
+  - https://dev.frontapp.com/reference/list-articles-in-a-category.md
+  - https://dev.frontapp.com/reference/list-articles-in-a-knowledge-base.md
+  - https://dev.frontapp.com/reference/list-assigned-conversations.md
+  - https://dev.frontapp.com/reference/list-categories-in-a-knowledge-base.md
+  - https://dev.frontapp.com/reference/list-channels.md
+  - https://dev.frontapp.com/reference/list-comment-mentions.md
+  - https://dev.frontapp.com/reference/list-company-tags.md
+  - https://dev.frontapp.com/reference/list-company-teammate-group-team-inboxes.md
+  - https://dev.frontapp.com/reference/list-company-teammate-group-teammates.md
+  - https://dev.frontapp.com/reference/list-company-teammate-group-teams.md
+  - https://dev.frontapp.com/reference/list-company-teammate-groups.md
+  - https://dev.frontapp.com/reference/list-company-ticket-statuses.md
+  - https://dev.frontapp.com/reference/list-contact-conversations.md
+  - https://dev.frontapp.com/reference/list-contact-custom-fields.md
+  - https://dev.frontapp.com/reference/list-contact-lists.md
+  - https://dev.frontapp.com/reference/list-contacts-in-contact-list.md
+  - https://dev.frontapp.com/reference/list-contacts-in-group.md
+  - https://dev.frontapp.com/reference/list-contacts.md
+  - https://dev.frontapp.com/reference/list-conversation-comments.md
+  - https://dev.frontapp.com/reference/list-conversation-custom-fields.md
+  - https://dev.frontapp.com/reference/list-conversation-drafts.md
+  - https://dev.frontapp.com/reference/list-conversation-events.md
+  - https://dev.frontapp.com/reference/list-conversation-followers.md
+  - https://dev.frontapp.com/reference/list-conversation-inboxes.md
+  - https://dev.frontapp.com/reference/list-conversation-messages.md
+  - https://dev.frontapp.com/reference/list-conversations.md
+  - https://dev.frontapp.com/reference/list-custom-fields.md
+  - https://dev.frontapp.com/reference/list-events.md
+  - https://dev.frontapp.com/reference/list-folders.md
+  - https://dev.frontapp.com/reference/list-groups.md
+  - https://dev.frontapp.com/reference/list-inbox-access.md
+  - https://dev.frontapp.com/reference/list-inbox-channels.md
+  - https://dev.frontapp.com/reference/list-inbox-conversations.md
+  - https://dev.frontapp.com/reference/list-inbox-custom-fields.md
+  - https://dev.frontapp.com/reference/list-inboxes.md
+  - https://dev.frontapp.com/reference/list-knowledge-bases.md
+  - https://dev.frontapp.com/reference/list-link-conversations.md
+  - https://dev.frontapp.com/reference/list-link-custom-fields.md
+  - https://dev.frontapp.com/reference/list-linked-conversations.md
+  - https://dev.frontapp.com/reference/list-links.md
+  - https://dev.frontapp.com/reference/list-message-templates.md
+  - https://dev.frontapp.com/reference/list-notes.md
+  - https://dev.frontapp.com/reference/list-rules.md
+  - https://dev.frontapp.com/reference/list-shifts-teammates.md
+  - https://dev.frontapp.com/reference/list-shifts.md
+  - https://dev.frontapp.com/reference/list-tag-children.md
+  - https://dev.frontapp.com/reference/list-tagged-conversations.md
+  - https://dev.frontapp.com/reference/list-tags.md
+  - https://dev.frontapp.com/reference/list-team-channels.md
+  - https://dev.frontapp.com/reference/list-team-contact-lists.md
+  - https://dev.frontapp.com/reference/list-team-contacts.md
+  - https://dev.frontapp.com/reference/list-team-folders.md
+  - https://dev.frontapp.com/reference/list-team-groups.md
+  - https://dev.frontapp.com/reference/list-team-inboxes.md
+  - https://dev.frontapp.com/reference/list-team-message-templates.md
+  - https://dev.frontapp.com/reference/list-team-rules.md
+  - https://dev.frontapp.com/reference/list-team-shifts.md
+  - https://dev.frontapp.com/reference/list-team-signatures.md
+  - https://dev.frontapp.com/reference/list-team-tags.md
+  - https://dev.frontapp.com/reference/list-team-time-offs.md
+  - https://dev.frontapp.com/reference/list-team-views.md
+  - https://dev.frontapp.com/reference/list-teammate-channels.md
+  - https://dev.frontapp.com/reference/list-teammate-contact-lists.md
+  - https://dev.frontapp.com/reference/list-teammate-contacts.md
+  - https://dev.frontapp.com/reference/list-teammate-custom-fields.md
+  - https://dev.frontapp.com/reference/list-teammate-folders.md
+  - https://dev.frontapp.com/reference/list-teammate-groups.md
+  - https://dev.frontapp.com/reference/list-teammate-inboxes.md
+  - https://dev.frontapp.com/reference/list-teammate-message-templates.md
+  - https://dev.frontapp.com/reference/list-teammate-private-inboxes.md
+  - https://dev.frontapp.com/reference/list-teammate-rules.md
+  - https://dev.frontapp.com/reference/list-teammate-shifts.md
+  - https://dev.frontapp.com/reference/list-teammate-signatures.md
+  - https://dev.frontapp.com/reference/list-teammate-tags.md
+  - https://dev.frontapp.com/reference/list-teammate-time-offs.md
+  - https://dev.frontapp.com/reference/list-teammates.md
+  - https://dev.frontapp.com/reference/list-teams.md
+  - https://dev.frontapp.com/reference/list-views.md
+  - https://dev.frontapp.com/reference/mark-message-seen.md
+  - https://dev.frontapp.com/reference/merge-contacts.md
+  - https://dev.frontapp.com/reference/receive-custom-messages.md
+  - https://dev.frontapp.com/reference/remove-company-teammate-group-team-inboxes.md
+  - https://dev.frontapp.com/reference/remove-company-teammate-group-teammates.md
+  - https://dev.frontapp.com/reference/remove-company-teammate-group-teams.md
+  - https://dev.frontapp.com/reference/remove-contact-from-account.md
+  - https://dev.frontapp.com/reference/remove-contacts-from-contact-list.md
+  - https://dev.frontapp.com/reference/remove-contacts-from-group.md
+  - https://dev.frontapp.com/reference/remove-conversation-links.md
+  - https://dev.frontapp.com/reference/remove-conversation-tag.md
+  - https://dev.frontapp.com/reference/remove-teammates-from-shift.md
+  - https://dev.frontapp.com/reference/remove-teammates-from-team.md
+  - https://dev.frontapp.com/reference/removes-inbox-access.md
+  - https://dev.frontapp.com/reference/search-conversations.md
+  - https://dev.frontapp.com/reference/trigger-app-event.md
+  - https://dev.frontapp.com/reference/update-a-company-teammate-group.md
+  - https://dev.frontapp.com/reference/update-a-contact.md
+  - https://dev.frontapp.com/reference/update-a-link.md
+  - https://dev.frontapp.com/reference/update-a-tag.md
+  - https://dev.frontapp.com/reference/update-account.md
+  - https://dev.frontapp.com/reference/update-article-content-in-default-locale.md
+  - https://dev.frontapp.com/reference/update-article-content-in-specified-locale.md
+  - https://dev.frontapp.com/reference/update-channel.md
+  - https://dev.frontapp.com/reference/update-comment.md
+  - https://dev.frontapp.com/reference/update-conversation-assignee.md
+  - https://dev.frontapp.com/reference/update-conversation-reminders.md
+  - https://dev.frontapp.com/reference/update-conversation.md
+  - https://dev.frontapp.com/reference/update-folder.md
+  - https://dev.frontapp.com/reference/update-knowledge-base-category-in-default-locale.md
+  - https://dev.frontapp.com/reference/update-knowledge-base-category-in-specified-locale.md
+  - https://dev.frontapp.com/reference/update-knowledge-base-in-default-locale.md
+  - https://dev.frontapp.com/reference/update-knowledge-base-in-specified-locale.md
+  - https://dev.frontapp.com/reference/update-message-template.md
+  - https://dev.frontapp.com/reference/update-shift.md
+  - https://dev.frontapp.com/reference/update-signature.md
+  - https://dev.frontapp.com/reference/update-teammate.md
+  - https://dev.frontapp.com/reference/update-time-off.md
+  - https://dev.frontapp.com/reference/update-view.md
+  - https://dev.frontapp.com/reference/validate-channel.md
+  merge:
+    pages: 246
+    deduped: 928
+    conflicts_kept_first: 0
