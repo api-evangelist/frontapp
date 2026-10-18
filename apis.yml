@@ -219,6 +219,8 @@ apis:
   humanURL: https://dev.frontapp.com/reference/introduction
   baseURL: https://api2.frontapp.com
   tags:
+  - Account
+  tags_raw:
   - Accounts
   properties:
   - type: OpenAPI
@@ -316,6 +318,8 @@ apis:
   humanURL: https://dev.frontapp.com/reference/introduction
   baseURL: https://api2.frontapp.com
   tags:
+  - Application
+  tags_raw:
   - Applications
   properties:
   - type: OpenAPI
@@ -732,6 +736,8 @@ apis:
   humanURL: https://dev.frontapp.com/reference/introduction
   baseURL: https://api2.frontapp.com
   tags:
+  - Event
+  tags_raw:
   - Events
   properties:
   - type: OpenAPI
@@ -991,6 +997,8 @@ apis:
   humanURL: https://dev.frontapp.com/reference/introduction
   baseURL: https://api2.frontapp.com
   tags:
+  - Message
+  tags_raw:
   - Messages
   properties:
   - type: OpenAPI
@@ -1119,6 +1127,8 @@ apis:
   humanURL: https://dev.frontapp.com/reference/introduction
   baseURL: https://api2.frontapp.com
   tags:
+  - Status
+  tags_raw:
   - Statuses
   properties:
   - type: OpenAPI
@@ -1247,6 +1257,8 @@ apis:
   humanURL: https://dev.frontapp.com/reference/introduction
   baseURL: https://api2.frontapp.com
   tags:
+  - Team
+  tags_raw:
   - Teams
   properties:
   - type: OpenAPI
